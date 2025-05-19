@@ -48,7 +48,7 @@ pip install -r requirements.txt
 
 3. Download datasets:
 ```bash
-python src/data/download.py
+python src/data/preprocess.py
 ```
 
 ## Project Components

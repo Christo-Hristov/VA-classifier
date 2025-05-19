@@ -45,6 +45,7 @@ wheels/
 *.db
 *.sqlite
 *.sqlite3
+*.arrow
 
 # IDE specific files
 .idea/
@@ -52,3 +53,11 @@ wheels/
 *.swp
 *.swo
 .DS_Store 
+
+# Model files
+*.pt
+*.pth
+*.pth.tar
+*.pth.tar.gz
+*.pth.tar.bz2
+*.pth.tar.xz
