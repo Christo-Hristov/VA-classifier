@@ -79,6 +79,9 @@ python src/data/preprocess.py
 - Used for initial RoBERTa fine-tuning
 - Provides emotion labels for projection to VA space
 
+### EDAIC-WOZ
+- https://dcapswoz.ict.usc.edu/wwwedaic/
+
 ## License
 
 [Add appropriate license information]
