@@ -143,7 +143,9 @@ def train_va_regressor(model, train_dataset, val_dataset, device):
         # Check for plateau and unfreeze
         if frozen and len(mae_history) > patience:
             recent = mae_history[-(patience + 1):]
-            if max(recent) - min(recent) < 0.01:
+            plateaued = max(recent) - min(recent) < 0.01
+            getting_worse = all(recent[i] < recent[i + 1] for i in range(len(recent) - 1))
+            if plateaued or getting_worse:
                 print("🔓 MAE plateaued. Unfreezing encoder and fc1, reducing learning rate.")
                 for p in model.transformer.parameters():
                     p.requires_grad = True

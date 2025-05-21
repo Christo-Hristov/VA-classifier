@@ -13,7 +13,7 @@ from src.models.roberta_goemotions import RoBERTaModel
 
 def load_model():
     model = RoBERTaModel(num_labels=28)
-    model.load_state_dict(torch.load("models/roberta_goemotions/best_model.pt", map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load("models/roberta_goemotions/best_model_goemotions.pt", map_location=torch.device('cpu')))
     return model
 
 def evaluate_model(model):
