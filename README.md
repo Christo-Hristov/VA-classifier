@@ -2,7 +2,7 @@
 
 This project implements and compares different approaches for classifying text into valence-arousal space.
 
-## Project Structure
+## Project Structure (UPDATE FULLY LATER)
 
 ```
 VA-classifier/
