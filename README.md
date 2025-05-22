@@ -22,12 +22,13 @@ VA-classifier/
 │   ├── models/                # Model training and evaluation
 │   │   ├── roberta_goemotions.py
 │   │   ├── roberta_emobank.py
-│   │   └── gpt4_classifier.py
+│   │   └── GPT_classifier.py  # o4-mini default VA classifier
 │   └── utils/                 # Utility functions
 │       ├── metrics.py         # Evaluation metrics
 │       └── visualization.py   # Visualization tools
 ├── notebooks/                 # Jupyter notebooks for analysis
 ├── tests/                     # Unit tests
+    └── evaluation_gpt.py      # VA evaluation for model/GPT_classifier.py
 ├── requirements.txt           # Project dependencies
 └── config/                    # Configuration files
     └── model_configs.yaml     # Model configurations
