@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 from scipy.stats import pearsonr
 import json, re
-from GPT_classifer import classify
+from src.models.GPT_classifier import classify
 
 RAW_URL = ("https://raw.githubusercontent.com/"
            "JULIELab/EmoBank/master/corpus/emobank.csv")
