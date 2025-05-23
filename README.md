@@ -52,6 +52,10 @@ pip install -r requirements.txt
 python src/data/preprocess_goemotions.py
 ```
 
+```bash
+python src/data/preprocess_emobank.py
+```
+
 ## Project Components
 
 ### 1. RoBERTa + GoEmotions

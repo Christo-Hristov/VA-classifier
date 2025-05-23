@@ -10,26 +10,32 @@ from datasets import load_from_disk
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+# Class for the RoBERTa model fine-tuned for emotion classification.
 class RoBERTaModel(nn.Module):
     def __init__(self, num_labels):
         super(RoBERTaModel, self).__init__()
+        # Load pre-trained RoBERTa model
         self.transformer = AutoModel.from_pretrained("roberta-base")
+        # Add a fully connected layer for classification
         self.fc1 = nn.Linear(self.transformer.config.hidden_size, 256)
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(0.3)
+        # Output layer for emotion classification
         self.fc2 = nn.Linear(256, num_labels)
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, input_ids, attention_mask):
+        # Forward pass through the transformer
         outputs = self.transformer(input_ids=input_ids, attention_mask=attention_mask)
-        pooled_output = outputs.last_hidden_state[:, 0]  # CLS token
+        # Use the CLS token for classification
+        pooled_output = outputs.last_hidden_state[:, 0]
         x = self.fc1(pooled_output)
         x = self.relu(x)
         x = self.dropout(x)
         logits = self.fc2(x)
         return self.sigmoid(logits)
 
-
+# Function to train the RoBERTa model on the GoEmotions dataset.
 def train():
     # Load and preprocess GoEmotions dataset
     dataset = load_from_disk("data/processed/goemotions")
@@ -37,6 +43,7 @@ def train():
         type="torch",
         columns=["input_ids", "attention_mask", "multi_hot_labels"])
 
+    # Create data loaders for training and validation
     train_loader = DataLoader(
         dataset["train"], batch_size=16,
         shuffle=True)  # expiriment with different batch sizes
@@ -45,12 +52,14 @@ def train():
                             batch_size=16,
                             shuffle=False)
 
+    # Set device to GPU if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = RoBERTaModel(num_labels=28).to(device)
     criterion = nn.BCELoss()
     optimizer = torch.optim.AdamW(model.parameters(), lr=3e-5)
 
     epochs = 15
+    # Learning rate scheduler
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
         optimizer, T_max=len(train_loader) * epochs)
 

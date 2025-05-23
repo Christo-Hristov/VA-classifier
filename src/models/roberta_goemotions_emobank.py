@@ -1,3 +1,6 @@
+# This script trains a Valence-Arousal (VA) regressor using a pre-trained RoBERTa model.
+# It fine-tunes the model to predict valence and arousal scores from text using the EmoBank dataset.
+
 import torch
 import torch.nn as nn
 from transformers import AutoModel
@@ -16,6 +19,7 @@ sys.path.append(project_root)
 
 from src.models.roberta_goemotions import RoBERTaModel
 
+# Class for the VA regressor model, which extends a pre-trained RoBERTa model with additional layers for regression.
 class VARegressor(nn.Module):
     def __init__(self, pretrained_model: nn.Module, freeze: bool = True):
         super(VARegressor, self).__init__()
