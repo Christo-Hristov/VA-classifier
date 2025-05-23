@@ -18,6 +18,8 @@ RAW_URL = ("https://raw.githubusercontent.com/"
 
 to_unit = lambda x: (x - 3.0) / 2.0  # convert the EmoBank 1-5 scale to [-1, 1]
 
+# Function to download or access a local CSV file
+# Returns a Path object pointing to the CSV file
 def get_local_csv(path_or_url: str) -> Path:
     if path_or_url.startswith("http"):
         print("⬇️  Downloading EmoBank …")
@@ -26,7 +28,8 @@ def get_local_csv(path_or_url: str) -> Path:
         return tmp
     return Path(path_or_url).expanduser()
 
-def va_from_any(raw): # convert classify() output to valence/arousal tupl
+# Function to convert classify() output to a valence/arousal tuple
+def va_from_any(raw):
     if isinstance(raw, (list, tuple)) and len(raw) == 2:
         v, a = raw
     elif isinstance(raw, dict):
@@ -39,11 +42,13 @@ def va_from_any(raw): # convert classify() output to valence/arousal tupl
         raise ValueError(f"Unrecognized classify() output: {raw!r}")
     return float(v), float(a)
 
-def mae_2d(gold_v, gold_a, pred_v, pred_a): # calc MAE score
+# Function to calculate the mean absolute error (MAE) for valence and arousal
+def mae_2d(gold_v, gold_a, pred_v, pred_a):
     total = sum(abs(gv - pv) + abs(ga - pa)
                 for gv, pv, ga, pa in zip(gold_v, pred_v, gold_a, pred_a))
     return total / (len(gold_v) * 2)
 
+# Main function to evaluate the classify function on the EmoBank test split
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--csv", default=RAW_URL)
@@ -61,12 +66,14 @@ def main():
     gold_V = [to_unit(v) for v in test["V"]]
     gold_A = [to_unit(a) for a in test["A"]]
 
+    # Function to call the classify function and convert its output
     def call(text):
         return va_from_any(classify(text, model=args.model, temp=args.temp))
 
     t0 = time.time()
     pred_V, pred_A = [None]*len(test), [None]*len(test)
 
+    # Use ThreadPoolExecutor for concurrent API calls
     with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
         futures = {ex.submit(call, txt): idx for idx, txt in enumerate(test["text"])}
         for j, fut in enumerate(cf.as_completed(futures), 1):
@@ -76,7 +83,7 @@ def main():
             if j % 25 == 0:
                 print(f"{j}/{len(test)} processed…", flush=True)
 
-    # Metrics
+    # Metrics calculation
     mae = mae_2d(gold_V, gold_A, pred_V, pred_A)
     r_v, _ = pearsonr(gold_V, pred_V) if len(set(pred_V)) > 1 else (float('nan'), None)
     r_a, _ = pearsonr(gold_A, pred_A) if len(set(pred_A)) > 1 else (float('nan'), None)

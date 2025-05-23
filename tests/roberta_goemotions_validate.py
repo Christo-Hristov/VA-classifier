@@ -11,10 +11,15 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.models.roberta_goemotions import RoBERTaModel
 
+# Function to load the pre-trained RoBERTa model for GoEmotions
+# Loads the model weights from a file
+
 def load_model():
     model = RoBERTaModel(num_labels=28)
     model.load_state_dict(torch.load("models/roberta_goemotions/best_model_goemotions.pt", map_location=torch.device('cpu')))
     return model
+
+# Function to evaluate the model on the GoEmotions validation dataset
 
 def evaluate_model(model):
     # Load processed GoEmotions dataset
@@ -31,6 +36,7 @@ def evaluate_model(model):
         shuffle=False
     )
 
+    # Set device to GPU if available
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
     model.eval()
