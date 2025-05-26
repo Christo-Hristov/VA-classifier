@@ -163,10 +163,13 @@ if __name__ == "__main__":
     # Create and load the emotion model
     emotion_model = RoBERTaModel(num_labels=28)
     
-    # Load the model weights with proper device mapping
-    state_dict = torch.load("models/roberta_goemotions/best_model.pt", 
-                          map_location=device)
-    emotion_model.load_state_dict(state_dict)
+    continue_training = False
+
+    if continue_training:
+        # Load the pretrained model weights
+        state_dict = torch.load("models/roberta_goemotions/best_model.pt", 
+                                map_location=device)
+        emotion_model.load_state_dict(state_dict)
     
     # Create and train the VA regressor
     va_model = VARegressor(emotion_model)
