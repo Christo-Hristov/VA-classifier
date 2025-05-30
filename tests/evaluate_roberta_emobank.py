@@ -5,24 +5,35 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 import sys
 import os
-import numpy as np
+from scipy.stats import pearsonr
 
 # Add the project root directory to Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.models.roberta_goemotions_emobank import VARegressor, RoBERTaModel
+from src.models.roberta_goemotions_emobank import VARegressorGoEmotions, RoBERTaModel
+from src.models.roberta_direct_to_VA_edits import VARegressor
 
-def load_model():
-    # First load the base emotion model
-    base_model = RoBERTaModel(num_labels=28)
-    # Create VA regressor
-    model = VARegressor(base_model, freeze=False)
-    # Load the best VA model state dict
-    model.load_state_dict(torch.load("models/roberta_emobank/best_va_model.pt", map_location=torch.device('cpu')))
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def load_model(model_name="roberta_goemotions_emobank"):
+    # Get the project root directory
+    # Load the appropriate model based on the model name
+    if model_name == "roberta_goemotions_emobank":
+        base_model = RoBERTaModel(num_labels=28)
+        model = VARegressorGoEmotions(base_model, freeze=False)
+        model_path = os.path.join(project_root, "models/roberta_goemotions_emobank/best_va_model.pt")
+    elif model_name == "roberta_emobank":
+        model = VARegressor()       
+        model_path = os.path.join(project_root, "models/roberta_emobank/best_model.pt")
+    else:
+        raise ValueError(f"Unknown model name: {model_name}. Supported models are: roberta_goemotions_emobank, roberta_emobank")
+    
+    # Load the model state dict
+    model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     return model
 
 def evaluate_model(model, test=False):
     # Load processed EmoBank dataset
-    dataset = load_from_disk("data/processed/emobank")
+    dataset = load_from_disk(os.path.join(project_root, "data/processed/emobank"))
     # Set the format for the dataset
     dataset.set_format(
         type="torch",
@@ -61,22 +72,22 @@ def evaluate_model(model, test=False):
     all_preds = torch.cat(all_preds, dim=0)
     all_labels = torch.cat(all_labels, dim=0)
     
-    # Calculate metrics for VA regression
-    mae = torch.mean(torch.abs(all_preds - all_labels)).item()
-    mse = torch.mean((all_preds - all_labels) ** 2).item()
-    rmse = np.sqrt(mse)
+    # Convert to numpy for scipy stats
+    preds_np = all_preds.numpy()
+    labels_np = all_labels.numpy()
     
-    # Calculate separate metrics for valence and arousal
-    valence_mae = torch.mean(torch.abs(all_preds[:, 0] - all_labels[:, 0])).item()
-    arousal_mae = torch.mean(torch.abs(all_preds[:, 1] - all_labels[:, 1])).item()
+    # Calculate overall MAE
+    mae = torch.mean(torch.abs(all_preds - all_labels)).item()
+    
+    # Calculate Pearson correlation for each dimension
+    valence_pearson = pearsonr(preds_np[:, 0], labels_np[:, 0])[0]
+    arousal_pearson = pearsonr(preds_np[:, 1], labels_np[:, 1])[0]
     
     # Print results
     print(f"\n{'Test' if test else 'Validation'} Results:")
     print(f"Overall MAE: {mae:.4f}")
-    print(f"Overall MSE: {mse:.4f}")
-    print(f"Overall RMSE: {rmse:.4f}")
-    print(f"Valence MAE: {valence_mae:.4f}")
-    print(f"Arousal MAE: {arousal_mae:.4f}")
+    print(f"Valence Pearson: {valence_pearson:.4f}")
+    print(f"Arousal Pearson: {arousal_pearson:.4f}")
     
     # Print sample predictions
     print("\nSample predictions (first 5):")
@@ -85,15 +96,25 @@ def evaluate_model(model, test=False):
 
 
 if __name__ == "__main__":
-    # take arguments if validation or test
+    # take arguments for validation/test and model name
     args = sys.argv[1:] if len(sys.argv) > 1 else []
-    if args and args[0] == "test":
-        print("Running on test set...")
-        model = load_model()
+    
+    if len(args) < 2:
+        print("Please provide both the evaluation mode ('test' or 'validate') and the model name.")
+        print("Example: python evaluate_roberta_emobank.py test roberta_goemotions_emobank")
+        sys.exit(1)
+        
+    eval_mode = args[0]
+    model_name = args[1]
+    
+    if eval_mode == "test":
+        print(f"Running on test set with model: {model_name}...")
+        model = load_model(model_name)
         evaluate_model(model, test=True)
-    elif args and args[0] == "validate":
-        print("Running on validation set...")
-        model = load_model()
+    elif eval_mode == "validate":
+        print(f"Running on validation set with model: {model_name}...")
+        model = load_model(model_name)
         evaluate_model(model, test=False)
     else:
-        print("Please specify 'test' or 'validate' as an argument.")
+        print("Please specify 'test' or 'validate' as the first argument.")
+        print("Example: python evaluate_roberta_emobank.py test roberta_goemotions_emobank")
