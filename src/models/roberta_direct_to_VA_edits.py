@@ -197,7 +197,7 @@ def train(hidden_fc1=256,
         # Check for plateau and unfreeze
         if frozen and len(mae_history) > patience:
             recent = mae_history[-(patience + 1):]
-            plateaued = max(recent) - min(recent) < 0.01
+            plateaued = max(recent) - min(recent) < 0.001
             getting_worse = all(recent[i] < recent[i + 1] for i in range(len(recent) - 1))
             if plateaued or getting_worse:
                 print("🔓 MAE plateaued. Unfreezing encoder, reducing learning rate.")
