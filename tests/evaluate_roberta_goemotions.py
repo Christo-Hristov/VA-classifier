@@ -13,10 +13,10 @@ from src.models.roberta_goemotions import RoBERTaModel
 
 def load_model():
     model = RoBERTaModel(num_labels=28)
-    model.load_state_dict(torch.load("models/roberta_goemotions/best_model_goemotions.pt", map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load("models/roberta_goemotions/best_model.pt", map_location=torch.device('cpu')))
     return model
 
-def evaluate_model(model):
+def evaluate_model(model, test=False):
     # Load processed GoEmotions dataset
     dataset = load_from_disk("data/processed/goemotions")
     dataset.set_format(
@@ -26,7 +26,7 @@ def evaluate_model(model):
 
     # Create validation dataloader
     val_loader = DataLoader(
-        dataset["validation"],
+        dataset["validation"] if not test else dataset["test"],
         batch_size=16,
         shuffle=False
     )
@@ -57,10 +57,22 @@ def evaluate_model(model):
 
     # Calculate final metrics
     accuracy = correct_val / total_val
-    print(f"Validation Accuracy: {accuracy:.4f}")
+    print(f"Total Correct: {correct_val}, Total Samples: {total_val}")
+    print(f"{'Test' if test else 'Validation'} Accuracy: {accuracy:.4f}")
 
 
 if __name__ == "__main__":
-    model = load_model()
-    evaluate_model(model)
+
+    # take arguments if validation or test
+    args = sys.argv[1:] if len(sys.argv) > 1 else []
+    if args and args[0] == "test":
+        print("Running on test set...")
+        model = load_model()
+        evaluate_model(model)
+    elif args and args[0] == "validate":
+        print("Running on validation set...")
+        model = load_model()
+        evaluate_model(model)
+    else:
+        print("Please specify 'test' or 'validate' as an argument.")
 
