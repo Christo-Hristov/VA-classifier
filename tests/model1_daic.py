@@ -55,9 +55,11 @@ def add_va_scores(
 
 # ───────────────  PHQ-8 PROMPT  ─────────────── #
 SYSTEM_PROMPT = """
-You are a clinical psychiatrist.
-Every line below has Valence and Arousal (-1 to 1).
-Estimate the participant’s PHQ-8 total (0–24) and reply with **only** a number.
+You are a clinical psychiatrist and expert in affective dynamics.
+Each line of the transcript below is annotated with Valence and Arousal scores (ranging from –1 to +1).
+Use these scores, along with the text content, to track patterns of mood and activation over time—recognizing that shifts in Valence/Arousal can signal changing depressive symptoms.
+Carefully reason through how these moment-to-moment VA trajectories relate to diagnostic criteria for depression and the PHQ-8 scale.
+Finally, provide your best estimate of the participant’s PHQ-8 total (0–24) as a single number.
 """.strip()
 
 def phq8_from_annotated(
