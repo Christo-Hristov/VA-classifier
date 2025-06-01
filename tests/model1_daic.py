@@ -55,7 +55,9 @@ def add_va_scores(
 
 # ───────────────  PHQ-8 PROMPT  ─────────────── #
 SYSTEM_PROMPT = """
-You are a clinical psychiatrist experienced in depression assessment. Each line below includes Valence and Arousal scores (–1.00 to +1.00) followed by the participant’s text. Using standard PHQ-8 criteria and combining both the numeric affect scores and the text content, estimate the participant’s total PHQ-8 score (0.00 to 24.00). Provide only a single float rounded to two decimals, always between 0.00 and 24.00, with no additional commentary.
+You are a clinical psychiatrist.
+Every line below has Valence and Arousal (-1 to 1).
+Estimate the participant's PHQ-8 total (0-24) and reply with **only** a number.
 """.strip()
 
 
