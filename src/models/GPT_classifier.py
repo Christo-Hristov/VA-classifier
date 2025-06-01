@@ -24,9 +24,9 @@ You are an affective-computing expert.
 For each input, estimate:
 - Valence: -1 (very negative) to 1 (very positive)
 - Arousal: -1 (inactive) to 1 (excited)
-For each input sentence, respond with exactly:
-{"valence": <float>, "arousal": <float>}
-No extra words, no explanation, no apologies—only a JSON object, nothing else.
+For each input, return exactly:
+{"valence": float, "arousal": float}
+No extra words, no explanation—return only a JSON object.
 """.strip()
 
 #3- Tenacity backoff wrapper: https://cookbook.openai.com/examples/how_to_handle_rate_limits
@@ -36,8 +36,9 @@ Rate limit: 500 RPM, 200,000 TPM, 2,000,000 TPD for o4-mini
 @retry(
     wait=wait_random_exponential(min=1, max=60),
     stop=stop_after_attempt(6),
-    before_sleep=lambda retry_state: 
-        print(f"[VaClassifier] Rate limit hit; retrying (attempt {retry_state.attempt_number})...")
+    before_sleep=lambda retry_state: print(
+        f"[VA-retry] attempt {retry_state.attempt_number} failed, backing off…"
+    )
 )
 def completion_with_backoff(**kwargs):
     return client.chat.completions.create(**kwargs)
@@ -53,7 +54,13 @@ def _call_openai(text: str, model: str, temperature: float):
             {"role": "user",   "content": text},
         ]
         for _ in range(3):
-            resp = _completion(model=model, messages=msgs, temperature=temperature)
+            resp = _completion(
+                model=model,
+                messages=msgs,
+                temperature=temperature,
+                timeout=30,
+                response_format={"type": "json_object"}   # ← NEW
+            )
 
             # 1) grab the raw content
             raw = resp.choices[0].message.content
@@ -63,7 +70,6 @@ def _call_openai(text: str, model: str, temperature: float):
                 raw = "" if raw is None else str(raw)
 
             content = raw.strip()
-            content = re.sub(r"^\s*JSON\s+", "", content, flags=re.I)
 
             try:
                 d = json.loads(content)
