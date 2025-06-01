@@ -87,10 +87,18 @@ def main() -> None:
                          "If omitted, util.py uses its default.")
     ap.add_argument("--device",       default=None,
                     help="'cpu' or 'cuda'; util.py auto-detects if None")
+    ap.add_argument("--transcripts",  default=None,
+               help="Folder that contains the <PID>_Transcript.csv files")
     ap.add_argument("--limit",        type=int,
                     help="Only first N participants (debug)")
 
     args = ap.parse_args()
+
+    TRANSCRIPT_DIR = args.transcripts or (
+    "/Users/michaelrimer/Library/CloudStorage/GoogleDrive-mikor@stanford.edu/"
+    ".shortcut-targets-by-id/1ZsoGK8SvUwFMzu_xhgN5lWRtBV9Rdfq_/cs277 project/"
+    "edaic_transcripts"
+    )
 
     split = pd.read_csv(TEST_SPLIT_PATH)
     if args.limit:
