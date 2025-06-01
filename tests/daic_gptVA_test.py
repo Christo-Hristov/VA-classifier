@@ -31,6 +31,7 @@ client = OpenAI(api_key=open(API_KEY_PATH).read().strip())
 #2- For each line in the transcript, compute Valence and Arousal score
 def add_va_scores(df: pd.DataFrame, model: str, temperature: float) -> pd.DataFrame:
     texts = df["Text"].fillna("").tolist()
+
     try:
         # fast, multi-threaded call
         scores = classify_many(
