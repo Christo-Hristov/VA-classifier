@@ -25,9 +25,18 @@ TRANSCRIPT_DIR = (
     "edaic_transcripts"
 )
 TEST_SPLIT_PATH = "src/data/test_split.csv"
-API_KEY_PATH    = os.path.expanduser("~/Desktop/openai_key.txt")
+API_KEY_PATH = os.path.expanduser("~/Desktop/openai_key.txt")
 
-client = OpenAI(api_key=Path(API_KEY_PATH).read_text().strip())
+if os.path.exists(API_KEY_PATH):
+    api_key = Path(API_KEY_PATH).read_text().strip()
+else:                                # ← fallback to env-var
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "No openai_key.txt file and OPENAI_API_KEY not set."
+        )
+
+client = OpenAI(api_key=api_key)
 
 # ───────────────  VA SCORING  ─────────────── #
 def add_va_scores(
