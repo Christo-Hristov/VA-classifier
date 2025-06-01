@@ -9,7 +9,7 @@ For every DAIC-WOZ participant in src/data/test_split.csv:
 - outputs results
 """
 
-import os, argparse, math
+import os, argparse, math, re
 from pathlib import Path
 
 import pandas as pd
@@ -48,22 +48,30 @@ Arousal scores (scaled from -1 to 1), estimate the participant's PHQ-8 total sco
 """.strip()
 
 def phq8_from_annotated(df: pd.DataFrame, model: str, temp: float = 1.0) -> float:
-    # Return PHQ‑8 float from the VA‑annotated text.
     rows = [f"{v:.2f}\t{a:.2f}\t{t}" for v, a, t in df[["valence", "arousal", "Text"]].values]
     prompt = "\n".join(rows)
+
     resp = client.chat.completions.create(
         model=model,
         temperature=temp,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt}
+            {"role": "user", "content": prompt},
         ],
     )
-    txt = resp.choices[0].message.content.strip()
-    try:
-        return float(txt)
-    except ValueError:
-        raise ValueError(f"LLM did not return a float: {txt}")
+
+    raw = resp.choices[0].message.content
+    if not isinstance(raw, str):
+        raw = "" if raw is None else str(raw)
+
+    txt = raw.strip()
+
+    # Try to extract the first numeric token (integer or decimal)
+    m = re.search(r"([0-9]+(?:\.[0-9]+)?)", txt)
+    if not m:
+        raise ValueError(f"LLM did not return a parseable number: {repr(txt)}")
+    return float(m.group(1))
+
 
 # Main function to process each participant's transcript
 def main() -> None:

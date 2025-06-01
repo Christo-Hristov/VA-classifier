@@ -24,19 +24,21 @@ You are an affective-computing expert.
 For each input, estimate:
 - Valence: -1 (very negative) to 1 (very positive)
 - Arousal: -1 (inactive) to 1 (excited)
-
-Return only JSON:
-{"valence": float, "arousal": float}
-(round both to two decimals)
-
-No extra text.
+For each input sentence, respond with exactly:
+{"valence": <float>, "arousal": <float>}
+No extra words, no explanation, no apologies—only a JSON object, nothing else.
 """.strip()
 
 #3- Tenacity backoff wrapper: https://cookbook.openai.com/examples/how_to_handle_rate_limits
 """
 Rate limit: 500 RPM, 200,000 TPM, 2,000,000 TPD for o4-mini
 """
-@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
+@retry(
+    wait=wait_random_exponential(min=1, max=60),
+    stop=stop_after_attempt(6),
+    before_sleep=lambda retry_state: 
+        print(f"[VaClassifier] Rate limit hit; retrying (attempt {retry_state.attempt_number})...")
+)
 def completion_with_backoff(**kwargs):
     return client.chat.completions.create(**kwargs)
 _completion = completion_with_backoff
@@ -45,7 +47,6 @@ _MAX_PAR = int(os.getenv("GPT_VA_MAX_WORKERS", "10"))
 _sema = threading.Semaphore(_MAX_PAR)
 
 def _call_openai(text: str, model: str, temperature: float):
-    # safely call OpenAI API to classify valence/arousal for a single text
     with _sema:
         msgs = [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -53,17 +54,28 @@ def _call_openai(text: str, model: str, temperature: float):
         ]
         for _ in range(3):
             resp = _completion(model=model, messages=msgs, temperature=temperature)
-            content = resp.choices[0].message.content.strip()
+
+            # 1) grab the raw content
+            raw = resp.choices[0].message.content
+
+            # 2) ensure it's a string before stripping
+            if not isinstance(raw, str):
+                raw = "" if raw is None else str(raw)
+
+            content = raw.strip()
             content = re.sub(r"^\s*JSON\s+", "", content, flags=re.I)
+
             try:
                 d = json.loads(content)
-                return {
-                    "valence": round(float(d["valence"]), 2),
-                    "arousal": round(float(d["arousal"]), 2),
-                }
+                # make sure valence/arousal are numeric
+                v = float(d.get("valence", None))
+                a = float(d.get("arousal", None))
+                return {"valence": round(v, 2), "arousal": round(a, 2)}
             except Exception:
+                # if parsing failed, explicitly ask for JSON-only and retry
                 msgs.append({"role": "system", "content": "JSON only."})
         raise RuntimeError("Failed to return valid JSON for: " + text[:60])
+
 
 def classify(text: str, model: str = "o4-mini", temperature: float = 1.0):
     #Return valence/arousal for a single string.
