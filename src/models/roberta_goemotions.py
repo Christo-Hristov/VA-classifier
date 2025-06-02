@@ -130,7 +130,7 @@ def train():
         if val_accuracy > best_val_accuracy:
             best_val_accuracy = val_accuracy
             torch.save(model.state_dict(),
-                       "models/roberta_goemotions/best_model.pt")
+                       "models/roberta_goemotions/best_model_goemotions.pt")
             print(f"✅ Saved new best model (Accuracy: {val_accuracy:.4f})")
 
 if __name__ == "__main__":

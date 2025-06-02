@@ -16,9 +16,9 @@ sys.path.append(project_root)
 
 from src.models.roberta_goemotions import RoBERTaModel
 
-class VARegressor(nn.Module):
+class VARegressorGoEmotions(nn.Module):
     def __init__(self, pretrained_model: nn.Module, freeze: bool = True):
-        super(VARegressor, self).__init__()
+        super(VARegressorGoEmotions, self).__init__()
 
         # Copy components from the pretrained RoBERTa emotion model
         self.transformer = pretrained_model.transformer
@@ -60,7 +60,7 @@ def mean_absolute_error(preds, labels):
     return torch.mean(torch.abs(preds - labels))
 
 # === Training Script ===
-def train_va_regressor(model, train_dataset, val_dataset, device):
+def train_va_regressor(model, device):
     batch_size = 16
     initial_lr = 3e-5
     fine_tune_lr = 1e-5
@@ -167,11 +167,11 @@ if __name__ == "__main__":
 
     if continue_training:
         # Load the pretrained model weights
-        state_dict = torch.load("models/roberta_goemotions/best_model.pt", 
+        state_dict = torch.load("models/roberta_goemotions/best_model_goemotions.pt", 
                                 map_location=device)
         emotion_model.load_state_dict(state_dict)
     
     # Create and train the VA regressor
-    va_model = VARegressor(emotion_model)
-    train_va_regressor(va_model, "data/processed/emobank", "data/processed/emobank", device)
+    va_model = VARegressorGoEmotions(emotion_model)
+    train_va_regressor(va_model, device)
 

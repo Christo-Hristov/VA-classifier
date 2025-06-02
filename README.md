@@ -58,11 +58,17 @@ python src/data/preprocess_goemotions.py
 - Fine-tunes RoBERTa on GoEmotions dataset
 - Projects emotion outputs to valence-arousal space
 - Implementation in `models/roberta_goemotions/`
+- Overall MAE: 0.0792
+- Valence Pearson: 0.07893
+- Arousal Pearson: 0.5479
 
 ### 2. RoBERTa + EmoBank
 - Uses fine-tuned RoBERTa with custom classifier head
 - Trained on EmoBank dataset
 - Implementation in `models/roberta_emobank/`
+- Overall MAE:
+- Valence Pearson:
+- Arousal Pearson:
 
 ### 3. GPT-4 Classifier
 - Implements GPT-4 based classification

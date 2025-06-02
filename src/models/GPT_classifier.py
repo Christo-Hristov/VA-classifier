@@ -1,92 +1,96 @@
 """
-A few points.  
-1- pip install --upgrade openai # in terminal
-2- Change the path to the api_key (1)
+GPT_classifier.py
+------------------------------------------------
 
-Input 
-    - Text input
-Output
-    - Valence (negative vs. positive)
-    - Arousal (calm vs. excited)
-    - Each of those take numeric values from [-1, 1] # we scaled this parameter for simplicity
+Prompting of a GPT model to calculate a valence/arousal score given an inputted string
+
+Additional point:
+- Tenacity backoff wrapper to handle rate limits (because of Tier 1 on OpenAI)
 """
-import json, argparse, re
+import json, re, os, threading, concurrent.futures as cf
 from pathlib import Path
-from openai import OpenAI
 
-from tenacity import (
-    retry,
-    stop_after_attempt,
-    wait_random_exponential,
-)  
+from openai import OpenAI
+from tenacity import retry, stop_after_attempt, wait_random_exponential
 
 #1- Get API key using Miko's API key. 
 key_path = Path.home() / "Desktop" / "openai_key.txt" 
 api_key = key_path.read_text().strip()           
 client = OpenAI(api_key=api_key)
 
-#2- Tenacity backoff wrapper: https://cookbook.openai.com/examples/how_to_handle_rate_limits
-"""
-Rate limit: 500 RPM, 200,000 TPM, 2,000,000 TPD
-"""
-@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(6))
-def completion_with_backoff(**kwargs):
-    return client.chat.completions.create(**kwargs)
-
-# 3. Fixed system prompt. Using few-shot, instruction prompting sampling (+, +) amd (-, -) from EmoBank train/dev. 
+#2- Fixed system prompt.
 SYSTEM_PROMPT = """
 You are an affective-computing expert.
-
 For each input, estimate:
-
 - Valence: -1 (very negative) to 1 (very positive)
 - Arousal: -1 (inactive) to 1 (excited)
-
-Output ONLY JSON:
+For each input, return exactly:
 {"valence": float, "arousal": float}
-(round both to two decimals)
-
-Examples:
-Input: Wonderful Simply Superb!
-Output: {"valence": 0.8, "arousal": 0.65}
-Input: migrate to 900,
-Output: {"valence": -0.07, "arousal": -0.355}
-
-Do NOT add any extra text.
-
-Note: Happiness = positive valence, moderate arousal; Excitement = positive valence, high arousal; Sadness = negative valence, moderate arousal; Anger = negative valence, high arousal.
+No extra words, no explanation—return only a JSON object.
 """.strip()
 
-def classify(text: str, model: str = "o4-mini", temp: float = 1.0) -> dict:
-    """
-    Return {'valence': v, 'arousal': a} floats in [-1, 1].
-    """
-    messages = [{"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": text}]
-    for _ in range(3):
-        resp = completion_with_backoff(
-            model=model, messages=messages, temperature=temp
-        )
-        content = resp.choices[0].message.content.strip()
-        content = re.sub(r'^\s*JSON\s+', '', content, flags=re.I)
-        try:
-            obj = json.loads(content)
-            return {
-                "valence": round(float(obj["valence"]), 2),
-                "arousal": round(float(obj["arousal"]), 2)
-            }
-        except Exception:
-            messages.append({"role": "system",
-                             "content": "Reply only with valid JSON."})
+#3- Tenacity backoff wrapper: https://cookbook.openai.com/examples/how_to_handle_rate_limits
+"""
+Rate limit: 500 RPM, 200,000 TPM, 2,000,000 TPD for o4-mini
+"""
+@retry(
+    wait=wait_random_exponential(min=1, max=60),
+    stop=stop_after_attempt(6),
+    before_sleep=lambda retry_state: print(
+        f"[VA-retry] attempt {retry_state.attempt_number} failed, backing off…"
+    )
+)
+def completion_with_backoff(**kwargs):
+    return client.chat.completions.create(**kwargs)
+_completion = completion_with_backoff
 
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser(description="Few-shot VA classifier")
-    ap.add_argument("text", nargs="+", help="Input sentence in quotes")
-    ap.add_argument("-m", "--model", default="o4-mini",
-                    help="OpenAI model name")
-    ap.add_argument("-t", "--temp", type=float, default=1,
-                    help="Sampling temperature (0-2)")
-    args = ap.parse_args()
+_MAX_PAR = int(os.getenv("GPT_VA_MAX_WORKERS", "10"))
+_sema = threading.Semaphore(_MAX_PAR)
 
-    result = classify(" ".join(args.text), model=args.model, temp=args.temp)
-    print(json.dumps(result, indent=2))
+def _call_openai(text: str, model: str, temperature: float):
+    with _sema:
+        msgs = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user",   "content": text},
+        ]
+        for _ in range(3):
+            resp = _completion(
+                model=model,
+                messages=msgs,
+                temperature=temperature,
+                timeout=30,
+                response_format={"type": "json_object"}   # ← NEW
+            )
+
+            # 1) grab the raw content
+            raw = resp.choices[0].message.content
+
+            # 2) ensure it's a string before stripping
+            if not isinstance(raw, str):
+                raw = "" if raw is None else str(raw)
+
+            content = raw.strip()
+
+            try:
+                d = json.loads(content)
+                # make sure valence/arousal are numeric
+                v = float(d.get("valence", None))
+                a = float(d.get("arousal", None))
+                return {"valence": round(v, 2), "arousal": round(a, 2)}
+            except Exception:
+                # if parsing failed, explicitly ask for JSON-only and retry
+                msgs.append({"role": "system", "content": "JSON only."})
+        raise RuntimeError("Failed to return valid JSON for: " + text[:60])
+
+
+def classify(text: str, model: str = "o4-mini", temperature: float = 1.0):
+    #Return valence/arousal for a single string.
+    return _call_openai(text, model, temperature)
+
+def classify_many(texts, *, model: str = "o4-mini", temperature: float = 1.0,
+                  max_workers: int | None = None):
+    #Parallel VA scoring for an iterable of texts
+    max_workers = max_workers or _MAX_PAR
+    with cf.ThreadPoolExecutor(max_workers=max_workers) as ex:
+        futs = [ex.submit(_call_openai, t, model, temperature) for t in texts]
+        return [f.result() for f in futs]
