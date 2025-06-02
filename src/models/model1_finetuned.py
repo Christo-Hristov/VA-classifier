@@ -55,11 +55,8 @@ def main():
 
         df = pd.read_csv(transcript_path)
         df = add_va_scores(df, model_path=args.va_model)
-
-
-
         prompt = format_prompt(df)
-        print(prompt)
+        print(f"The prompt is: {prompt}")
         example = {
             "messages": [
                 {"role": "system", "content": {SYSTEM_PROMPT}},
