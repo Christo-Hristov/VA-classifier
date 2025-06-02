@@ -22,6 +22,7 @@ def add_va_scores(df: pd.DataFrame, model_path=None, device=None) -> pd.DataFram
     texts = df["Text"].fillna("").tolist()
     scores = get_va_scores(texts, model_path=model_path, device=device)
     df[["valence", "arousal"]] = pd.DataFrame(scores)
+    print(df)
     return df
 
 def format_prompt(df: pd.DataFrame) -> str:
