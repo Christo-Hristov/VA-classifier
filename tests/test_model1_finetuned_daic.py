@@ -80,6 +80,7 @@ def phq8_from_annotated(
 
     txt = str(resp.choices[0].message.content).strip()
     m   = re.search(r"([0-9]+(?:\.[0-9]+)?)", txt)
+    print(txt, m)
     if not m:
         raise ValueError(f"PHQ parse error: {repr(txt)}")
     return float(m.group(1))
