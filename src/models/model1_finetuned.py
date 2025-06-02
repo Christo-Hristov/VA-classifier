@@ -59,7 +59,7 @@ def main():
         print(f"The prompt is: {prompt}")
         example = {
             "messages": [
-                {"role": "system", "content": {SYSTEM_PROMPT}},
+                {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": prompt},
                 {"role": "assistant", "content": str(phq_score)}
             ]
