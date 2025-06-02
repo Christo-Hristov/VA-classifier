@@ -18,7 +18,7 @@ TRANSCRIPT_DIR = "/content/drive/MyDrive/edaic_transcripts"
 TRAIN_SPLIT_PATH = "src/data/train_split.csv"
 OUT_JSONL_PATH   = "phq8_gpt_train.jsonl"
 
-def add_va_scores(df: pd.DataFrame, model_path=model_path, device=None) -> pd.DataFrame:
+def add_va_scores(df: pd.DataFrame, model_path=None, device=None) -> pd.DataFrame:
     texts = df["Text"].fillna("").tolist()
     scores = get_va_scores(texts, model_path=model_path, device=device)
     df[["valence", "arousal"]] = pd.DataFrame(scores)
