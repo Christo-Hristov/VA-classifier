@@ -13,11 +13,8 @@ if not api_key:
 
 client = OpenAI(api_key=api_key)
 
-TRANSCRIPT_DIR = (
-    "/Users/michaelrimer/Library/CloudStorage/GoogleDrive-mikor@stanford.edu/"
-    ".shortcut-targets-by-id/1ZsoGK8SvUwFMzu_xhgN5lWRtBV9Rdfq_/cs277 project/"
-    "edaic_transcripts"
-)
+TRANSCRIPT_DIR = "/content/drive/MyDrive/edaic_transcripts"
+
 TRAIN_SPLIT_PATH = "src/data/train_split.csv"
 OUT_JSONL_PATH   = "phq8_gpt_train.jsonl"
 
