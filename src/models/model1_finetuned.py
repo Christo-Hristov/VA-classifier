@@ -18,7 +18,7 @@ TRANSCRIPT_DIR = "/content/drive/MyDrive/edaic_transcripts"
 TRAIN_SPLIT_PATH = "src/data/train_split.csv"
 OUT_JSONL_PATH   = "phq8_gpt_train.jsonl"
 
-def add_va_scores(df: pd.DataFrame, model_path=None, device=None) -> pd.DataFrame:
+def add_va_scores(df: pd.DataFrame, model_path=model_path, device=None) -> pd.DataFrame:
     texts = df["Text"].fillna("").tolist()
     scores = get_va_scores(texts, model_path=model_path, device=device)
     df[["valence", "arousal"]] = pd.DataFrame(scores)
@@ -30,6 +30,13 @@ def format_prompt(df: pd.DataFrame) -> str:
     return "\n".join(rows)
 
 def main():
+    ap = argparse.ArgumentParser(description="Prepare PHQ-8 fine-tuning data")
+    ap.add_argument("--va_model", default=None,
+                help="Path to RoBERTa VA checkpoint (.pt)")
+    ap.add_argument("--transcripts", default=None,
+                help="Folder containing <PID>_Transcript.csv files")
+    args = ap.parse_args()
+    
     train_split = pd.read_csv(TRAIN_SPLIT_PATH)
     dataset = []
 
@@ -43,7 +50,7 @@ def main():
             continue
 
         df = pd.read_csv(transcript_path)
-        df = add_va_scores(df)
+        df = add_va_scores(df, model_path=args.va_model)
 
         prompt = format_prompt(df)
         example = {
@@ -64,18 +71,6 @@ def main():
     print(f"\n[INFO] Training data saved to {OUT_JSONL_PATH}")
     
     # Upload and fine-tune
-    uploaded_file = client.files.create(
-        file=open(OUT_JSONL_PATH, "rb"),
-        purpose="fine-tune"
-    )
-    
-    fine_tune_job = client.fine_tuning.jobs.create(
-        training_file=uploaded_file.id,
-        model="gpt-3.5-turbo",  # or "gpt-4" if available
-        suffix="phq8-predictor"
-    )
-
-    print(f"[INFO] Fine-tuning started. Job ID: {fine_tune_job.id}")
 
 if __name__ == "__main__":
     main()
