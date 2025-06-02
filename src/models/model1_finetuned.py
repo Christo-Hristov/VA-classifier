@@ -16,7 +16,7 @@ client = OpenAI(api_key=api_key)
 TRANSCRIPT_DIR = "/content/drive/MyDrive/edaic_transcripts"
 
 TRAIN_SPLIT_PATH = "src/data/train_split.csv"
-OUT_JSONL_PATH   = "/content/drive/MyDrive/phq8_gpt_train.jsonl"
+OUT_JSONL_PATH   = "/content/drive/MyDrive/phq8_gpt_train_new.jsonl"
 
 def add_va_scores(df: pd.DataFrame, model_path=None, device=None) -> pd.DataFrame:
     texts = df["Text"].fillna("").tolist()
@@ -38,6 +38,11 @@ def main():
     
     train_split = pd.read_csv(TRAIN_SPLIT_PATH)
     dataset = []
+    SYSTEM_PROMPT = """
+    You are a clinical psychiatrist.
+    Every line below has Valence and Arousal (-1 to 1).
+    Estimate the participant's PHQ-8 total (0-24) and reply with **only** a number.
+    """.strip()
 
     for _, row in tqdm(train_split.iterrows(), total=len(train_split), desc="Preparing examples"):
         pid = row["Participant_ID"]
@@ -51,10 +56,13 @@ def main():
         df = pd.read_csv(transcript_path)
         df = add_va_scores(df, model_path=args.va_model)
 
+
+
         prompt = format_prompt(df)
+        print(prompt)
         example = {
             "messages": [
-                {"role": "system", "content": "You are a clinical psychiatrist. Estimate the PHQ-8 total from the annotated dialogue."},
+                {"role": "system", "content": {SYSTEM_PROMPT}},
                 {"role": "user", "content": prompt},
                 {"role": "assistant", "content": str(phq_score)}
             ]
