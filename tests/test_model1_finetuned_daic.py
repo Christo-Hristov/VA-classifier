@@ -22,7 +22,6 @@ from src.utils.util import get_va_scores
 
 TRANSCRIPT_DIR = "/content/drive/MyDrive/edaic_transcripts"
 
-MODEL_ID = "ft:gpt-4.1-mini-2025-04-14:personal:cs277-project:Be8KypW4"
 TEST_SPLIT_PATH = "src/data/test_split.csv"
 API_KEY_PATH = os.path.expanduser("~/Desktop/openai_key.txt")
 
@@ -70,7 +69,7 @@ def phq8_from_annotated(
     prompt = "\n".join(rows)
 
     resp = client.chat.completions.create(
-        model=MODEL_ID,
+        model=args.model_id,
         temperature=temperature,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -88,7 +87,7 @@ def phq8_from_annotated(
 # ───────────────  MAIN  ─────────────── #
 def main() -> None:
     ap = argparse.ArgumentParser(description="DAIC-WOZ PHQ-8 evaluator")
-    ap.add_argument("--model",        default="o4-mini",
+    ap.add_argument("--model_id",        default=None,
                     help="OpenAI model for PHQ estimation")
     ap.add_argument("--temperature",  type=float, default=1.0,
                     help="Sampling temperature for the PHQ step")
@@ -126,7 +125,7 @@ def main() -> None:
 
         try:
             phq = phq8_from_annotated(df,
-                                      model=args.model,
+                                      model=args.model_id,
                                       temperature=args.temperature)
         except Exception as e:
             print(f"  [ERROR] PHQ failed → {e}")
