@@ -41,16 +41,21 @@ client = OpenAI(api_key=api_key)
 # ───────────────  VA SCORING  ─────────────── #
 def add_va_scores(
     df: pd.DataFrame,
+    output_path: str,
     model_path: str | None = None,
     device: str | None     = None
 ) -> pd.DataFrame:
     """
     Run RoBERTa VA regressor on every row in df["Text"] and
-    append the predictions as two new columns.
+    append the predictions as two new columns. Save the result to a CSV file.
     """
     texts   = df["Text"].fillna("").tolist()
     scores  = get_va_scores(texts, model_path=model_path, device=device)
     df[["valence", "arousal"]] = pd.DataFrame(scores)
+    
+    # Save the DataFrame with VA scores to a CSV file
+    df.to_csv(output_path, index=False)
+    
     return df
 
 # ───────────────  PHQ-8 PROMPT  ─────────────── #
@@ -125,31 +130,39 @@ def main() -> None:
             continue
 
         df = pd.read_csv(csv_p)
+        # Create the output directory if it doesn't exist
+        output_dir = os.path.join(TRANSCRIPT_DIR, 'model1_outputted_va_scores')
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Define the output path for the VA scores
+        output_path = os.path.join(output_dir, f'{pid}_Transcript.csv')
+
         df = add_va_scores(df,
+                           output_path=output_path,
                            model_path=args.va_model,
                            device=args.device)
 
-        try:
-            phq = phq8_from_annotated(df,
-                                      model=args.model,
-                                      temperature=args.temperature)
-        except Exception as e:
-            print(f"  [ERROR] PHQ failed → {e}")
-            phq = float("nan")
+    #     try:
+    #         phq = phq8_from_annotated(df,
+    #                                   model=args.model,
+    #                                   temperature=args.temperature)
+    #     except Exception as e:
+    #         print(f"  [ERROR] PHQ failed → {e}")
+    #         phq = float("nan")
 
-        gold.append(float(row["PHQ_Score"]))
-        pred.append(phq)
+    #     gold.append(float(row["PHQ_Score"]))
+    #     pred.append(phq)
 
-    # ───── Metrics (skip NaNs) ─────
-    pairs = [(g, p) for g, p in zip(gold, pred) if not math.isnan(p)]
-    n     = len(pairs)
-    mae   = (sum(abs(g-p) for g, p in pairs) / n) if n else float("nan")
-    rmse  = (math.sqrt(sum((g-p)**2 for g, p in pairs) / n)
-             if n else float("nan"))
+    # # ───── Metrics (skip NaNs) ─────
+    # pairs = [(g, p) for g, p in zip(gold, pred) if not math.isnan(p)]
+    # n     = len(pairs)
+    # mae   = (sum(abs(g-p) for g, p in pairs) / n) if n else float("nan")
+    # rmse  = (math.sqrt(sum((g-p)**2 for g, p in pairs) / n)
+    #          if n else float("nan"))
 
-    print(f"\nParticipants evaluated : {n}/{len(split)}")
-    print(f"MAE                   : {mae:.3f}")
-    print(f"RMSE                  : {rmse:.3f}")
+    # print(f"\nParticipants evaluated : {n}/{len(split)}")
+    # print(f"MAE                   : {mae:.3f}")
+    # print(f"RMSE                  : {rmse:.3f}")
 
 if __name__ == "__main__":
     main()

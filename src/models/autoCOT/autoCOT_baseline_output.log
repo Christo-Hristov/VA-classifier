@@ -1,0 +1,636 @@
+Calling merge_and_split_transcripts_and_labels...🫠
+Demo data saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/demo_transcripts.csv
+Training data saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/training_transcripts.csv
+Calling generate_rationale_demos_with_gpt...🫠
+  0%|          | 0/8 [00:00<?, ?it/s] 12%|█▎        | 1/8 [00:12<01:26, 12.38s/it] 25%|██▌       | 2/8 [00:19<00:54,  9.10s/it] 38%|███▊      | 3/8 [00:33<00:57, 11.50s/it] 50%|█████     | 4/8 [00:44<00:45, 11.48s/it] 62%|██████▎   | 5/8 [01:03<00:41, 13.92s/it] 75%|███████▌  | 6/8 [01:14<00:25, 13.00s/it] 88%|████████▊ | 7/8 [01:28<00:13, 13.19s/it]100%|██████████| 8/8 [01:41<00:00, 13.23s/it]100%|██████████| 8/8 [01:41<00:00, 12.67s/it]
+✅ Saved 8 demo rationales to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/demo_rationales.json
+Calling format_autocot_demo_text...🫠
+Formatted demos saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/formatted_demos.csv
+Calling run_autocot_inference...🫠
+Running Auto-CoT Inference:   0%|          | 0/210 [00:00<?, ?it/s]Running Auto-CoT Inference:   0%|          | 1/210 [00:38<2:15:45, 38.97s/it]Running Auto-CoT Inference:   1%|          | 2/210 [01:08<1:56:23, 33.57s/it]Running Auto-CoT Inference:   1%|▏         | 3/210 [02:19<2:54:18, 50.52s/it]Running Auto-CoT Inference:   2%|▏         | 4/210 [02:44<2:18:17, 40.28s/it]Running Auto-CoT Inference:   2%|▏         | 5/210 [03:49<2:48:09, 49.22s/it]Running Auto-CoT Inference:   3%|▎         | 6/210 [04:20<2:27:04, 43.26s/it]Running Auto-CoT Inference:   3%|▎         | 7/210 [05:15<2:38:51, 46.95s/it]Running Auto-CoT Inference:   4%|▍         | 8/210 [06:21<2:58:56, 53.15s/it]Running Auto-CoT Inference:   4%|▍         | 9/210 [07:22<3:06:05, 55.55s/it]Running Auto-CoT Inference:   5%|▍         | 10/210 [08:39<3:27:38, 62.29s/it]Running Auto-CoT Inference:   5%|▌         | 11/210 [09:31<3:15:51, 59.06s/it]Running Auto-CoT Inference:   6%|▌         | 12/210 [10:48<3:32:44, 64.47s/it]Running Auto-CoT Inference:   6%|▌         | 13/210 [11:43<3:22:36, 61.71s/it]Running Auto-CoT Inference:   7%|▋         | 14/210 [12:49<3:25:28, 62.90s/it]Running Auto-CoT Inference:   7%|▋         | 15/210 [13:24<2:57:03, 54.48s/it]Running Auto-CoT Inference:   8%|▊         | 16/210 [14:23<3:00:57, 55.97s/it]Running Auto-CoT Inference:   8%|▊         | 17/210 [15:28<3:08:37, 58.64s/it]Running Auto-CoT Inference:   9%|▊         | 18/210 [16:37<3:17:02, 61.58s/it]Running Auto-CoT Inference:   9%|▉         | 19/210 [17:38<3:15:35, 61.44s/it]Running Auto-CoT Inference:  10%|▉         | 20/210 [18:13<2:49:09, 53.42s/it]Running Auto-CoT Inference:  10%|█         | 21/210 [18:47<2:29:57, 47.60s/it]Running Auto-CoT Inference:  10%|█         | 22/210 [19:48<2:42:31, 51.87s/it]Running Auto-CoT Inference:  11%|█         | 23/210 [20:48<2:48:23, 54.03s/it]Running Auto-CoT Inference:  11%|█▏        | 24/210 [21:48<2:53:41, 56.03s/it]Running Auto-CoT Inference:  12%|█▏        | 25/210 [22:52<2:59:29, 58.21s/it]Running Auto-CoT Inference:  12%|█▏        | 26/210 [23:55<3:02:58, 59.66s/it]Running Auto-CoT Inference:  13%|█▎        | 27/210 [25:00<3:06:49, 61.25s/it]Running Auto-CoT Inference:  13%|█▎        | 28/210 [26:11<3:15:19, 64.39s/it]Running Auto-CoT Inference:  14%|█▍        | 29/210 [27:03<3:03:06, 60.70s/it]Running Auto-CoT Inference:  14%|█▍        | 30/210 [28:14<3:11:19, 63.78s/it]Running Auto-CoT Inference:  15%|█▍        | 31/210 [28:42<2:37:50, 52.91s/it]Running Auto-CoT Inference:  15%|█▌        | 32/210 [29:43<2:44:30, 55.45s/it]Running Auto-CoT Inference:  16%|█▌        | 33/210 [30:16<2:23:05, 48.51s/it]
+🔍 Processing Participant_ID: 473 (1/210)
+
+🔍 Processing Participant_ID: 334 (2/210)
+
+🔍 Processing Participant_ID: 411 (3/210)
+[ERROR] GPT failed on PID 411 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 19753, Requested 20049. Please try again in 19.604s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 316 (4/210)
+
+🔍 Processing Participant_ID: 331 (5/210)
+
+🔍 Processing Participant_ID: 310 (6/210)
+
+🔍 Processing Participant_ID: 707 (7/210)
+[ERROR] GPT failed on PID 707 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 29528, Requested 17380. Please try again in 33.816s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 403 (8/210)
+[ERROR] GPT failed on PID 403 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 28517, Requested 18221. Please try again in 33.476s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 341 (9/210)
+[ERROR] GPT failed on PID 341 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 29330, Requested 17844. Please try again in 34.348s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 440 (10/210)
+
+🔍 Processing Participant_ID: 492 (11/210)
+[ERROR] GPT failed on PID 492 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 29256, Requested 17770. Please try again in 34.052s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 459 (12/210)
+
+🔍 Processing Participant_ID: 628 (13/210)
+[ERROR] GPT failed on PID 628 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27870, Requested 18387. Please try again in 32.514s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 344 (14/210)
+[ERROR] GPT failed on PID 344 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 26510, Requested 18567. Please try again in 30.154s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 667 (15/210)
+
+🔍 Processing Participant_ID: 366 (16/210)
+[ERROR] GPT failed on PID 366 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27177, Requested 19122. Please try again in 32.598s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 363 (17/210)
+[ERROR] GPT failed on PID 363 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 26183, Requested 19016. Please try again in 30.398s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 335 (18/210)
+
+🔍 Processing Participant_ID: 349 (19/210)
+
+🔍 Processing Participant_ID: 384 (20/210)
+
+🔍 Processing Participant_ID: 304 (21/210)
+
+🔍 Processing Participant_ID: 359 (22/210)
+[ERROR] GPT failed on PID 359 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 23267, Requested 18482. Please try again in 23.498s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 450 (23/210)
+[ERROR] GPT failed on PID 450 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27195, Requested 18657. Please try again in 31.704s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 382 (24/210)
+[ERROR] GPT failed on PID 382 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27802, Requested 17789. Please try again in 31.182s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 484 (25/210)
+[ERROR] GPT failed on PID 484 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27594, Requested 17991. Please try again in 31.169s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 410 (26/210)
+[ERROR] GPT failed on PID 410 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 28672, Requested 18205. Please try again in 33.754s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 445 (27/210)
+[ERROR] GPT failed on PID 445 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27502, Requested 17678. Please try again in 30.36s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 327 (28/210)
+
+🔍 Processing Participant_ID: 435 (29/210)
+[ERROR] GPT failed on PID 435 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 28182, Requested 17493. Please try again in 31.349s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 489 (30/210)
+
+🔍 Processing Participant_ID: 389 (31/210)
+
+🔍 Processing Participant_ID: 483 (32/210)
+[ERROR] GPT failed on PID 483 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 26454, Requested 18912. Please try again in 30.732s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 393 (33/210)
+
+🔍 Processing Participant_ID: 482 (34/210)
+Running Auto-CoT Inference:  16%|█▌        | 34/210 [31:12<2:29:15, 50.88s/it]Running Auto-CoT Inference:  17%|█▋        | 35/210 [32:16<2:40:06, 54.89s/it]Running Auto-CoT Inference:  17%|█▋        | 36/210 [32:25<1:59:08, 41.08s/it]Running Auto-CoT Inference:  18%|█▊        | 37/210 [33:20<2:10:35, 45.29s/it]Running Auto-CoT Inference:  18%|█▊        | 38/210 [34:33<2:33:28, 53.54s/it]Running Auto-CoT Inference:  19%|█▊        | 39/210 [35:06<2:15:04, 47.40s/it]Running Auto-CoT Inference:  19%|█▉        | 40/210 [35:34<1:58:10, 41.71s/it]Running Auto-CoT Inference:  20%|█▉        | 41/210 [36:38<2:16:00, 48.29s/it]Running Auto-CoT Inference:  20%|██        | 42/210 [37:33<2:20:58, 50.35s/it]Running Auto-CoT Inference:  20%|██        | 43/210 [38:48<2:40:33, 57.69s/it]Running Auto-CoT Inference:  21%|██        | 44/210 [39:38<2:33:13, 55.38s/it]Running Auto-CoT Inference:  21%|██▏       | 45/210 [40:43<2:40:19, 58.30s/it]Running Auto-CoT Inference:  22%|██▏       | 46/210 [41:15<2:17:56, 50.47s/it]Running Auto-CoT Inference:  22%|██▏       | 47/210 [41:17<1:37:11, 35.78s/it]Running Auto-CoT Inference:  23%|██▎       | 48/210 [41:18<1:08:55, 25.53s/it]Running Auto-CoT Inference:  23%|██▎       | 49/210 [41:20<49:05, 18.30s/it]  Running Auto-CoT Inference:  24%|██▍       | 50/210 [41:22<35:30, 13.32s/it]Running Auto-CoT Inference:  24%|██▍       | 51/210 [41:24<26:15,  9.91s/it]Running Auto-CoT Inference:  25%|██▍       | 52/210 [41:25<19:28,  7.40s/it]Running Auto-CoT Inference:  25%|██▌       | 53/210 [41:27<14:43,  5.63s/it]Running Auto-CoT Inference:  26%|██▌       | 54/210 [41:28<11:22,  4.38s/it]Running Auto-CoT Inference:  26%|██▌       | 55/210 [41:30<09:09,  3.54s/it]Running Auto-CoT Inference:  27%|██▋       | 56/210 [41:31<07:29,  2.92s/it]Running Auto-CoT Inference:  27%|██▋       | 57/210 [41:33<06:22,  2.50s/it]Running Auto-CoT Inference:  28%|██▊       | 58/210 [41:34<05:39,  2.23s/it][ERROR] GPT failed on PID 482 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 30000, Requested 18431. Please try again in 36.862s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 458 (35/210)
+[ERROR] GPT failed on PID 458 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 12156, Requested 17850. Please try again in 12ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 684 (36/210)
+
+🔍 Processing Participant_ID: 387 (37/210)
+[ERROR] GPT failed on PID 387 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 28115, Requested 17148. Please try again in 30.526s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 442 (38/210)
+
+🔍 Processing Participant_ID: 434 (39/210)
+
+🔍 Processing Participant_ID: 357 (40/210)
+
+🔍 Processing Participant_ID: 443 (41/210)
+
+🔍 Processing Participant_ID: 465 (42/210)
+[ERROR] GPT failed on PID 465 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27913, Requested 19365. Please try again in 34.556s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 617 (43/210)
+
+🔍 Processing Participant_ID: 430 (44/210)
+[ERROR] GPT failed on PID 430 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 29286, Requested 17981. Please try again in 34.534s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 399 (45/210)
+[ERROR] GPT failed on PID 399 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 27441, Requested 17900. Please try again in 30.681s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 414 (46/210)
+[ERROR] GPT failed on PID 414 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 466 (47/210)
+[ERROR] GPT failed on PID 466 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 601 (48/210)
+[ERROR] GPT failed on PID 601 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 608 (49/210)
+[ERROR] GPT failed on PID 608 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 313 (50/210)
+[ERROR] GPT failed on PID 313 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 386 (51/210)
+[ERROR] GPT failed on PID 386 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 319 (52/210)
+[ERROR] GPT failed on PID 319 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 306 (53/210)
+[ERROR] GPT failed on PID 306 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 452 (54/210)
+[ERROR] GPT failed on PID 452 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 481 (55/210)
+[ERROR] GPT failed on PID 481 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 453 (56/210)
+[ERROR] GPT failed on PID 453 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 673 (57/210)
+[ERROR] GPT failed on PID 673 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 329 (58/210)
+[ERROR] GPT failed on PID 329 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 698 (59/210)
+Running Auto-CoT Inference:  28%|██▊       | 59/210 [41:36<05:13,  2.07s/it]Running Auto-CoT Inference:  29%|██▊       | 60/210 [41:37<04:48,  1.92s/it]Running Auto-CoT Inference:  29%|██▉       | 61/210 [41:39<04:32,  1.83s/it]Running Auto-CoT Inference:  30%|██▉       | 62/210 [41:41<04:30,  1.83s/it]Running Auto-CoT Inference:  30%|███       | 63/210 [41:43<04:17,  1.75s/it]Running Auto-CoT Inference:  30%|███       | 64/210 [41:44<04:08,  1.70s/it]Running Auto-CoT Inference:  31%|███       | 65/210 [41:46<03:55,  1.63s/it]Running Auto-CoT Inference:  31%|███▏      | 66/210 [41:47<03:47,  1.58s/it]Running Auto-CoT Inference:  32%|███▏      | 67/210 [41:49<03:56,  1.65s/it]Running Auto-CoT Inference:  32%|███▏      | 68/210 [41:50<03:50,  1.62s/it]Running Auto-CoT Inference:  33%|███▎      | 69/210 [41:52<03:44,  1.59s/it]Running Auto-CoT Inference:  33%|███▎      | 70/210 [41:53<03:39,  1.57s/it]Running Auto-CoT Inference:  34%|███▍      | 71/210 [41:55<03:38,  1.57s/it]Running Auto-CoT Inference:  34%|███▍      | 72/210 [41:57<03:38,  1.58s/it]Running Auto-CoT Inference:  35%|███▍      | 73/210 [41:58<03:30,  1.54s/it]Running Auto-CoT Inference:  35%|███▌      | 74/210 [42:00<03:32,  1.57s/it]Running Auto-CoT Inference:  36%|███▌      | 75/210 [42:01<03:32,  1.57s/it]Running Auto-CoT Inference:  36%|███▌      | 76/210 [42:03<03:27,  1.55s/it]Running Auto-CoT Inference:  37%|███▋      | 77/210 [42:04<03:31,  1.59s/it]Running Auto-CoT Inference:  37%|███▋      | 78/210 [42:06<03:28,  1.58s/it]Running Auto-CoT Inference:  38%|███▊      | 79/210 [42:07<03:22,  1.55s/it][ERROR] GPT failed on PID 698 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 388 (60/210)
+[ERROR] GPT failed on PID 388 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 350 (61/210)
+[ERROR] GPT failed on PID 350 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 468 (62/210)
+[ERROR] GPT failed on PID 468 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 303 (63/210)
+[ERROR] GPT failed on PID 303 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 361 (64/210)
+[ERROR] GPT failed on PID 361 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 372 (65/210)
+[ERROR] GPT failed on PID 372 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 449 (66/210)
+[ERROR] GPT failed on PID 449 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 454 (67/210)
+[ERROR] GPT failed on PID 454 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 332 (68/210)
+[ERROR] GPT failed on PID 332 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 376 (69/210)
+[ERROR] GPT failed on PID 376 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 328 (70/210)
+[ERROR] GPT failed on PID 328 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 437 (71/210)
+[ERROR] GPT failed on PID 437 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 415 (72/210)
+[ERROR] GPT failed on PID 415 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 485 (73/210)
+[ERROR] GPT failed on PID 485 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 420 (74/210)
+[ERROR] GPT failed on PID 420 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 441 (75/210)
+[ERROR] GPT failed on PID 441 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 352 (76/210)
+[ERROR] GPT failed on PID 352 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 365 (77/210)
+[ERROR] GPT failed on PID 365 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 326 (78/210)
+[ERROR] GPT failed on PID 326 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 373 (79/210)
+[ERROR] GPT failed on PID 373 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Running Auto-CoT Inference:  38%|███▊      | 80/210 [42:09<03:26,  1.59s/it]Running Auto-CoT Inference:  39%|███▊      | 81/210 [42:11<03:20,  1.56s/it]Running Auto-CoT Inference:  39%|███▉      | 82/210 [42:12<03:18,  1.55s/it]Running Auto-CoT Inference:  40%|███▉      | 83/210 [42:14<03:16,  1.55s/it]Running Auto-CoT Inference:  40%|████      | 84/210 [42:15<03:16,  1.56s/it]Running Auto-CoT Inference:  40%|████      | 85/210 [42:17<03:12,  1.54s/it]Running Auto-CoT Inference:  41%|████      | 86/210 [42:18<03:09,  1.53s/it]Running Auto-CoT Inference:  41%|████▏     | 87/210 [42:20<03:05,  1.51s/it]Running Auto-CoT Inference:  42%|████▏     | 88/210 [42:21<03:02,  1.50s/it]Running Auto-CoT Inference:  42%|████▏     | 89/210 [42:23<03:06,  1.55s/it]Running Auto-CoT Inference:  43%|████▎     | 90/210 [42:24<03:04,  1.54s/it]Running Auto-CoT Inference:  43%|████▎     | 91/210 [42:26<02:59,  1.51s/it]Running Auto-CoT Inference:  44%|████▍     | 92/210 [42:27<02:55,  1.49s/it]Running Auto-CoT Inference:  44%|████▍     | 93/210 [42:29<02:56,  1.51s/it]Running Auto-CoT Inference:  45%|████▍     | 94/210 [42:30<02:59,  1.55s/it]Running Auto-CoT Inference:  45%|████▌     | 95/210 [42:32<02:59,  1.56s/it]Running Auto-CoT Inference:  46%|████▌     | 96/210 [42:34<02:54,  1.53s/it]Running Auto-CoT Inference:  46%|████▌     | 97/210 [42:35<02:55,  1.55s/it]Running Auto-CoT Inference:  47%|████▋     | 98/210 [42:37<02:54,  1.56s/it]Running Auto-CoT Inference:  47%|████▋     | 99/210 [42:38<02:50,  1.54s/it]
+🔍 Processing Participant_ID: 351 (80/210)
+[ERROR] GPT failed on PID 351 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 471 (81/210)
+[ERROR] GPT failed on PID 471 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 486 (82/210)
+[ERROR] GPT failed on PID 486 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 436 (83/210)
+[ERROR] GPT failed on PID 436 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 370 (84/210)
+[ERROR] GPT failed on PID 370 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 311 (85/210)
+[ERROR] GPT failed on PID 311 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 413 (86/210)
+[ERROR] GPT failed on PID 413 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 417 (87/210)
+[ERROR] GPT failed on PID 417 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 432 (88/210)
+[ERROR] GPT failed on PID 432 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 392 (89/210)
+[ERROR] GPT failed on PID 392 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 320 (90/210)
+[ERROR] GPT failed on PID 320 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 379 (91/210)
+[ERROR] GPT failed on PID 379 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 367 (92/210)
+[ERROR] GPT failed on PID 367 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 358 (93/210)
+[ERROR] GPT failed on PID 358 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 660 (94/210)
+[ERROR] GPT failed on PID 660 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 317 (95/210)
+[ERROR] GPT failed on PID 317 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 653 (96/210)
+[ERROR] GPT failed on PID 653 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 312 (97/210)
+[ERROR] GPT failed on PID 312 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 670 (98/210)
+[ERROR] GPT failed on PID 670 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 374 (99/210)
+[ERROR] GPT failed on PID 374 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 633 (100/210)
+Running Auto-CoT Inference:  48%|████▊     | 100/210 [42:40<02:51,  1.56s/it]Running Auto-CoT Inference:  48%|████▊     | 101/210 [42:41<02:54,  1.60s/it]Running Auto-CoT Inference:  49%|████▊     | 102/210 [42:43<02:50,  1.58s/it]Running Auto-CoT Inference:  49%|████▉     | 103/210 [42:45<02:58,  1.67s/it]Running Auto-CoT Inference:  50%|████▉     | 104/210 [42:46<02:52,  1.63s/it]Running Auto-CoT Inference:  50%|█████     | 105/210 [42:48<02:47,  1.60s/it]Running Auto-CoT Inference:  50%|█████     | 106/210 [42:49<02:40,  1.55s/it]Running Auto-CoT Inference:  51%|█████     | 107/210 [42:51<02:38,  1.54s/it]Running Auto-CoT Inference:  51%|█████▏    | 108/210 [42:53<02:38,  1.56s/it]Running Auto-CoT Inference:  52%|█████▏    | 109/210 [42:54<02:35,  1.54s/it]Running Auto-CoT Inference:  52%|█████▏    | 110/210 [42:55<02:31,  1.51s/it]Running Auto-CoT Inference:  53%|█████▎    | 111/210 [42:57<02:30,  1.52s/it]Running Auto-CoT Inference:  53%|█████▎    | 112/210 [42:59<02:32,  1.56s/it]Running Auto-CoT Inference:  54%|█████▍    | 113/210 [43:00<02:28,  1.53s/it]Running Auto-CoT Inference:  54%|█████▍    | 114/210 [43:02<02:26,  1.52s/it]Running Auto-CoT Inference:  55%|█████▍    | 115/210 [43:03<02:27,  1.55s/it]Running Auto-CoT Inference:  55%|█████▌    | 116/210 [43:05<02:24,  1.53s/it]Running Auto-CoT Inference:  56%|█████▌    | 117/210 [43:06<02:25,  1.56s/it]Running Auto-CoT Inference:  56%|█████▌    | 118/210 [43:08<02:18,  1.51s/it]Running Auto-CoT Inference:  57%|█████▋    | 119/210 [43:09<02:17,  1.51s/it]Running Auto-CoT Inference:  57%|█████▋    | 120/210 [43:11<02:15,  1.51s/it][ERROR] GPT failed on PID 633 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 354 (101/210)
+[ERROR] GPT failed on PID 354 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 383 (102/210)
+[ERROR] GPT failed on PID 383 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 439 (103/210)
+[ERROR] GPT failed on PID 439 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 472 (104/210)
+[ERROR] GPT failed on PID 472 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 339 (105/210)
+[ERROR] GPT failed on PID 339 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 323 (106/210)
+[ERROR] GPT failed on PID 323 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 447 (107/210)
+[ERROR] GPT failed on PID 447 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 702 (108/210)
+[ERROR] GPT failed on PID 702 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 713 (109/210)
+[ERROR] GPT failed on PID 713 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 461 (110/210)
+[ERROR] GPT failed on PID 461 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 408 (111/210)
+[ERROR] GPT failed on PID 408 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 487 (112/210)
+[ERROR] GPT failed on PID 487 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 429 (113/210)
+[ERROR] GPT failed on PID 429 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 305 (114/210)
+[ERROR] GPT failed on PID 305 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 428 (115/210)
+[ERROR] GPT failed on PID 428 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 479 (116/210)
+[ERROR] GPT failed on PID 479 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 343 (117/210)
+[ERROR] GPT failed on PID 343 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 355 (118/210)
+[ERROR] GPT failed on PID 355 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 369 (119/210)
+[ERROR] GPT failed on PID 369 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 474 (120/210)
+[ERROR] GPT failed on PID 474 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Running Auto-CoT Inference:  58%|█████▊    | 121/210 [43:12<02:17,  1.55s/it]Running Auto-CoT Inference:  58%|█████▊    | 122/210 [43:14<02:14,  1.53s/it]Running Auto-CoT Inference:  59%|█████▊    | 123/210 [43:15<02:13,  1.53s/it]Running Auto-CoT Inference:  59%|█████▉    | 124/210 [43:17<02:11,  1.53s/it]Running Auto-CoT Inference:  60%|█████▉    | 125/210 [43:18<02:09,  1.52s/it]Running Auto-CoT Inference:  60%|██████    | 126/210 [43:20<02:09,  1.55s/it]Running Auto-CoT Inference:  60%|██████    | 127/210 [43:22<02:09,  1.56s/it]Running Auto-CoT Inference:  61%|██████    | 128/210 [43:23<02:08,  1.56s/it]Running Auto-CoT Inference:  61%|██████▏   | 129/210 [43:25<02:12,  1.63s/it]Running Auto-CoT Inference:  62%|██████▏   | 130/210 [43:27<02:13,  1.66s/it]Running Auto-CoT Inference:  62%|██████▏   | 131/210 [43:28<02:08,  1.63s/it]Running Auto-CoT Inference:  63%|██████▎   | 132/210 [43:30<02:01,  1.56s/it]Running Auto-CoT Inference:  63%|██████▎   | 133/210 [43:31<02:00,  1.57s/it]Running Auto-CoT Inference:  64%|██████▍   | 134/210 [43:33<01:54,  1.51s/it]Running Auto-CoT Inference:  64%|██████▍   | 135/210 [43:34<01:57,  1.56s/it]Running Auto-CoT Inference:  65%|██████▍   | 136/210 [43:36<01:56,  1.58s/it]Running Auto-CoT Inference:  65%|██████▌   | 137/210 [43:37<01:50,  1.52s/it]Running Auto-CoT Inference:  66%|██████▌   | 138/210 [43:39<01:48,  1.51s/it]Running Auto-CoT Inference:  66%|██████▌   | 139/210 [43:40<01:50,  1.56s/it]Running Auto-CoT Inference:  67%|██████▋   | 140/210 [43:42<01:49,  1.56s/it]
+🔍 Processing Participant_ID: 470 (121/210)
+[ERROR] GPT failed on PID 470 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 697 (122/210)
+[ERROR] GPT failed on PID 697 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 632 (123/210)
+[ERROR] GPT failed on PID 632 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 377 (124/210)
+[ERROR] GPT failed on PID 377 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 390 (125/210)
+[ERROR] GPT failed on PID 390 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 321 (126/210)
+[ERROR] GPT failed on PID 321 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 692 (127/210)
+[ERROR] GPT failed on PID 692 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 400 (128/210)
+[ERROR] GPT failed on PID 400 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 448 (129/210)
+[ERROR] GPT failed on PID 448 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 478 (130/210)
+[ERROR] GPT failed on PID 478 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 641 (131/210)
+[ERROR] GPT failed on PID 641 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 301 (132/210)
+[ERROR] GPT failed on PID 301 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 687 (133/210)
+[ERROR] GPT failed on PID 687 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 322 (134/210)
+[ERROR] GPT failed on PID 322 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 360 (135/210)
+[ERROR] GPT failed on PID 360 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 457 (136/210)
+[ERROR] GPT failed on PID 457 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 325 (137/210)
+[ERROR] GPT failed on PID 325 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 385 (138/210)
+[ERROR] GPT failed on PID 385 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 480 (139/210)
+[ERROR] GPT failed on PID 480 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 462 (140/210)
+[ERROR] GPT failed on PID 462 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 318 (141/210)
+Running Auto-CoT Inference:  67%|██████▋   | 141/210 [43:44<01:45,  1.53s/it]Running Auto-CoT Inference:  68%|██████▊   | 142/210 [43:45<01:45,  1.56s/it]Running Auto-CoT Inference:  68%|██████▊   | 143/210 [43:47<01:42,  1.52s/it]Running Auto-CoT Inference:  69%|██████▊   | 144/210 [43:48<01:39,  1.51s/it]Running Auto-CoT Inference:  69%|██████▉   | 145/210 [43:50<01:36,  1.49s/it]Running Auto-CoT Inference:  70%|██████▉   | 146/210 [43:51<01:33,  1.46s/it]Running Auto-CoT Inference:  70%|███████   | 147/210 [43:52<01:34,  1.50s/it]Running Auto-CoT Inference:  70%|███████   | 148/210 [43:54<01:35,  1.54s/it]Running Auto-CoT Inference:  71%|███████   | 149/210 [43:56<01:35,  1.56s/it]Running Auto-CoT Inference:  71%|███████▏  | 150/210 [43:57<01:32,  1.53s/it]Running Auto-CoT Inference:  72%|███████▏  | 151/210 [43:59<01:29,  1.51s/it]Running Auto-CoT Inference:  72%|███████▏  | 152/210 [44:00<01:28,  1.53s/it]Running Auto-CoT Inference:  73%|███████▎  | 153/210 [44:02<01:29,  1.56s/it]Running Auto-CoT Inference:  73%|███████▎  | 154/210 [44:03<01:26,  1.55s/it]Running Auto-CoT Inference:  74%|███████▍  | 155/210 [44:05<01:25,  1.56s/it]Running Auto-CoT Inference:  74%|███████▍  | 156/210 [44:06<01:22,  1.53s/it]Running Auto-CoT Inference:  75%|███████▍  | 157/210 [44:08<01:20,  1.52s/it]Running Auto-CoT Inference:  75%|███████▌  | 158/210 [44:10<01:20,  1.54s/it]Running Auto-CoT Inference:  76%|███████▌  | 159/210 [44:11<01:17,  1.52s/it]Running Auto-CoT Inference:  76%|███████▌  | 160/210 [44:13<01:17,  1.55s/it]Running Auto-CoT Inference:  77%|███████▋  | 161/210 [44:14<01:15,  1.54s/it][ERROR] GPT failed on PID 318 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 300 (142/210)
+[ERROR] GPT failed on PID 300 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 368 (143/210)
+[ERROR] GPT failed on PID 368 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 407 (144/210)
+[ERROR] GPT failed on PID 407 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 469 (145/210)
+[ERROR] GPT failed on PID 469 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 337 (146/210)
+[ERROR] GPT failed on PID 337 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 348 (147/210)
+[ERROR] GPT failed on PID 348 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 662 (148/210)
+[ERROR] GPT failed on PID 662 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 314 (149/210)
+[ERROR] GPT failed on PID 314 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 438 (150/210)
+[ERROR] GPT failed on PID 438 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 396 (151/210)
+[ERROR] GPT failed on PID 396 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 421 (152/210)
+[ERROR] GPT failed on PID 421 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 378 (153/210)
+[ERROR] GPT failed on PID 378 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 603 (154/210)
+[ERROR] GPT failed on PID 603 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 405 (155/210)
+[ERROR] GPT failed on PID 405 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 336 (156/210)
+[ERROR] GPT failed on PID 336 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 427 (157/210)
+[ERROR] GPT failed on PID 427 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 612 (158/210)
+[ERROR] GPT failed on PID 612 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 431 (159/210)
+[ERROR] GPT failed on PID 431 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 680 (160/210)
+[ERROR] GPT failed on PID 680 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 346 (161/210)
+[ERROR] GPT failed on PID 346 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Running Auto-CoT Inference:  77%|███████▋  | 162/210 [44:16<01:13,  1.53s/it]Running Auto-CoT Inference:  78%|███████▊  | 163/210 [44:17<01:10,  1.51s/it]Running Auto-CoT Inference:  78%|███████▊  | 164/210 [44:19<01:10,  1.53s/it]Running Auto-CoT Inference:  79%|███████▊  | 165/210 [44:20<01:09,  1.55s/it]Running Auto-CoT Inference:  79%|███████▉  | 166/210 [44:22<01:12,  1.65s/it]Running Auto-CoT Inference:  80%|███████▉  | 167/210 [44:24<01:08,  1.59s/it]Running Auto-CoT Inference:  80%|████████  | 168/210 [44:25<01:06,  1.59s/it]Running Auto-CoT Inference:  80%|████████  | 169/210 [44:27<01:06,  1.61s/it]Running Auto-CoT Inference:  81%|████████  | 170/210 [44:28<01:01,  1.55s/it]Running Auto-CoT Inference:  81%|████████▏ | 171/210 [44:30<01:01,  1.57s/it]Running Auto-CoT Inference:  82%|████████▏ | 172/210 [44:31<00:59,  1.56s/it]Running Auto-CoT Inference:  82%|████████▏ | 173/210 [44:33<00:57,  1.54s/it]Running Auto-CoT Inference:  83%|████████▎ | 174/210 [44:34<00:54,  1.52s/it]Running Auto-CoT Inference:  83%|████████▎ | 175/210 [44:36<00:54,  1.55s/it]Running Auto-CoT Inference:  84%|████████▍ | 176/210 [44:38<00:54,  1.59s/it]Running Auto-CoT Inference:  84%|████████▍ | 177/210 [44:39<00:54,  1.66s/it]Running Auto-CoT Inference:  85%|████████▍ | 178/210 [44:41<00:50,  1.58s/it]Running Auto-CoT Inference:  85%|████████▌ | 179/210 [44:42<00:48,  1.57s/it]Running Auto-CoT Inference:  86%|████████▌ | 180/210 [44:44<00:46,  1.56s/it]Running Auto-CoT Inference:  86%|████████▌ | 181/210 [44:46<00:46,  1.60s/it]
+🔍 Processing Participant_ID: 476 (162/210)
+[ERROR] GPT failed on PID 476 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 455 (163/210)
+[ERROR] GPT failed on PID 455 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 401 (164/210)
+[ERROR] GPT failed on PID 401 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 444 (165/210)
+[ERROR] GPT failed on PID 444 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 404 (166/210)
+[ERROR] GPT failed on PID 404 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 412 (167/210)
+[ERROR] GPT failed on PID 412 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 467 (168/210)
+[ERROR] GPT failed on PID 467 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 418 (169/210)
+[ERROR] GPT failed on PID 418 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 362 (170/210)
+[ERROR] GPT failed on PID 362 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 397 (171/210)
+[ERROR] GPT failed on PID 397 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 381 (172/210)
+[ERROR] GPT failed on PID 381 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 677 (173/210)
+[ERROR] GPT failed on PID 677 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 490 (174/210)
+[ERROR] GPT failed on PID 490 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 491 (175/210)
+[ERROR] GPT failed on PID 491 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 627 (176/210)
+[ERROR] GPT failed on PID 627 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 695 (177/210)
+[ERROR] GPT failed on PID 695 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 375 (178/210)
+[ERROR] GPT failed on PID 375 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 309 (179/210)
+[ERROR] GPT failed on PID 309 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 302 (180/210)
+[ERROR] GPT failed on PID 302 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 446 (181/210)
+[ERROR] GPT failed on PID 446 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 409 (182/210)
+Running Auto-CoT Inference:  87%|████████▋ | 182/210 [44:47<00:43,  1.57s/it]Running Auto-CoT Inference:  87%|████████▋ | 183/210 [44:49<00:41,  1.55s/it]Running Auto-CoT Inference:  88%|████████▊ | 184/210 [44:50<00:40,  1.56s/it]Running Auto-CoT Inference:  88%|████████▊ | 185/210 [44:52<00:38,  1.53s/it]Running Auto-CoT Inference:  89%|████████▊ | 186/210 [44:53<00:36,  1.53s/it]Running Auto-CoT Inference:  89%|████████▉ | 187/210 [44:55<00:34,  1.51s/it]Running Auto-CoT Inference:  90%|████████▉ | 188/210 [44:56<00:32,  1.48s/it]Running Auto-CoT Inference:  90%|█████████ | 189/210 [44:58<00:31,  1.51s/it]Running Auto-CoT Inference:  90%|█████████ | 190/210 [44:59<00:30,  1.53s/it]Running Auto-CoT Inference:  91%|█████████ | 191/210 [45:01<00:29,  1.53s/it]Running Auto-CoT Inference:  91%|█████████▏| 192/210 [45:03<00:28,  1.59s/it]Running Auto-CoT Inference:  92%|█████████▏| 193/210 [45:04<00:26,  1.56s/it]Running Auto-CoT Inference:  92%|█████████▏| 194/210 [45:05<00:24,  1.53s/it]Running Auto-CoT Inference:  93%|█████████▎| 195/210 [45:07<00:23,  1.58s/it]Running Auto-CoT Inference:  93%|█████████▎| 196/210 [45:09<00:21,  1.56s/it]Running Auto-CoT Inference:  94%|█████████▍| 197/210 [45:10<00:20,  1.57s/it]Running Auto-CoT Inference:  94%|█████████▍| 198/210 [45:12<00:18,  1.57s/it]Running Auto-CoT Inference:  95%|█████████▍| 199/210 [45:13<00:16,  1.54s/it]Running Auto-CoT Inference:  95%|█████████▌| 200/210 [45:15<00:15,  1.54s/it]Running Auto-CoT Inference:  96%|█████████▌| 201/210 [45:16<00:13,  1.55s/it]Running Auto-CoT Inference:  96%|█████████▌| 202/210 [45:18<00:12,  1.51s/it][ERROR] GPT failed on PID 409 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 324 (183/210)
+[ERROR] GPT failed on PID 324 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 353 (184/210)
+[ERROR] GPT failed on PID 353 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 475 (185/210)
+[ERROR] GPT failed on PID 475 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 333 (186/210)
+[ERROR] GPT failed on PID 333 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 425 (187/210)
+[ERROR] GPT failed on PID 425 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 356 (188/210)
+[ERROR] GPT failed on PID 356 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 402 (189/210)
+[ERROR] GPT failed on PID 402 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 423 (190/210)
+[ERROR] GPT failed on PID 423 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 422 (191/210)
+[ERROR] GPT failed on PID 422 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 477 (192/210)
+[ERROR] GPT failed on PID 477 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 463 (193/210)
+[ERROR] GPT failed on PID 463 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 488 (194/210)
+[ERROR] GPT failed on PID 488 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 371 (195/210)
+[ERROR] GPT failed on PID 371 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 433 (196/210)
+[ERROR] GPT failed on PID 433 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 307 (197/210)
+[ERROR] GPT failed on PID 307 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 456 (198/210)
+[ERROR] GPT failed on PID 456 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 347 (199/210)
+[ERROR] GPT failed on PID 347 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 380 (200/210)
+[ERROR] GPT failed on PID 380 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 464 (201/210)
+[ERROR] GPT failed on PID 464 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 657 (202/210)
+[ERROR] GPT failed on PID 657 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+Running Auto-CoT Inference:  97%|█████████▋| 203/210 [45:19<00:10,  1.47s/it]Running Auto-CoT Inference:  97%|█████████▋| 204/210 [45:21<00:08,  1.47s/it]Running Auto-CoT Inference:  98%|█████████▊| 205/210 [45:23<00:08,  1.62s/it]Running Auto-CoT Inference:  98%|█████████▊| 206/210 [45:24<00:06,  1.61s/it]Running Auto-CoT Inference:  99%|█████████▊| 207/210 [45:26<00:04,  1.58s/it]Running Auto-CoT Inference:  99%|█████████▉| 208/210 [45:27<00:03,  1.60s/it]Running Auto-CoT Inference: 100%|█████████▉| 209/210 [45:29<00:01,  1.57s/it]Running Auto-CoT Inference: 100%|██████████| 210/210 [45:31<00:00,  1.59s/it]Running Auto-CoT Inference: 100%|██████████| 210/210 [45:31<00:00, 13.00s/it]
+
+🔍 Processing Participant_ID: 703 (203/210)
+[ERROR] GPT failed on PID 703 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 419 (204/210)
+[ERROR] GPT failed on PID 419 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 451 (205/210)
+[ERROR] GPT failed on PID 451 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 315 (206/210)
+[ERROR] GPT failed on PID 315 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 424 (207/210)
+[ERROR] GPT failed on PID 424 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 308 (208/210)
+[ERROR] GPT failed on PID 308 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 338 (209/210)
+[ERROR] GPT failed on PID 338 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+🔍 Processing Participant_ID: 364 (210/210)
+[ERROR] GPT failed on PID 364 → Error code: 429 - {'error': {'message': 'You exceeded your current quota, please check your plan and billing details. For more information on this error, read the docs: https://platform.openai.com/docs/guides/error-codes/api-errors.', 'type': 'insufficient_quota', 'param': None, 'code': 'insufficient_quota'}}
+
+✅ Finished! Saved predictions to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/autocot_predictions.csv
+Calling calculate_statistics...🫠
+PHQ_8NoInterest - MAE: 7.182, RMSE: 7.211
+PHQ_8Depressed - MAE: 2.045, RMSE: 3.599
+PHQ_8Sleep - MAE: 1.273, RMSE: 1.883
+PHQ_8Tired - MAE: 0.955, RMSE: 1.261
+PHQ_8Appetite - MAE: 1.136, RMSE: 1.462
+PHQ_8Failure - MAE: 1.727, RMSE: 2.000
+PHQ_8Concentrating - MAE: 1.273, RMSE: 1.809
+PHQ_8Moving - MAE: 3.045, RMSE: 3.226
+PHQ_8Total - MAE: 6.136, RMSE: 7.986
+Traceback (most recent call last):
+  File "autoCOT.py", line 366, in <module>
+    mae_scores, rmse_scores = calculate_statistics(output_predictions_path, training_csv_path)
+  File "autoCOT.py", line 329, in calculate_statistics
+    f.write(f"MAE: {mae_scores:.3f}\n")
+TypeError: unsupported format string passed to dict.__format__
