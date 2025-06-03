@@ -69,7 +69,7 @@ def phq8_from_annotated(
     prompt = "\n".join(rows)
 
     resp = client.chat.completions.create(
-        model=args.model_id,
+        model=model,
         temperature=temperature,
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
