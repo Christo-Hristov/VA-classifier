@@ -17,7 +17,7 @@ client = OpenAI(api_key=api_key)
 
 TRANSCRIPT_DIR = "/content/drive/MyDrive/edaic_transcripts"
 
-TRAIN_SPLIT_PATH = "src/data/train_split_noVA.csv"
+TRAIN_SPLIT_PATH = "src/data/train_split.csv"
 OUT_JSONL_PATH   = "/content/drive/MyDrive/phq8_gpt_train_noVA.jsonl"
 
 def add_va_scores(df: pd.DataFrame, model_path=None, device=None) -> pd.DataFrame:
