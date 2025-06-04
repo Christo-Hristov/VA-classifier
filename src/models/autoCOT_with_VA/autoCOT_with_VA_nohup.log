@@ -1,0 +1,154 @@
+Creating demo set...🫠
+Calling generate_rationale_demos_with_gpt...🫠
+Calling format_autocot_demo_text...🫠
+Calling run_autocot_inference...🫠
+Running Auto-CoT Inference:   0%|          | 0/48 [00:00<?, ?it/s]Running Auto-CoT Inference:   2%|▏         | 1/48 [00:32<25:09, 32.12s/it]Running Auto-CoT Inference:   4%|▍         | 2/48 [01:45<43:00, 56.10s/it]Running Auto-CoT Inference:   6%|▋         | 3/48 [02:51<45:35, 60.78s/it]Running Auto-CoT Inference:   8%|▊         | 4/48 [03:58<46:18, 63.15s/it]Running Auto-CoT Inference:  10%|█         | 5/48 [05:10<47:31, 66.31s/it]Running Auto-CoT Inference:  12%|█▎        | 6/48 [06:28<49:11, 70.28s/it]Running Auto-CoT Inference:  15%|█▍        | 7/48 [07:39<48:12, 70.54s/it]Running Auto-CoT Inference:  17%|█▋        | 8/48 [08:51<47:29, 71.23s/it]Running Auto-CoT Inference:  19%|█▉        | 9/48 [10:09<47:32, 73.13s/it]Running Auto-CoT Inference:  21%|██        | 10/48 [11:26<47:12, 74.53s/it]Running Auto-CoT Inference:  23%|██▎       | 11/48 [12:33<44:30, 72.16s/it]Running Auto-CoT Inference:  25%|██▌       | 12/48 [13:42<42:44, 71.23s/it]Running Auto-CoT Inference:  27%|██▋       | 13/48 [13:53<30:57, 53.08s/it]Running Auto-CoT Inference:  29%|██▉       | 14/48 [15:15<34:58, 61.73s/it]Running Auto-CoT Inference:  31%|███▏      | 15/48 [15:21<24:43, 44.94s/it]Running Auto-CoT Inference:  33%|███▎      | 16/48 [16:33<28:13, 52.93s/it]Running Auto-CoT Inference:  35%|███▌      | 17/48 [16:34<19:21, 37.47s/it]Running Auto-CoT Inference:  38%|███▊      | 18/48 [17:49<24:16, 48.55s/it]Running Auto-CoT Inference:  40%|███▉      | 19/48 [19:04<27:20, 56.56s/it]Running Auto-CoT Inference:  42%|████▏     | 20/48 [20:07<27:16, 58.46s/it]Running Auto-CoT Inference:  44%|████▍     | 21/48 [21:24<28:53, 64.19s/it]Running Auto-CoT Inference:  46%|████▌     | 22/48 [22:37<28:56, 66.81s/it]Running Auto-CoT Inference:  48%|████▊     | 23/48 [23:58<29:38, 71.13s/it]Running Auto-CoT Inference:  50%|█████     | 24/48 [24:56<26:51, 67.16s/it]Running Auto-CoT Inference:  52%|█████▏    | 25/48 [25:04<18:55, 49.35s/it]Running Auto-CoT Inference:  54%|█████▍    | 26/48 [26:19<20:57, 57.16s/it]Running Auto-CoT Inference:  56%|█████▋    | 27/48 [27:37<22:06, 63.16s/it]Running Auto-CoT Inference:  58%|█████▊    | 28/48 [28:58<22:54, 68.75s/it]Running Auto-CoT Inference:  60%|██████    | 29/48 [30:14<22:28, 70.95s/it]Running Auto-CoT Inference:  62%|██████▎   | 30/48 [31:33<21:58, 73.23s/it]Running Auto-CoT Inference:  65%|██████▍   | 31/48 [32:45<20:36, 72.73s/it]Running Auto-CoT Inference:  67%|██████▋   | 32/48 [33:55<19:12, 72.02s/it]Running Auto-CoT Inference:  69%|██████▉   | 33/48 [35:08<18:05, 72.38s/it]Running Auto-CoT Inference:  71%|███████   | 34/48 [36:21<16:56, 72.59s/it]Running Auto-CoT Inference:  73%|███████▎  | 35/48 [37:38<15:59, 73.80s/it]Running Auto-CoT Inference:  75%|███████▌  | 36/48 [38:53<14:49, 74.12s/it]Running Auto-CoT Inference:  77%|███████▋  | 37/48 [40:10<13:46, 75.16s/it]Running Auto-CoT Inference:  79%|███████▉  | 38/48 [41:23<12:23, 74.39s/it]Running Auto-CoT Inference:  81%|████████▏ | 39/48 [42:32<10:55, 72.83s/it]Running Auto-CoT Inference:  83%|████████▎ | 40/48 [43:43<09:36, 72.10s/it]Running Auto-CoT Inference:  85%|████████▌ | 41/48 [44:51<08:17, 71.07s/it]Running Auto-CoT Inference:  88%|████████▊ | 42/48 [46:02<07:05, 70.99s/it]Running Auto-CoT Inference:  90%|████████▉ | 43/48 [47:15<05:58, 71.61s/it]Running Auto-CoT Inference:  92%|█████████▏| 44/48 [48:32<04:53, 73.33s/it]Running Auto-CoT Inference:  94%|█████████▍| 45/48 [49:51<03:44, 74.83s/it]Running Auto-CoT Inference:  96%|█████████▌| 46/48 [51:10<02:32, 76.17s/it]Running Auto-CoT Inference:  98%|█████████▊| 47/48 [52:30<01:17, 77.20s/it]Running Auto-CoT Inference: 100%|██████████| 48/48 [53:43<00:00, 75.95s/it]Running Auto-CoT Inference: 100%|██████████| 48/48 [53:43<00:00, 67.15s/it]
+
+🔍 Processing Participant_ID: 602 (1/48)
+✅ Saved prediction for Participant_ID: 602
+
+🔍 Processing Participant_ID: 604 (2/48)
+✅ Saved prediction for Participant_ID: 604
+
+🔍 Processing Participant_ID: 605 (3/48)
+✅ Saved prediction for Participant_ID: 605
+
+🔍 Processing Participant_ID: 606 (4/48)
+✅ Saved prediction for Participant_ID: 606
+
+🔍 Processing Participant_ID: 609 (5/48)
+✅ Saved prediction for Participant_ID: 609
+
+🔍 Processing Participant_ID: 615 (6/48)
+✅ Saved prediction for Participant_ID: 615
+
+🔍 Processing Participant_ID: 618 (7/48)
+✅ Saved prediction for Participant_ID: 618
+
+🔍 Processing Participant_ID: 619 (8/48)
+✅ Saved prediction for Participant_ID: 619
+
+🔍 Processing Participant_ID: 620 (9/48)
+✅ Saved prediction for Participant_ID: 620
+
+🔍 Processing Participant_ID: 622 (10/48)
+✅ Saved prediction for Participant_ID: 622
+
+🔍 Processing Participant_ID: 623 (11/48)
+✅ Saved prediction for Participant_ID: 623
+
+🔍 Processing Participant_ID: 625 (12/48)
+[ERROR] GPT failed on PID 625 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 4042, Requested 28617. Please try again in 5.318s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 626 (13/48)
+✅ Saved prediction for Participant_ID: 626
+
+🔍 Processing Participant_ID: 629 (14/48)
+[ERROR] GPT failed on PID 629 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 1252, Requested 29037. Please try again in 578ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 631 (15/48)
+✅ Saved prediction for Participant_ID: 631
+
+🔍 Processing Participant_ID: 634 (16/48)
+✅ Saved prediction for Participant_ID: 634
+
+🔍 Processing Participant_ID: 636 (17/48)
+[ERROR] GPT failed on PID 636 → Error code: 429 - {'error': {'message': 'Request too large for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Requested 30980. The input or output tokens must be reduced in order to run successfully. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 637 (18/48)
+✅ Saved prediction for Participant_ID: 637
+
+🔍 Processing Participant_ID: 638 (19/48)
+✅ Saved prediction for Participant_ID: 638
+
+🔍 Processing Participant_ID: 640 (20/48)
+✅ Saved prediction for Participant_ID: 640
+
+🔍 Processing Participant_ID: 649 (21/48)
+✅ Saved prediction for Participant_ID: 649
+
+🔍 Processing Participant_ID: 650 (22/48)
+✅ Saved prediction for Participant_ID: 650
+
+🔍 Processing Participant_ID: 652 (23/48)
+✅ Saved prediction for Participant_ID: 652
+
+🔍 Processing Participant_ID: 655 (24/48)
+[ERROR] GPT failed on PID 655 → Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4o in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 30000, Used 3829, Requested 27826. Please try again in 3.31s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 656 (25/48)
+✅ Saved prediction for Participant_ID: 656
+
+🔍 Processing Participant_ID: 658 (26/48)
+✅ Saved prediction for Participant_ID: 658
+
+🔍 Processing Participant_ID: 659 (27/48)
+✅ Saved prediction for Participant_ID: 659
+
+🔍 Processing Participant_ID: 661 (28/48)
+✅ Saved prediction for Participant_ID: 661
+
+🔍 Processing Participant_ID: 664 (29/48)
+✅ Saved prediction for Participant_ID: 664
+
+🔍 Processing Participant_ID: 666 (30/48)
+✅ Saved prediction for Participant_ID: 666
+
+🔍 Processing Participant_ID: 676 (31/48)
+✅ Saved prediction for Participant_ID: 676
+
+🔍 Processing Participant_ID: 679 (32/48)
+✅ Saved prediction for Participant_ID: 679
+
+🔍 Processing Participant_ID: 682 (33/48)
+✅ Saved prediction for Participant_ID: 682
+
+🔍 Processing Participant_ID: 683 (34/48)
+✅ Saved prediction for Participant_ID: 683
+
+🔍 Processing Participant_ID: 688 (35/48)
+✅ Saved prediction for Participant_ID: 688
+
+🔍 Processing Participant_ID: 689 (36/48)
+✅ Saved prediction for Participant_ID: 689
+
+🔍 Processing Participant_ID: 691 (37/48)
+✅ Saved prediction for Participant_ID: 691
+
+🔍 Processing Participant_ID: 693 (38/48)
+✅ Saved prediction for Participant_ID: 693
+
+🔍 Processing Participant_ID: 696 (39/48)
+✅ Saved prediction for Participant_ID: 696
+
+🔍 Processing Participant_ID: 699 (40/48)
+✅ Saved prediction for Participant_ID: 699
+
+🔍 Processing Participant_ID: 705 (41/48)
+✅ Saved prediction for Participant_ID: 705
+
+🔍 Processing Participant_ID: 708 (42/48)
+✅ Saved prediction for Participant_ID: 708
+
+🔍 Processing Participant_ID: 709 (43/48)
+✅ Saved prediction for Participant_ID: 709
+
+🔍 Processing Participant_ID: 712 (44/48)
+✅ Saved prediction for Participant_ID: 712
+
+🔍 Processing Participant_ID: 715 (45/48)
+✅ Saved prediction for Participant_ID: 715
+
+🔍 Processing Participant_ID: 716 (46/48)
+✅ Saved prediction for Participant_ID: 716
+
+🔍 Processing Participant_ID: 717 (47/48)
+✅ Saved prediction for Participant_ID: 717
+
+🔍 Processing Participant_ID: 718 (48/48)
+✅ Saved prediction for Participant_ID: 718
+
+✅ Finished! All predictions saved to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/autocotVA_predictions.csv
+Calling calculate_statistics...🫠
+PHQ-8 Total Score - MAE: 3.795, RMSE: 4.634
+Results saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/statistics_results.txt
