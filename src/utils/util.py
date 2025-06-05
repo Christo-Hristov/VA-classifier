@@ -23,7 +23,7 @@ def get_va_scores(texts, model_path=None, device=None):
     
     # Load model weights if path provided
     if model_path is None:
-        model_path = "models/roberta_emobank/best_model.pt"
+        model_path = "src/models/roberta_emobank/best_model.pt"
     model.load_state_dict(torch.load(model_path, map_location=device))
     
     model.to(device)

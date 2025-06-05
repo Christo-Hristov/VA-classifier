@@ -1,0 +1,3 @@
+PHQ-8 Total Score Statistics:
+MAE: 3.795
+RMSE: 4.634
