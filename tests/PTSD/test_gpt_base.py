@@ -46,6 +46,25 @@ patient has PTSD or not. PTSD is a psychiatric condition that arises after expos
 
 Every sentence in the transcript has a Valence and Arousal (-1 to 1) score. Valence and arousal are two key dimensions of emotional experience often used in affective computing and psychology to quantify the emotional tone of text or speech. Valence measures how positive or negative an emotion is (e.g., happiness vs. sadness), while arousal measures the intensity or activation level of that emotion (e.g., calm vs. panicked). In individuals with PTSD, emotional responses are often dysregulated: they may show frequent negative valence (e.g., fear, guilt, sadness) and high arousal (e.g., anxiety, hyperalertness), even in neutral situations.
 
+According to the DSM-5 diagnostic criteria, PTSD is characterized by: a. Intrusion Symptoms: At least one
+symptom such as recurrent, involuntary, and intrusive distressing memories of the traumatic event(s);
+recurrent distressing dreams related to the event(s); dissociative reactions (e.g., flashbacks) in which the
+event seems to recur; intense or prolonged psychological distress at exposure to internal or external cues that
+symbolize or resemble the traumatic event(s); or marked physiological reactions to such cues. b. Avoidance:
+Persistent avoidance of stimuli associated with the traumatic event(s), evidenced by efforts to avoid
+distressing memories, thoughts, or feelings about or closely associated with the event(s) and/or avoidance of
+external reminders (people, places, conversations, activities, objects, or situations) that trigger these
+memories. c. Negative Alterations in Cognitions and Mood: Two or more symptoms such as inability to
+remember an important aspect of the traumatic event(s) (typically due to dissociative amnesia); persistent and
+exaggerated negative beliefs or expectations about oneself, others, or the world; persistent, distorted
+cognitions about the cause or consequences of the traumatic event(s) leading to self-blame or blaming others;
+persistent negative emotional state (e.g., fear, horror, anger, guilt, or shame); markedly diminished interest in
+significant activities; feelings of detachment or estrangement from others; or a persistent inability to
+experience positive emotions. d. Alterations in Arousal and Reactivity: Two or more symptoms such as
+irritable behavior and angry outbursts (with little or no provocation); reckless or self-destructive behavior;
+hypervigilance; exaggerated startle response; problems with concentration; or sleep disturbances.
+
+
 Output:
 
 - First line: Estimate the participant's total score of PCL-5 (0-80) and reply with **only** a number.
