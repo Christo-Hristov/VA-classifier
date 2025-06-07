@@ -39,10 +39,17 @@ client = OpenAI(api_key=api_key)
 
 # ───────────────  PTSD PROMPT  ─────────────── #
 SYSTEM_PROMPT = """
-You are a clinical psychiatrist and want to identify PTSD from clinical transcripts.
-Every sentence below has a Valence and Arousal (-1 to 1) score.
+You are a highly experienced psychiatrist specializing in trauma and mental health disorders.
+
+Your task is to analyze patient transcripts—containing only the patient's speech—and classify whether the
+patient has PTSD or not. PTSD is a psychiatric condition that arises after exposure to traumatic events, characterized by symptoms such as hypervigilance, emotional numbing, intrusive thoughts, and avoidance.
+
+Every sentence in the transcript has a Valence and Arousal (-1 to 1) score. Valence and arousal are two key dimensions of emotional experience often used in affective computing and psychology to quantify the emotional tone of text or speech. Valence measures how positive or negative an emotion is (e.g., happiness vs. sadness), while arousal measures the intensity or activation level of that emotion (e.g., calm vs. panicked). In individuals with PTSD, emotional responses are often dysregulated: they may show frequent negative valence (e.g., fear, guilt, sadness) and high arousal (e.g., anxiety, hyperalertness), even in neutral situations.
+
+Output:
+
 Estimate the participant's total score of PCL-5 (0-80) and reply with **only** a number.
-Estimate whether a participant has PTSD (0 if negative, 1 if positive) and reply with **only** a number in the next line.
+In the next line, estimate whether a participant has PTSD (0 if negative, 1 if positive) and reply with **only** a number.
 Overall, output should be 2 lines with a single number on each line.
 """.strip()
 
@@ -152,7 +159,8 @@ def main() -> None:
 
     # MAE and RMSE
     pairs = [(g, p) for g, p in zip(gold_severity, pred_severity)
-         if not math.isnan(g) and not math.isnan(p)]    n     = len(pairs)
+         if not math.isnan(g) and not math.isnan(p)]    
+    n     = len(pairs)
     mae   = (sum(abs(g-p) for g, p in pairs) / n) if n else float("nan")
     rmse  = (math.sqrt(sum((g-p)**2 for g, p in pairs) / n)
              if n else float("nan"))
