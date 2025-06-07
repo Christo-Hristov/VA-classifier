@@ -174,7 +174,7 @@ def main() -> None:
     prepare_supervised_jsonl(
         split_df=train_split,
         transcript_dir=transcript_dir,
-        VA_MODEL_PATH,
+        va_model=VA_MODEL_PATH,
         output_path="/content/drive/MyDrive/PTSD_results/PTSD_with_VA.jsonl",
         no_va=args.no_va,
         compute_va=args.compute_va
