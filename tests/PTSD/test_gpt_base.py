@@ -217,7 +217,10 @@ def main() -> None:
         pid   = row["Participant_ID"]
         pids.append(pid)
         print(f"\n[{time.strftime('%H:%M:%S')}] → PID {pid}")
-        csv_p = os.path.join(transcript_dir, f"{pid}_Transcript.csv")
+        name = f"{pid}_Transcript.csv"
+        if "va_pruned" in transcript_dir:
+            name = f"{pid}_va_pruned_transcript.csv"
+        csv_p = os.path.join(transcript_dir, name)
         if not os.path.exists(csv_p):
             print("  [WARN] transcript missing - skipped")
             continue
