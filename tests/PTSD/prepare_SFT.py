@@ -174,7 +174,7 @@ def main() -> None:
         split_df=train_split,
         transcript_dir=transcript_dir,
         va_model=VA_MODEL_PATH,
-        output_path="/content/drive/MyDrive/PTSD_results/PTSD_with_VA.jsonl",
+        output_path="/content/drive/MyDrive/PTSD_results/PTSD_dev_no_VA.jsonl",
         no_va=args.no_va,
         compute_va=args.compute_va
     )
