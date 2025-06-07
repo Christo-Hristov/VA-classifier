@@ -25,6 +25,7 @@ TRANSCRIPT_DIR = "/content/drive/MyDrive/model1_outputted_va_scores"
 
 TEST_SPLIT_PATH = "/content/drive/My Drive/test_split.csv"
 API_KEY_PATH = os.path.expanduser("~/Desktop/openai_key.txt")
+VA_MODEL_PATH = "/content/drive/MyDrive/VA-classifier/src/models/roberta_direct_emobank/3_hidden_256_128_patience_5_finetune_1e-05.pt"
 
 if os.path.exists(API_KEY_PATH):
     api_key = Path(API_KEY_PATH).read_text().strip()
@@ -37,6 +38,21 @@ else:                                # ← fallback to env-var
 
 client = OpenAI(api_key=api_key)
 
+
+# ───────────────  VA SCORING  ─────────────── #
+def add_va_scores(
+    df: pd.DataFrame,
+    model_path: str | None = None,
+    device: str | None     = None
+) -> pd.DataFrame:
+    """
+    Run RoBERTa VA regressor on every row in df["Text"] and
+    append the predictions as two new columns.
+    """
+    texts   = df["Text"].fillna("").tolist()
+    scores  = get_va_scores(texts, model_path=model_path, device=device)
+    df[["valence", "arousal"]] = pd.DataFrame(scores)
+    return df
 
 # ───────────────  PTSD PROMPT  ─────────────── #
 SYSTEM_PROMPT = """
@@ -73,8 +89,11 @@ def format_prompt(df: pd.DataFrame, no_va: bool = False) -> str:
 
 
 # Prepare JSONL for SFT
-def prepare_supervised_jsonl(split_df: pd.DataFrame, transcript_dir: str, output_path: str, no_va: bool = False):
+def prepare_supervised_jsonl(split_df: pd.DataFrame, transcript_dir: str, va_model: str, output_path: str, no_va: bool = False, compute_va: bool = False):
     examples = []
+    if compute_va:
+        transcript_dir = "/content/drive/MyDrive/edaic_transcripts"
+
     for _, row in tqdm(split_df.iterrows(), total=len(split_df), desc="Preparing fine-tune data"):
         pid = row["Participant_ID"]
 
@@ -91,6 +110,11 @@ def prepare_supervised_jsonl(split_df: pd.DataFrame, transcript_dir: str, output
             continue
 
         df = pd.read_csv(transcript_path)
+        if compute_va:
+            df = add_va_scores(df,
+                            model_path=va_model,
+                            device=args.device)
+            df.to_csv("/content/drive/MyDrive/model1_outputted_va_scores/name")
         if not all(col in df.columns for col in ["Text"]):
             continue
         if not no_va and not all(col in df.columns for col in ["valence", "arousal"]):
@@ -136,6 +160,8 @@ def main() -> None:
     ap.add_argument("--no_va", action="store_true",
                 help="Use only text (no valence/arousal) in prompt")
     ap.add_argument("--few_shot", action="store_true")
+    ap.add_argument("--compute_va", action="store_true")
+
 
 
     args = ap.parse_args()
@@ -148,8 +174,10 @@ def main() -> None:
     prepare_supervised_jsonl(
         split_df=train_split,
         transcript_dir=transcript_dir,
+        VA_MODEL_PATH,
         output_path="/content/drive/MyDrive/PTSD_results/PTSD_with_VA.jsonl",
-        no_va=args.no_va
+        no_va=args.no_va,
+        compute_va=args.compute_va
     )
     
 
