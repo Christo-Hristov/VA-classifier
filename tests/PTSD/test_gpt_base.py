@@ -75,7 +75,7 @@ Overall, output should be 2 lines with a single number on each line.
 
 
 def format_prompt(df: pd.DataFrame, no_va: bool = False) -> str:
-    if text_only:
+    if no_va:
         return "\n".join(df["Text"].dropna().tolist())
     
     header = f"{'Valence':>8} | {'Arousal':>8} | Text"
