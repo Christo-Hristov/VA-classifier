@@ -118,6 +118,9 @@ def main() -> None:
 
     args = ap.parse_args()
 
+    transcript_dir = TRANSCRIPT_DIR
+    if args.transcripts:
+        transcript_dir = args.transcripts
 
     split = pd.read_csv(TEST_SPLIT_PATH)
     if args.limit:
@@ -136,7 +139,7 @@ def main() -> None:
         pid   = row["Participant_ID"]
         pids.append(pid)
         print(f"\n[{time.strftime('%H:%M:%S')}] → PID {pid}")
-        csv_p = os.path.join(TRANSCRIPT_DIR, f"{pid}_Transcript.csv")
+        csv_p = os.path.join(transcript_dir, f"{pid}_Transcript.csv")
         if not os.path.exists(csv_p):
             print("  [WARN] transcript missing - skipped")
             continue
