@@ -14,6 +14,7 @@ import pandas as pd
 from tqdm import tqdm
 from openai import OpenAI
 from sklearn.metrics import accuracy_score, precision_score, recall_score
+import random
 
 # ───────────────  LOCAL VA REGRESSOR  ─────────────── #
 # util.py lives in src/models/; adjust if located elsewhere
