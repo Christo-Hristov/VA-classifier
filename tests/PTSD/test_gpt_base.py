@@ -83,7 +83,7 @@ def format_prompt(df: pd.DataFrame, no_va: bool = False, random_va: bool = False
         rows = [f"{'':>8} | {'':>8} | {t}" for t in df["Text"].fillna("")]
     elif random_va:
         rows = [
-            f"{random.uniform(-1, 1):+8.2f} | {random.uniform(-1, 1):+8.2f} | {t}"
+            f"{random.uniform(-0.5, 0.5):+8.2f} | {random.uniform(-0.5, 0.5):+8.2f} | {t}"
             for t in df["Text"].fillna("")
         ]
     else:
