@@ -127,6 +127,11 @@ def main() -> None:
     gold_binary, pred_binary = [], []
     pids = []
 
+    if no_va:
+        print("Without VA")
+    else:
+        print("With VA")
+
     for _, row in tqdm(split.iterrows(), total=len(split), desc="Participants"):
         pid   = row["Participant_ID"]
         pids.append(pid)
