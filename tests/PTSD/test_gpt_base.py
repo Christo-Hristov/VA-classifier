@@ -47,14 +47,23 @@ Overall, output should be 2 lines with a single number on each line.
 """.strip()
 
 
+def format_prompt(df: pd.DataFrame) -> str:
+    header = f"{'Valence':>8} | {'Arousal':>8} | Text"
+    separator = "-" * 60
+    rows = [
+        f"{v:+8.2f} | {a:+8.2f} | {t}"
+        for v, a, t in df[["valence", "arousal", "Text"]].values
+    ]
+    return "\n".join([header, separator] + rows)
+
+
 def pcl5_from_annotated(
     df: pd.DataFrame,
     model: str,
     temperature: float = 1.0
 ) -> float:
 
-    rows = [f"{v:+.2f}\t{a:+.2f}\t{t}" for v, a, t in df[["valence", "arousal", "Text"]].values]
-    prompt = "\n".join(rows)
+    prompt = format_prompt(df)
 
     print(prompt)
     resp = client.chat.completions.create(
@@ -67,7 +76,7 @@ def pcl5_from_annotated(
     )
     txt = str(resp.choices[0].message.content).strip()
     print(txt)
-    lines = response_text.splitlines()
+    lines = txt.splitlines()
     severity = float(lines[0].strip())
     binary = float(lines[1].strip())
 
