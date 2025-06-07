@@ -96,9 +96,7 @@ def pcl5_from_annotated(
 ) -> float:
 
     prompt = format_prompt(df, no_va=no_va)
-    print(prompt)
 
-    #print(prompt)
     resp = client.chat.completions.create(
         model=model,
         temperature=temperature,
