@@ -72,37 +72,6 @@ def make_few_shot_prompt(df: pd.DataFrame, severity: float, binary: int, no_va: 
     return f"{transcript_block}\nPCL-5 Score: {severity:.1f}\nPTSD Binary: {binary}\n"
 
 
-few_shot_contexts = []
-few_shot_limit = 3
-used_pids = set()
-train_split = pd.read_csv("/content/drive/My Drive/train_split.csv")
-
-for _, row in train_split.iterrows():
-    pid = row["Participant_ID"]
-    if pid in used_pids:
-        continue
-    transcript_path = os.path.join(transcript_dir, f"{pid}_Transcript.csv")
-    if not os.path.exists(transcript_path):
-        continue
-
-    df = pd.read_csv(transcript_path)
-    if not all(col in df.columns for col in ["Text"]):
-        continue
-
-    if not args.no_va and not all(col in df.columns for col in ["valence", "arousal"]):
-        continue
-
-    severity = float(row["PTSD_Severity"])
-    binary = int(row["PTSD_Binary"])
-    few_shot_contexts.append(make_few_shot_prompt(df, severity, binary, no_va=args.no_va))
-    used_pids.add(pid)
-
-    if len(few_shot_contexts) == few_shot_limit:
-        break
-
-FEW_SHOT_CONTEXT = "\n---\n".join(few_shot_contexts).strip()
-
-
 # Format prompt
 
 
@@ -171,7 +140,7 @@ def main() -> None:
     ap.add_argument("--no_va", action="store_true",
                 help="Use only text (no valence/arousal) in prompt")
     ap.add_argument("--few_shot", action="store_true")
-    
+
 
     args = ap.parse_args()
 
@@ -186,6 +155,39 @@ def main() -> None:
     gold_severity, pred_severity = [], []
     gold_binary, pred_binary = [], []
     pids = []
+
+    # Make few shot examples
+
+    few_shot_contexts = []
+    few_shot_limit = 3
+    used_pids = set()
+    train_split = pd.read_csv("/content/drive/My Drive/train_split.csv")
+
+    for _, row in train_split.iterrows():
+        pid = row["Participant_ID"]
+        if pid in used_pids:
+            continue
+        transcript_path = os.path.join(transcript_dir, f"{pid}_Transcript.csv")
+        if not os.path.exists(transcript_path):
+            continue
+
+        df = pd.read_csv(transcript_path)
+        if not all(col in df.columns for col in ["Text"]):
+            continue
+
+        if not args.no_va and not all(col in df.columns for col in ["valence", "arousal"]):
+            continue
+
+        severity = float(row["PTSD_Severity"])
+        binary = int(row["PTSD_Binary"])
+        few_shot_contexts.append(make_few_shot_prompt(df, severity, binary, no_va=args.no_va))
+        used_pids.add(pid)
+
+        if len(few_shot_contexts) == few_shot_limit:
+            break
+
+    FEW_SHOT_CONTEXT = "\n---\n".join(few_shot_contexts).strip()
+
 
     if args.no_va:
         print("Without VA")
