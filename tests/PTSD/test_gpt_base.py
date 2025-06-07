@@ -91,7 +91,8 @@ def format_prompt(df: pd.DataFrame, no_va: bool = False) -> str:
 def pcl5_from_annotated(
     df: pd.DataFrame,
     model: str,
-    temperature: float = 1.0
+    temperature: float = 1.0,
+    no_va: bool = False
 ) -> float:
 
     prompt = format_prompt(df, no_va=no_va)
@@ -161,7 +162,8 @@ def main() -> None:
         try:
             severity, binary = pcl5_from_annotated(df,
                                       model=args.model_id,
-                                      temperature=args.temperature)
+                                      temperature=args.temperature,
+                                      no_va=args.no_va)
         except Exception as e:
             print(f"  [ERROR] PHQ failed → {e}")
             phq = float("nan")
