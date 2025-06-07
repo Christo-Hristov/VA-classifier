@@ -56,15 +56,17 @@ Overall, output should be 2 lines with a single number on each line.
 
 
 def format_prompt(df: pd.DataFrame, no_va: bool = False) -> str:
-    if no_va:
-        return "\n".join(df["Text"].dropna().tolist())
-    
     header = f"{'Valence':>8} | {'Arousal':>8} | Text"
     separator = "-" * 60
-    rows = [
-        f"{v:+8.2f} | {a:+8.2f} | {t}"
-        for v, a, t in df[["valence", "arousal", "Text"]].values
-    ]
+
+    if no_va:
+        rows = [f"{'':>8} | {'':>8} | {t}" for t in df["Text"].fillna("")]
+    else:
+        rows = [
+            f"{v:+8.2f} | {a:+8.2f} | {t}"
+            for v, a, t in df[["valence", "arousal", "Text"]].values
+        ]
+
     return "\n".join([header, separator] + rows)
 
 
