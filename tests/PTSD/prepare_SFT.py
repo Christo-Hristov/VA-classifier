@@ -121,7 +121,7 @@ def prepare_supervised_jsonl(split_df: pd.DataFrame, transcript_dir: str, va_mod
 
         prompt = format_prompt(df, no_va=no_va)
         print(prompt)
-        completion = f"PCL-5 Score: {int(row['PTSD_Severity'])}\nPTSD Binary: {int(row['PTSD_Binary'])}"
+        completion = f"PCL-5 Score: {int(row['PTSD Severity'])}\nPTSD Binary: {int(row['PCL-C (PTSD)'])}"
 
         entry = {
             "messages": [
