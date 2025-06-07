@@ -169,6 +169,7 @@ def main() -> None:
             continue
         transcript_path = os.path.join(transcript_dir, f"{pid}_Transcript.csv")
         if not os.path.exists(transcript_path):
+            print(f"{transcript_path} does not exist")
             continue
 
         df = pd.read_csv(transcript_path)
