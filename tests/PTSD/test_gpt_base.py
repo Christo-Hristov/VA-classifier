@@ -151,8 +151,8 @@ def main() -> None:
     # ───── Metrics (skip NaNs) ─────
 
     # MAE and RMSE
-    pairs = [(g, p) for g, p in zip(gold_severity, pred_severity) if not math.isnan(p)]
-    n     = len(pairs)
+    pairs = [(g, p) for g, p in zip(gold_severity, pred_severity)
+         if not math.isnan(g) and not math.isnan(p)]    n     = len(pairs)
     mae   = (sum(abs(g-p) for g, p in pairs) / n) if n else float("nan")
     rmse  = (math.sqrt(sum((g-p)**2 for g, p in pairs) / n)
              if n else float("nan"))
