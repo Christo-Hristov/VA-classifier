@@ -112,8 +112,7 @@ def prepare_supervised_jsonl(split_df: pd.DataFrame, transcript_dir: str, va_mod
         df = pd.read_csv(transcript_path)
         if compute_va:
             df = add_va_scores(df,
-                            model_path=va_model,
-                            device=args.device)
+                            model_path=va_model)
             df.to_csv("/content/drive/MyDrive/model1_outputted_va_scores/name")
         if not all(col in df.columns for col in ["Text"]):
             continue
