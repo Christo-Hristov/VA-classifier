@@ -149,9 +149,8 @@ def main() -> None:
                 help="Use only text (no valence/arousal) in prompt")
     ap.add_argument("--few_shot", action="store_true")
 
-    print(args.model_id)
-
     args = ap.parse_args()
+    print(args.model_id)
 
     transcript_dir = TRANSCRIPT_DIR
     if args.transcripts:
