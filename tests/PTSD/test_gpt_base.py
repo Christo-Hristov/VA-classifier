@@ -175,10 +175,10 @@ def main() -> None:
         pid = row["Participant_ID"]
         if pid in used_pids:
             continue
-        name = pid
+        name = f"{pid}_Transcript.csv"
         if "va_pruned" in transcript_dir:
-            name = f"{pid}_va_pruned"
-        transcript_path = os.path.join(transcript_dir, f"{name}_Transcript.csv")
+            name = f"{pid}_va_pruned_transcript.csv"
+        transcript_path = os.path.join(transcript_dir, name)
         if not os.path.exists(transcript_path):
             print(f"{transcript_path} does not exist")
             continue
