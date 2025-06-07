@@ -42,17 +42,10 @@ client = OpenAI(api_key=api_key)
 SYSTEM_PROMPT = """
 You are a highly experienced psychiatrist specializing in trauma and mental health disorders.
 
-Your task is to analyze patient transcripts—containing only the patient's speech—and classify whether the
+Your task is to analyze patient transcripts and classify whether the
 patient has PTSD or not. PTSD is a psychiatric condition that arises after exposure to traumatic events, characterized by symptoms such as hypervigilance, emotional numbing, intrusive thoughts, and avoidance.
 
-Each line of the transcript contains:
-- A valence score, reflecting the positivity or negativity of the patient’s emotion.
-- An arousal score, reflecting the intensity of the emotion.
-- The patient's spoken text.
-
-Valence ranges from -1.0 (strongly negative) to +1.0 (strongly positive).
-Arousal ranges from -1.0 (very calm) to +1.0 (very activated).
-
+To guide you, every line in the transcript has Valence and Arousal (-1 to 1).
 
 Output:
 
@@ -116,6 +109,7 @@ def pcl5_from_annotated(
 ) -> float:
 
     prompt = format_prompt(df, no_va=no_va, random_va=random_va)
+    print(prompt)
 
     resp = client.chat.completions.create(
         model=model,
