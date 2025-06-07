@@ -52,7 +52,7 @@ Output:
 - First line: Estimate the participant's total score of PCL-5 (0-80) and reply with 'PCL-5 Score: [0-80]' 
 - Second line: Output 0 if there is no indication of PTSD and 1 if PTSD is present. Reply with 'PTSD Binary: [0 or 1]'.
 
-Overall, output should be 2 lines with a single number on each line.
+Overall, output should be 2 lines.
 """.strip()
 
 ### Generate 3 few shots
