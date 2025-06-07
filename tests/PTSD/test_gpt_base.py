@@ -127,7 +127,7 @@ def pcl5_from_annotated(
     model: str,
     temperature: float = 1.0,
     no_va: bool = False,
-    system_prompt
+    system_prompt: str
 ) -> float:
 
     prompt = format_prompt(df, no_va=no_va)
