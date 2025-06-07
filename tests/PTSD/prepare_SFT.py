@@ -113,7 +113,7 @@ def prepare_supervised_jsonl(split_df: pd.DataFrame, transcript_dir: str, va_mod
         if compute_va:
             df = add_va_scores(df,
                             model_path=va_model)
-            df.to_csv("/content/drive/MyDrive/model1_outputted_va_scores/name")
+            df.to_csv(f"/content/drive/MyDrive/model1_outputted_va_scores/{name}")
         if not all(col in df.columns for col in ["Text"]):
             continue
         if not no_va and not all(col in df.columns for col in ["valence", "arousal"]):
