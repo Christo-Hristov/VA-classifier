@@ -23,7 +23,7 @@ from src.utils.util import get_va_scores
 
 TRANSCRIPT_DIR = "/content/drive/MyDrive/model1_outputted_va_scores"
 
-TEST_SPLIT_PATH = "/content/drive/My Drive/dev_split.csv"
+TEST_SPLIT_PATH = "/content/drive/My Drive/train_split.csv"
 API_KEY_PATH = os.path.expanduser("~/Desktop/openai_key.txt")
 VA_MODEL_PATH = "/content/drive/MyDrive/VA-classifier/src/models/roberta_direct_emobank/3_hidden_256_128_patience_5_finetune_1e-05.pt"
 
@@ -169,12 +169,12 @@ def main() -> None:
     if args.transcripts:
         transcript_dir = args.transcripts
 
-    train_split = pd.read_csv("/content/drive/My Drive/dev_split.csv")
+    train_split = pd.read_csv("/content/drive/My Drive/train_split.csv")
     prepare_supervised_jsonl(
         split_df=train_split,
         transcript_dir=transcript_dir,
         va_model=VA_MODEL_PATH,
-        output_path="/content/drive/MyDrive/PTSD_results/PTSD_dev_no_VA.jsonl",
+        output_path="/content/drive/MyDrive/PTSD_results/PTSD_train_no_VA.jsonl",
         no_va=args.no_va,
         compute_va=args.compute_va
     )
