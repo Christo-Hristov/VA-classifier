@@ -75,12 +75,17 @@ def make_few_shot_prompt(df: pd.DataFrame, severity: float, binary: int, no_va: 
 # Format prompt
 
 
-def format_prompt(df: pd.DataFrame, no_va: bool = False) -> str:
+def format_prompt(df: pd.DataFrame, no_va: bool = False, random_va: bool = False) -> str:
     header = f"{'Valence':>8} | {'Arousal':>8} | Text"
     separator = "-" * 60
 
     if no_va:
         rows = [f"{'':>8} | {'':>8} | {t}" for t in df["Text"].fillna("")]
+    elif random_va:
+        rows = [
+            f"{random.uniform(-1, 1):+8.2f} | {random.uniform(-1, 1):+8.2f} | {t}"
+            for t in df["Text"].fillna("")
+        ]
     else:
         rows = [
             f"{v:+8.2f} | {a:+8.2f} | {t}"
@@ -148,6 +153,8 @@ def main() -> None:
     ap.add_argument("--no_va", action="store_true",
                 help="Use only text (no valence/arousal) in prompt")
     ap.add_argument("--few_shot", action="store_true")
+    ap.add_argument("--random_va", action="store_true")
+
 
     args = ap.parse_args()
     print(args.model_id)
