@@ -23,7 +23,7 @@ from src.utils.util import get_va_scores
 
 TRANSCRIPT_DIR = "/content/drive/MyDrive/model_outputted_va_scores"
 
-TEST_SPLIT_PATH = "test_split.csv"
+TEST_SPLIT_PATH = "/content/drive/My Drive/test_split.csv"
 API_KEY_PATH = os.path.expanduser("~/Desktop/openai_key.txt")
 
 if os.path.exists(API_KEY_PATH):
