@@ -74,7 +74,10 @@ Overall, output should be 2 lines with a single number on each line.
 """.strip()
 
 
-def format_prompt(df: pd.DataFrame) -> str:
+def format_prompt(df: pd.DataFrame, no_va: bool = False) -> str:
+    if text_only:
+        return "\n".join(df["Text"].dropna().tolist())
+    
     header = f"{'Valence':>8} | {'Arousal':>8} | Text"
     separator = "-" * 60
     rows = [
@@ -84,13 +87,15 @@ def format_prompt(df: pd.DataFrame) -> str:
     return "\n".join([header, separator] + rows)
 
 
+
 def pcl5_from_annotated(
     df: pd.DataFrame,
     model: str,
     temperature: float = 1.0
 ) -> float:
 
-    prompt = format_prompt(df)
+    prompt = format_prompt(df, no_va=no_va)
+    print(prompt)
 
     #print(prompt)
     resp = client.chat.completions.create(
@@ -128,6 +133,8 @@ def main() -> None:
                help="Folder that contains the <PID>_Transcript.csv files")
     ap.add_argument("--limit",        type=int,
                     help="Only first N participants (debug)")
+    ap.add_argument("--no_va", action="store_true",
+                help="Use only text (no valence/arousal) in prompt")
 
     args = ap.parse_args()
 
