@@ -49,8 +49,8 @@ def prune_by_va(participant_id, transcripts_dir, output_dir):
     transcript_file = os.path.join(transcripts_dir, f'{participant_id}_Transcript.csv')
     if os.path.exists(transcript_file):
         df = pd.read_csv(transcript_file)
-        # Filter by valence and arousal
-        pruned_df = df[(df['valence'].between(-0.5, 0.5)) & (df['arousal'].between(-0.5, 0.5))]
+        # Filter by valence and arousal: Score ranges are the 25th-75th percentile for depressed patients from Yalcin's analysis
+        pruned_df = df[(df['valence'].between(-0.110732, 0.040102)) & (df['arousal'].between(-0.057169, 0.058140))]
         pruned_df.to_csv(os.path.join(output_dir, f'{participant_id}_va_pruned_transcript.csv'), index=False)
 
 def prune_by_both(participant_id, transcripts_dir, output_dir):
