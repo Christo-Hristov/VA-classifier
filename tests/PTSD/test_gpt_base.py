@@ -105,7 +105,7 @@ def pcl5_from_annotated(
     random_va: bool = False
 ) -> float:
 
-    prompt = format_prompt(df, no_va=no_va, random_va)
+    prompt = format_prompt(df, no_va=no_va, random_va=random_va)
 
     resp = client.chat.completions.create(
         model=model,
@@ -244,7 +244,8 @@ def main() -> None:
                                       model=args.model_id,
                                       system_prompt=final_system_prompt,
                                       temperature=args.temperature,
-                                      no_va=args.no_va)
+                                      no_va=args.no_va, 
+                                      random_va=args.random_va)
         except Exception as e:
             print(f"  [ERROR] PHQ failed → {e}")
             phq = float("nan")
