@@ -101,10 +101,11 @@ def pcl5_from_annotated(
     model: str,
     system_prompt: str,
     temperature: float = 1.0,
-    no_va: bool = False
+    no_va: bool = False,
+    random_va: bool = False
 ) -> float:
 
-    prompt = format_prompt(df, no_va=no_va)
+    prompt = format_prompt(df, no_va=no_va, random_va)
 
     resp = client.chat.completions.create(
         model=model,
