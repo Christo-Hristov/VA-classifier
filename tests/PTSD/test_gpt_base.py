@@ -127,7 +127,7 @@ def main() -> None:
     gold_binary, pred_binary = [], []
     pids = []
 
-    if no_va:
+    if args.no_va:
         print("Without VA")
     else:
         print("With VA")
