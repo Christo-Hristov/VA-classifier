@@ -9,6 +9,7 @@ model1_daic.py  ―  DAIC-WOZ batch evaluator
 
 import os, argparse, math, re, time
 from pathlib import Path
+from typing import Optional
 
 import pandas as pd
 from tqdm import tqdm
@@ -42,8 +43,8 @@ client = OpenAI(api_key=api_key)
 def add_va_scores(
     df: pd.DataFrame,
     output_path: str,
-    model_path: str | None = None,
-    device: str | None     = None
+    model_path: Optional[str] = None,
+    device: Optional[str] = None
 ) -> pd.DataFrame:
     """
     Run RoBERTa VA regressor on every row in df["Text"] and
@@ -74,6 +75,7 @@ def phq8_from_annotated(
     rows   = [f"{v:+.2f}\t{a:+.2f}\t{t}"
               for v, a, t in df[["valence", "arousal", "Text"]].values]
     prompt = "\n".join(rows)
+    print(f"prompt: {prompt}")
 
     resp = client.chat.completions.create(
         model=model,
@@ -106,6 +108,8 @@ def main() -> None:
                help="Folder that contains the <PID>_Transcript.csv files")
     ap.add_argument("--limit",        type=int,
                     help="Only first N participants (debug)")
+    ap.add_argument("--summary",      action="store_true",
+                    help="Use existing VA scores from input CSV instead of computing new ones")
 
     args = ap.parse_args()
 
@@ -130,39 +134,47 @@ def main() -> None:
             continue
 
         df = pd.read_csv(csv_p)
-        # Create the output directory if it doesn't exist
-        output_dir = os.path.join(TRANSCRIPT_DIR, 'model1_outputted_va_scores')
-        os.makedirs(output_dir, exist_ok=True)
+        
+        if not args.summary:
+            # Create the output directory if it doesn't exist
+            output_dir = os.path.join(TRANSCRIPT_DIR, 'model1_outputted_va_scores')
+            os.makedirs(output_dir, exist_ok=True)
 
-        # Define the output path for the VA scores
-        output_path = os.path.join(output_dir, f'{pid}_Transcript.csv')
+            # Define the output path for the VA scores
+            output_path = os.path.join(output_dir, f'{pid}_Transcript.csv')
 
-        df = add_va_scores(df,
-                           output_path=output_path,
-                           model_path=args.va_model,
-                           device=args.device)
+            df = add_va_scores(df,
+                               output_path=output_path,
+                               model_path=args.va_model,
+                               device=args.device)
+        else:
+            # Case: Summary transcripts, already contain VA scores, no need to recalculate. Verify that valence and arousal columns exist
+            if "valence" not in df.columns or "arousal" not in df.columns:
+                print(f"  [ERROR] Missing VA scores in {csv_p} - skipped")
+                continue
 
-    #     try:
-    #         phq = phq8_from_annotated(df,
-    #                                   model=args.model,
-    #                                   temperature=args.temperature)
-    #     except Exception as e:
-    #         print(f"  [ERROR] PHQ failed → {e}")
-    #         phq = float("nan")
+        try:
+            phq = phq8_from_annotated(df,
+                                      model=args.model,
+                                      temperature=args.temperature)
+            print(f"  [INFO] Predicted PHQ-8 score: {phq:.1f}")
+        except Exception as e:
+            print(f"  [ERROR] PHQ failed → {e}")
+            phq = float("nan")
 
-    #     gold.append(float(row["PHQ_Score"]))
-    #     pred.append(phq)
+        gold.append(float(row["PHQ_Score"]))
+        pred.append(phq)
 
-    # # ───── Metrics (skip NaNs) ─────
-    # pairs = [(g, p) for g, p in zip(gold, pred) if not math.isnan(p)]
-    # n     = len(pairs)
-    # mae   = (sum(abs(g-p) for g, p in pairs) / n) if n else float("nan")
-    # rmse  = (math.sqrt(sum((g-p)**2 for g, p in pairs) / n)
-    #          if n else float("nan"))
+    # ───── Metrics (skip NaNs) ─────
+    pairs = [(g, p) for g, p in zip(gold, pred) if not math.isnan(p)]
+    n     = len(pairs)
+    mae   = (sum(abs(g-p) for g, p in pairs) / n) if n else float("nan")
+    rmse  = (math.sqrt(sum((g-p)**2 for g, p in pairs) / n)
+             if n else float("nan"))
 
-    # print(f"\nParticipants evaluated : {n}/{len(split)}")
-    # print(f"MAE                   : {mae:.3f}")
-    # print(f"RMSE                  : {rmse:.3f}")
+    print(f"\nParticipants evaluated : {n}/{len(split)}")
+    print(f"MAE                   : {mae:.3f}")
+    print(f"RMSE                  : {rmse:.3f}")
 
 if __name__ == "__main__":
     main()

@@ -1,11 +1,10 @@
 """
 summarize_transcripts.py  ―  Transcript Summarizer
 ------------------------------------------------
-This script processes clinical interview transcripts and generates concise summaries using OpenAI's o4-mini model.
-For each transcript:
-1. Loads the transcript and its associated valence/arousal scores
-2. Uses o4-mini to generate a ~250 word summary from a clinical psychologist's perspective
-3. Saves the summary along with the original VA scores (line by line) to a new CSV file
+This script processes clinical interview transcripts and generates concise summaries by:
+1. Identifying and preserving the most important sentences
+2. Summarizing less important sentences into a single entry
+3. Preserving original VA scores for important sentences and averaging VA scores for summarized content
 
 To run this script from the src directory use:
     python summarize_transcripts.py
@@ -14,6 +13,8 @@ To run this script from the src directory use:
 import os
 import pandas as pd
 from openai import OpenAI
+import numpy as np
+import json
 
 def summarize_test_transcripts():
     # OpenAI call set up
@@ -30,11 +31,13 @@ def summarize_test_transcripts():
     participant_ids = pd.read_csv(test_split_path)['Participant_ID'].tolist()
 
     SYSTEM_PROMPT = """
-    You are a clinical psychologist.
-    Summarize the main topics discussed by the patient in the transcript below. The transcript is from 
-    a diagnostic psychological clinical interview.
-    Make sure to keep details. Capture topics, the patient's tone, how the conversation progresses. 
-    Your returned summary should be around 250 words. The transcript is as follows: 
+    You are a clinical psychologist analyzing a transcript from a diagnostic interview.
+    For each line in the transcript:
+    1. Determine if it contains important clinical information that should be preserved verbatim
+    2. If not important, mark it for summarization
+    Return a JSON with two lists:
+    - "important_lines": List of indices of important lines to preserve
+    - "summary": A concise summary of the remaining lines
     """.strip()
     
     processed_count = 0
@@ -42,35 +45,61 @@ def summarize_test_transcripts():
         transcript_file = os.path.join(transcripts_dir, f'{participant_id}_Transcript.csv')
         if os.path.exists(transcript_file):
             df = pd.read_csv(transcript_file)
-            text = ' '.join(df['Text'].tolist())
+            texts = df['Text'].tolist()
             valence_scores = df['valence'].tolist()
             arousal_scores = df['arousal'].tolist()
 
-            # Use o4-mini model to generate a summary of the transcript
+            # Use o4-mini model to identify important lines and summarize others
             response = client.chat.completions.create(
                 model="o4-mini",
-                messages =[
+                messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
-                    {"role": "user", "content": text},
+                    {"role": "user", "content": "\n".join(texts)},
                 ]
             ).choices[0].message.content.strip()
 
-            # Create a DataFrame for the summary
+            print(f"Response: {response}")
+
+            # Strip code fencing if present — added for debugging
+            if response.startswith("```json"):
+                response = response.replace("```json", "").replace("```", "").strip()
+            elif response.startswith("```"):
+                response = response.replace("```", "").strip()
+
+            # Parse response to get important lines and summary
+            result = json.loads(response)
+            important_indices = result["important_lines"]
+            summary = result["summary"]
+
+            # Create new DataFrame with important lines and summary
+            important_texts = [texts[i] for i in important_indices if i < len(texts)]
+            important_valence = [valence_scores[i] for i in important_indices]
+            important_arousal = [arousal_scores[i] for i in important_indices]
+
+            # Calculate average VA scores for summarized content
+            summary_indices = [i for i in range(len(texts)) if i not in important_indices]
+            avg_valence = np.mean([valence_scores[i] for i in summary_indices]) if summary_indices else 0
+            avg_arousal = np.mean([arousal_scores[i] for i in summary_indices]) if summary_indices else 0
+
+            # Combine important lines and summary
+            final_texts = important_texts + [summary]
+            final_valence = important_valence + [avg_valence]
+            final_arousal = important_arousal + [avg_arousal]
+
+            # Create DataFrame and save
             summary_df = pd.DataFrame({
-                'text': [response],
-                'valence_score': [valence_scores],
-                'arousal_score': [arousal_scores]
+                'Text': final_texts,
+                'valence': final_valence,
+                'arousal': final_arousal
             })
 
-            # Save the summary to the output directory
-            output_path = os.path.join(output_dir, f'{participant_id}_summarized_transcript.csv')
+            output_path = os.path.join(output_dir, f'{participant_id}_Transcript.csv')
             summary_df.to_csv(output_path, index=False)
             processed_count += 1
             print(f"Transcript for patient {participant_id} has been processed")
 
     print(f"\nAll transcripts have been summarized and output to {output_dir}")
     print(f"Total transcripts processed: {processed_count}")
-
 
 if __name__ == "__main__":
     summarize_test_transcripts() 
