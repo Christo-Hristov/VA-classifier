@@ -52,6 +52,59 @@ Output:
 Overall, output should be 2 lines with a single number on each line.
 """.strip()
 
+### Generate 3 few shots
+
+
+def make_few_shot_prompt(df: pd.DataFrame, severity: float, binary: int, no_va: bool = False) -> str:
+    if no_va:
+        header = f"{'Valence':>8} | {'Arousal':>8} | Text"
+        separator = "-" * 60
+        rows = [f"{'':>8} | {'':>8} | {t}" for t in df["Text"].fillna("")]
+    else:
+        header = f"{'Valence':>8} | {'Arousal':>8} | Text"
+        separator = "-" * 60
+        rows = [
+            f"{v:+8.2f} | {a:+8.2f} | {t}"
+            for v, a, t in df[["valence", "arousal", "Text"]].values
+        ]
+
+    transcript_block = "\n".join([header, separator] + rows)
+    return f"{transcript_block}\nPCL-5 Score: {severity:.1f}\nPTSD Binary: {binary}\n"
+
+
+few_shot_contexts = []
+few_shot_limit = 3
+used_pids = set()
+train_split = pd.read_csv("/content/drive/My Drive/train_split.csv")
+
+for _, row in train_split.iterrows():
+    pid = row["Participant_ID"]
+    if pid in used_pids:
+        continue
+    transcript_path = os.path.join(transcript_dir, f"{pid}_Transcript.csv")
+    if not os.path.exists(transcript_path):
+        continue
+
+    df = pd.read_csv(transcript_path)
+    if not all(col in df.columns for col in ["Text"]):
+        continue
+
+    if not args.no_va and not all(col in df.columns for col in ["valence", "arousal"]):
+        continue
+
+    severity = float(row["PTSD_Severity"])
+    binary = int(row["PTSD_Binary"])
+    few_shot_contexts.append(make_few_shot_prompt(df, severity, binary, no_va=args.no_va))
+    used_pids.add(pid)
+
+    if len(few_shot_contexts) == few_shot_limit:
+        break
+
+FEW_SHOT_CONTEXT = "\n---\n".join(few_shot_contexts).strip()
+
+
+# Format prompt
+
 
 def format_prompt(df: pd.DataFrame, no_va: bool = False) -> str:
     header = f"{'Valence':>8} | {'Arousal':>8} | Text"
@@ -73,7 +126,8 @@ def pcl5_from_annotated(
     df: pd.DataFrame,
     model: str,
     temperature: float = 1.0,
-    no_va: bool = False
+    no_va: bool = False,
+    system_prompt: str,
 ) -> float:
 
     prompt = format_prompt(df, no_va=no_va)
@@ -82,7 +136,7 @@ def pcl5_from_annotated(
         model=model,
         temperature=temperature,
         messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "system", "content": system_prompt},
             {"role": "user",   "content": prompt},
         ],
     )
@@ -96,6 +150,7 @@ def pcl5_from_annotated(
     print(f"binary: {binary}")
 
     return severity, binary
+
 
 # ───────────────  MAIN  ─────────────── #
 def main() -> None:
@@ -115,6 +170,8 @@ def main() -> None:
                     help="Only first N participants (debug)")
     ap.add_argument("--no_va", action="store_true",
                 help="Use only text (no valence/arousal) in prompt")
+    ap.add_argument("--few_shot", action="store_true")
+    
 
     args = ap.parse_args()
 
@@ -135,6 +192,13 @@ def main() -> None:
     else:
         print("With VA")
 
+    if args.few_shot:
+        final_system_prompt = SYSTEM_PROMPT + "\n\n--- FEW-SHOT EXAMPLES ---\n\n" + FEW_SHOT_CONTEXT
+    else:
+        final_system_prompt = SYSTEM_PROMPT
+    
+    print(final_system_prompt)
+
     for _, row in tqdm(split.iterrows(), total=len(split), desc="Participants"):
         pid   = row["Participant_ID"]
         pids.append(pid)
@@ -150,7 +214,8 @@ def main() -> None:
             severity, binary = pcl5_from_annotated(df,
                                       model=args.model_id,
                                       temperature=args.temperature,
-                                      no_va=args.no_va)
+                                      no_va=args.no_va,
+                                      system_prompt=final_system_prompt)
         except Exception as e:
             print(f"  [ERROR] PHQ failed → {e}")
             phq = float("nan")
