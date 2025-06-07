@@ -140,12 +140,12 @@ def main() -> None:
 
     # Save results
     try:
-        df = pd.DataFrame("Paritcipant_ID" : pid, 
+        df = pd.DataFrame({"Paritcipant_ID" : pid, 
                         "GT Severity" : gold_severity,
                         "Predicted Severity" : pred_severity,
                         "GT Binary" : gold_binary,
                         "Predicted Binary" : pred_binary
-                        )
+                        })
         df.to_csv("/content/drive/MyDrive/PTSD_results/base_gpt.csv")
 
 
