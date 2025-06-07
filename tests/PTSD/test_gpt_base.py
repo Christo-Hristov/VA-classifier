@@ -79,7 +79,7 @@ def pcl5_from_annotated(
 # ───────────────  MAIN  ─────────────── #
 def main() -> None:
     ap = argparse.ArgumentParser(description="DAIC-WOZ PCL evaluator")
-    ap.add_argument("--model_id",        default=None,
+    ap.add_argument("--model_id",        default="GPT-4o mini",
                     help="OpenAI model for PCL-5 estimation")
     ap.add_argument("--temperature",  type=float, default=1.0,
                     help="Sampling temperature for the PCL step")
