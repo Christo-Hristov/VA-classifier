@@ -161,9 +161,9 @@ def main() -> None:
     few_shot_contexts = []
     few_shot_limit = 3
     used_pids = set()
-    train_split = pd.read_csv("/content/drive/My Drive/train_split.csv")
+    #train_split = pd.read_csv("/content/drive/My Drive/train_split.csv")
 
-    for _, row in train_split.iterrows():
+    for _, row in split.iterrows():
         pid = row["Participant_ID"]
         if pid in used_pids:
             continue
