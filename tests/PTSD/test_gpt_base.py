@@ -21,7 +21,7 @@ from src.utils.util import get_va_scores
 
 # ───────────────  CONSTANT PATHS  ─────────────── #
 
-TRANSCRIPT_DIR = "/content/drive/MyDrive/model_outputted_va_scores"
+TRANSCRIPT_DIR = "/content/drive/MyDrive/model1_outputted_va_scores"
 
 TEST_SPLIT_PATH = "/content/drive/My Drive/test_split.csv"
 API_KEY_PATH = os.path.expanduser("~/Desktop/openai_key.txt")
@@ -105,6 +105,7 @@ def main() -> None:
 
     for _, row in tqdm(split.iterrows(), total=len(split), desc="Participants"):
         pid   = row["Participant_ID"]
+        print(row)
         print(f"\n[{time.strftime('%H:%M:%S')}] → PID {pid}")
         csv_p = os.path.join(TRANSCRIPT_DIR, f"{pid}_Transcript.csv")
         if not os.path.exists(csv_p):
