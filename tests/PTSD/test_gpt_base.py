@@ -46,8 +46,8 @@ patient has PTSD or not. PTSD is a psychiatric condition that arises after expos
 
 Output:
 
-- First line: Estimate the participant's total score of PCL-5 (0-80) and reply with **only** a number.
-- Second line: Output 0 if there is no indication of PTSD and 1 if PTSD is present. Reply with **only** a number.
+- First line: Estimate the participant's total score of PCL-5 (0-80) and reply with 'PCL-5 Score: [0-80]' 
+- Second line: Output 0 if there is no indication of PTSD and 1 if PTSD is present. Reply with 'PTSD Binary: [0 or 1]'.
 
 Overall, output should be 2 lines with a single number on each line.
 """.strip()
@@ -110,10 +110,18 @@ def pcl5_from_annotated(
         ],
     )
     txt = str(resp.choices[0].message.content).strip()
-    #print(txt)
-    lines = txt.splitlines()
-    severity = float(lines[0].strip())
-    binary = float(lines[1].strip())
+    
+    severity_match = re.search(r"PCL-5 Score:\s*(\d+)", txt)
+    if severity_match:
+        severity = int(severity_match.group(1))
+     
+    binary_match = re.search(r"PTSD Binary:\s*(\d+)", txt)
+    if binary_match:
+        binary = int(binary_match.group(1))
+
+
+    #severity = float(lines[0].strip())
+    #binary = float(lines[1].strip())
 
     print(f"severity: {severity}")
     print(f"binary: {binary}")
