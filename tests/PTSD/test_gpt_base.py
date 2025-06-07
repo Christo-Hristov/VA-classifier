@@ -65,7 +65,7 @@ def pcl5_from_annotated(
 
     prompt = format_prompt(df)
 
-    print(prompt)
+    #print(prompt)
     resp = client.chat.completions.create(
         model=model,
         temperature=temperature,
@@ -75,7 +75,7 @@ def pcl5_from_annotated(
         ],
     )
     txt = str(resp.choices[0].message.content).strip()
-    print(txt)
+    #print(txt)
     lines = txt.splitlines()
     severity = float(lines[0].strip())
     binary = float(lines[1].strip())
@@ -111,10 +111,11 @@ def main() -> None:
 
     gold_severity, pred_severity = [], []
     gold_binary, pred_binary = [], []
+    pids = []
 
     for _, row in tqdm(split.iterrows(), total=len(split), desc="Participants"):
         pid   = row["Participant_ID"]
-        print(row)
+        pids.append(pid)
         print(f"\n[{time.strftime('%H:%M:%S')}] → PID {pid}")
         csv_p = os.path.join(TRANSCRIPT_DIR, f"{pid}_Transcript.csv")
         if not os.path.exists(csv_p):
@@ -136,6 +137,17 @@ def main() -> None:
 
         gold_binary.append(float(row["PTSD_Binary"]))
         pred_binary.append(binary)
+
+    # Save results
+    try:
+        df = pd.DataFrame("Paritcipant_ID" : pid, 
+                        "GT Severity" : gold_severity,
+                        "Predicted Severity" : pred_severity,
+                        "GT Binary" : gold_binary,
+                        "Predicted Binary" : pred_binary
+                        )
+        df.to_csv("/content/drive/MyDrive/PTSD_results/base_gpt.csv")
+
 
     # ───── Metrics (skip NaNs) ─────
 
