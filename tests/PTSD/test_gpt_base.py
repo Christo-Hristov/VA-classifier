@@ -48,8 +48,9 @@ Every sentence in the transcript has a Valence and Arousal (-1 to 1) score. Vale
 
 Output:
 
-Estimate the participant's total score of PCL-5 (0-80) and reply with **only** a number.
-In the next line, estimate whether a participant has PTSD (0 if negative, 1 if positive) and reply with **only** a number.
+- First line: Estimate the participant's total score of PCL-5 (0-80) and reply with **only** a number.
+- Second line: Output 0 if there is no indication of PTSD and 1 if PTSD is present. Reply with **only** a number.
+
 Overall, output should be 2 lines with a single number on each line.
 """.strip()
 
