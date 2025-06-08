@@ -1,0 +1,222 @@
+Creating demo set...🫠
+Transcript directory used: /Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/pruned_transcripts/va_pruned
+Loaded test split with 56 participants
+Selected demo IDs: [600, 607, 663, 624, 635, 710, 669, 651]
+✅ Successfully added participant 600 to demo set
+✅ Successfully added participant 607 to demo set
+✅ Successfully added participant 663 to demo set
+✅ Successfully added participant 624 to demo set
+✅ Successfully added participant 635 to demo set
+✅ Successfully added participant 710 to demo set
+✅ Successfully added participant 669 to demo set
+✅ Successfully added participant 651 to demo set
+✅ Demo set saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/demo_set.csv
+✅ Demo set saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/va/prune_va/demo_set.csv
+Calling generate_rationale_demos_with_gpt...🫠
+  0%|          | 0/8 [00:00<?, ?it/s] 12%|█▎        | 1/8 [00:05<00:39,  5.66s/it] 25%|██▌       | 2/8 [00:15<00:49,  8.17s/it] 38%|███▊      | 3/8 [00:23<00:39,  7.95s/it] 50%|█████     | 4/8 [00:32<00:33,  8.31s/it] 62%|██████▎   | 5/8 [00:43<00:28,  9.48s/it] 75%|███████▌  | 6/8 [00:54<00:19,  9.79s/it] 88%|████████▊ | 7/8 [01:01<00:09,  9.09s/it]100%|██████████| 8/8 [01:09<00:00,  8.52s/it]100%|██████████| 8/8 [01:09<00:00,  8.63s/it]
+✅ Saved 8 demo rationales to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/va/prune_va/rationale_demos.csv
+Calling format_autocot_demo_text...🫠
+Formatted demos saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/va/prune_va/formatted_demos.csv
+Processing remaining test transcripts: 0it [00:00, ?it/s]Processing remaining test transcripts: 48it [00:00, 780.40it/s]
+✅ Successfully processed participant 602
+✅ Successfully processed participant 604
+✅ Successfully processed participant 605
+✅ Successfully processed participant 606
+✅ Successfully processed participant 609
+✅ Successfully processed participant 615
+✅ Successfully processed participant 618
+✅ Successfully processed participant 619
+✅ Successfully processed participant 620
+✅ Successfully processed participant 622
+✅ Successfully processed participant 623
+✅ Successfully processed participant 625
+✅ Successfully processed participant 626
+✅ Successfully processed participant 629
+✅ Successfully processed participant 631
+✅ Successfully processed participant 634
+✅ Successfully processed participant 636
+✅ Successfully processed participant 637
+✅ Successfully processed participant 638
+✅ Successfully processed participant 640
+✅ Successfully processed participant 649
+✅ Successfully processed participant 650
+✅ Successfully processed participant 652
+✅ Successfully processed participant 655
+✅ Successfully processed participant 656
+✅ Successfully processed participant 658
+✅ Successfully processed participant 659
+✅ Successfully processed participant 661
+✅ Successfully processed participant 664
+✅ Successfully processed participant 666
+✅ Successfully processed participant 676
+✅ Successfully processed participant 679
+✅ Successfully processed participant 682
+✅ Successfully processed participant 683
+✅ Successfully processed participant 688
+✅ Successfully processed participant 689
+✅ Successfully processed participant 691
+✅ Successfully processed participant 693
+✅ Successfully processed participant 696
+✅ Successfully processed participant 699
+✅ Successfully processed participant 705
+✅ Successfully processed participant 708
+✅ Successfully processed participant 709
+✅ Successfully processed participant 712
+✅ Successfully processed participant 715
+✅ Successfully processed participant 716
+✅ Successfully processed participant 717
+✅ Successfully processed participant 718
+✅ New test split saved to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/va/prune_va/new_test_split.csv
+Removed 8 demo participants from test split
+New test split contains 48 participants
+Calling run_autocot_inference...🫠
+Running Auto-CoT Inference:   0%|          | 0/48 [00:00<?, ?it/s]Running Auto-CoT Inference:   2%|▏         | 1/48 [00:13<10:39, 13.61s/it]Running Auto-CoT Inference:   4%|▍         | 2/48 [00:22<08:13, 10.72s/it]Running Auto-CoT Inference:   6%|▋         | 3/48 [00:43<11:29, 15.32s/it]Running Auto-CoT Inference:   8%|▊         | 4/48 [00:48<08:28, 11.55s/it]Running Auto-CoT Inference:  10%|█         | 5/48 [00:55<06:53,  9.60s/it]Running Auto-CoT Inference:  12%|█▎        | 6/48 [01:07<07:24, 10.58s/it]Running Auto-CoT Inference:  15%|█▍        | 7/48 [01:13<06:18,  9.23s/it]Running Auto-CoT Inference:  17%|█▋        | 8/48 [01:28<07:16, 10.91s/it]Running Auto-CoT Inference:  19%|█▉        | 9/48 [01:34<06:06,  9.40s/it]Running Auto-CoT Inference:  21%|██        | 10/48 [01:39<05:02,  7.96s/it]Running Auto-CoT Inference:  23%|██▎       | 11/48 [01:46<04:50,  7.86s/it]Running Auto-CoT Inference:  25%|██▌       | 12/48 [01:53<04:32,  7.57s/it]Running Auto-CoT Inference:  27%|██▋       | 13/48 [02:05<05:12,  8.92s/it]Running Auto-CoT Inference:  29%|██▉       | 14/48 [02:12<04:40,  8.25s/it]Running Auto-CoT Inference:  31%|███▏      | 15/48 [02:21<04:38,  8.44s/it]Running Auto-CoT Inference:  33%|███▎      | 16/48 [02:32<04:54,  9.22s/it]Running Auto-CoT Inference:  35%|███▌      | 17/48 [02:44<05:10, 10.00s/it]Running Auto-CoT Inference:  38%|███▊      | 18/48 [02:53<04:56,  9.88s/it]Running Auto-CoT Inference:  40%|███▉      | 19/48 [03:07<05:18, 10.98s/it]Running Auto-CoT Inference:  42%|████▏     | 20/48 [03:17<05:02, 10.80s/it]Running Auto-CoT Inference:  44%|████▍     | 21/48 [03:34<05:39, 12.58s/it]Running Auto-CoT Inference:  46%|████▌     | 22/48 [03:44<05:04, 11.73s/it]Running Auto-CoT Inference:  48%|████▊     | 23/48 [03:59<05:15, 12.63s/it]Running Auto-CoT Inference:  50%|█████     | 24/48 [04:18<05:50, 14.62s/it]Running Auto-CoT Inference:  52%|█████▏    | 25/48 [04:22<04:23, 11.44s/it]Running Auto-CoT Inference:  54%|█████▍    | 26/48 [04:32<04:00, 10.92s/it]Running Auto-CoT Inference:  56%|█████▋    | 27/48 [04:50<04:38, 13.28s/it]Running Auto-CoT Inference:  58%|█████▊    | 28/48 [05:04<04:28, 13.43s/it]Running Auto-CoT Inference:  60%|██████    | 29/48 [05:15<04:00, 12.64s/it]Running Auto-CoT Inference:  62%|██████▎   | 30/48 [05:23<03:23, 11.29s/it]Running Auto-CoT Inference:  65%|██████▍   | 31/48 [05:30<02:51, 10.10s/it]Running Auto-CoT Inference:  67%|██████▋   | 32/48 [05:39<02:34,  9.63s/it]Running Auto-CoT Inference:  69%|██████▉   | 33/48 [05:49<02:28,  9.88s/it]Running Auto-CoT Inference:  71%|███████   | 34/48 [06:02<02:28, 10.60s/it]Running Auto-CoT Inference:  73%|███████▎  | 35/48 [06:13<02:21, 10.90s/it]Running Auto-CoT Inference:  75%|███████▌  | 36/48 [06:21<02:00, 10.02s/it]Running Auto-CoT Inference:  77%|███████▋  | 37/48 [06:38<02:14, 12.19s/it]Running Auto-CoT Inference:  79%|███████▉  | 38/48 [06:55<02:13, 13.37s/it]Running Auto-CoT Inference:  81%|████████▏ | 39/48 [07:08<02:01, 13.45s/it]Running Auto-CoT Inference:  83%|████████▎ | 40/48 [07:38<02:26, 18.34s/it]Running Auto-CoT Inference:  85%|████████▌ | 41/48 [07:54<02:02, 17.53s/it]Running Auto-CoT Inference:  88%|████████▊ | 42/48 [08:00<01:24, 14.05s/it]Running Auto-CoT Inference:  90%|████████▉ | 43/48 [08:16<01:13, 14.74s/it]Running Auto-CoT Inference:  92%|█████████▏| 44/48 [08:26<00:53, 13.34s/it]Running Auto-CoT Inference:  94%|█████████▍| 45/48 [08:37<00:37, 12.56s/it]Running Auto-CoT Inference:  96%|█████████▌| 46/48 [08:52<00:27, 13.52s/it]Running Auto-CoT Inference:  98%|█████████▊| 47/48 [09:02<00:12, 12.29s/it]Running Auto-CoT Inference: 100%|██████████| 48/48 [09:17<00:00, 13.03s/it]Running Auto-CoT Inference: 100%|██████████| 48/48 [09:17<00:00, 11.61s/it]
+
+🔍 Processing Participant_ID: 602 (1/48)
+✅ Saved prediction for Participant_ID: 602
+
+🔍 Processing Participant_ID: 604 (2/48)
+✅ Saved prediction for Participant_ID: 604
+
+🔍 Processing Participant_ID: 605 (3/48)
+✅ Saved prediction for Participant_ID: 605
+
+🔍 Processing Participant_ID: 606 (4/48)
+✅ Saved prediction for Participant_ID: 606
+
+🔍 Processing Participant_ID: 609 (5/48)
+✅ Saved prediction for Participant_ID: 609
+
+🔍 Processing Participant_ID: 615 (6/48)
+✅ Saved prediction for Participant_ID: 615
+
+🔍 Processing Participant_ID: 618 (7/48)
+✅ Saved prediction for Participant_ID: 618
+
+🔍 Processing Participant_ID: 619 (8/48)
+✅ Saved prediction for Participant_ID: 619
+
+🔍 Processing Participant_ID: 620 (9/48)
+✅ Saved prediction for Participant_ID: 620
+
+🔍 Processing Participant_ID: 622 (10/48)
+✅ Saved prediction for Participant_ID: 622
+
+🔍 Processing Participant_ID: 623 (11/48)
+✅ Saved prediction for Participant_ID: 623
+
+🔍 Processing Participant_ID: 625 (12/48)
+✅ Saved prediction for Participant_ID: 625
+
+🔍 Processing Participant_ID: 626 (13/48)
+✅ Saved prediction for Participant_ID: 626
+
+🔍 Processing Participant_ID: 629 (14/48)
+✅ Saved prediction for Participant_ID: 629
+
+🔍 Processing Participant_ID: 631 (15/48)
+✅ Saved prediction for Participant_ID: 631
+
+🔍 Processing Participant_ID: 634 (16/48)
+✅ Saved prediction for Participant_ID: 634
+
+🔍 Processing Participant_ID: 636 (17/48)
+✅ Saved prediction for Participant_ID: 636
+
+🔍 Processing Participant_ID: 637 (18/48)
+✅ Saved prediction for Participant_ID: 637
+
+🔍 Processing Participant_ID: 638 (19/48)
+✅ Saved prediction for Participant_ID: 638
+
+🔍 Processing Participant_ID: 640 (20/48)
+✅ Saved prediction for Participant_ID: 640
+
+🔍 Processing Participant_ID: 649 (21/48)
+✅ Saved prediction for Participant_ID: 649
+
+🔍 Processing Participant_ID: 650 (22/48)
+✅ Saved prediction for Participant_ID: 650
+
+🔍 Processing Participant_ID: 652 (23/48)
+✅ Saved prediction for Participant_ID: 652
+
+🔍 Processing Participant_ID: 655 (24/48)
+✅ Saved prediction for Participant_ID: 655
+
+🔍 Processing Participant_ID: 656 (25/48)
+✅ Saved prediction for Participant_ID: 656
+
+🔍 Processing Participant_ID: 658 (26/48)
+✅ Saved prediction for Participant_ID: 658
+
+🔍 Processing Participant_ID: 659 (27/48)
+✅ Saved prediction for Participant_ID: 659
+
+🔍 Processing Participant_ID: 661 (28/48)
+✅ Saved prediction for Participant_ID: 661
+
+🔍 Processing Participant_ID: 664 (29/48)
+✅ Saved prediction for Participant_ID: 664
+
+🔍 Processing Participant_ID: 666 (30/48)
+✅ Saved prediction for Participant_ID: 666
+
+🔍 Processing Participant_ID: 676 (31/48)
+✅ Saved prediction for Participant_ID: 676
+
+🔍 Processing Participant_ID: 679 (32/48)
+✅ Saved prediction for Participant_ID: 679
+
+🔍 Processing Participant_ID: 682 (33/48)
+✅ Saved prediction for Participant_ID: 682
+
+🔍 Processing Participant_ID: 683 (34/48)
+✅ Saved prediction for Participant_ID: 683
+
+🔍 Processing Participant_ID: 688 (35/48)
+✅ Saved prediction for Participant_ID: 688
+
+🔍 Processing Participant_ID: 689 (36/48)
+✅ Saved prediction for Participant_ID: 689
+
+🔍 Processing Participant_ID: 691 (37/48)
+✅ Saved prediction for Participant_ID: 691
+
+🔍 Processing Participant_ID: 693 (38/48)
+✅ Saved prediction for Participant_ID: 693
+
+🔍 Processing Participant_ID: 696 (39/48)
+✅ Saved prediction for Participant_ID: 696
+
+🔍 Processing Participant_ID: 699 (40/48)
+✅ Saved prediction for Participant_ID: 699
+
+🔍 Processing Participant_ID: 705 (41/48)
+✅ Saved prediction for Participant_ID: 705
+
+🔍 Processing Participant_ID: 708 (42/48)
+✅ Saved prediction for Participant_ID: 708
+
+🔍 Processing Participant_ID: 709 (43/48)
+✅ Saved prediction for Participant_ID: 709
+
+🔍 Processing Participant_ID: 712 (44/48)
+✅ Saved prediction for Participant_ID: 712
+
+🔍 Processing Participant_ID: 715 (45/48)
+✅ Saved prediction for Participant_ID: 715
+
+🔍 Processing Participant_ID: 716 (46/48)
+✅ Saved prediction for Participant_ID: 716
+
+🔍 Processing Participant_ID: 717 (47/48)
+✅ Saved prediction for Participant_ID: 717
+
+🔍 Processing Participant_ID: 718 (48/48)
+✅ Saved prediction for Participant_ID: 718
+
+✅ Finished! All predictions saved to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/va/prune_va/autocotVA_predictions.csv
+Calling calculate_statistics...🫠
+PHQ-8 Total Score - MAE: 4.343, RMSE: 5.846
+Results saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/statistics_results.txt

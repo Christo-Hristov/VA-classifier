@@ -1,0 +1,222 @@
+Creating demo set...🫠
+Transcript directory used: /Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/summarized_transcripts
+Loaded test split with 56 participants
+Selected demo IDs: [600, 607, 663, 624, 635, 710, 669, 651]
+✅ Successfully added participant 600 to demo set
+✅ Successfully added participant 607 to demo set
+✅ Successfully added participant 663 to demo set
+✅ Successfully added participant 624 to demo set
+✅ Successfully added participant 635 to demo set
+✅ Successfully added participant 710 to demo set
+✅ Successfully added participant 669 to demo set
+✅ Successfully added participant 651 to demo set
+✅ Demo set saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/demo_set.csv
+✅ Demo set saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/no_VA/summary/demo_set.csv
+Calling generate_rationale_demos_with_gpt...🫠
+  0%|          | 0/8 [00:00<?, ?it/s] 12%|█▎        | 1/8 [00:22<02:36, 22.35s/it] 25%|██▌       | 2/8 [00:38<01:53, 18.95s/it] 38%|███▊      | 3/8 [00:57<01:32, 18.58s/it] 50%|█████     | 4/8 [01:22<01:25, 21.37s/it] 62%|██████▎   | 5/8 [01:36<00:55, 18.63s/it] 75%|███████▌  | 6/8 [01:57<00:38, 19.49s/it] 88%|████████▊ | 7/8 [02:21<00:20, 20.76s/it]100%|██████████| 8/8 [02:42<00:00, 20.94s/it]100%|██████████| 8/8 [02:42<00:00, 20.29s/it]
+✅ Saved 8 demo rationales to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/no_VA/summary/rationale_demos.csv
+Calling format_autocot_demo_text...🫠
+Formatted demos saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/no_VA/summary/formatted_demos.csv
+Processing remaining test transcripts: 0it [00:00, ?it/s]Processing remaining test transcripts: 48it [00:00, 720.36it/s]
+✅ Successfully processed participant 602
+✅ Successfully processed participant 604
+✅ Successfully processed participant 605
+✅ Successfully processed participant 606
+✅ Successfully processed participant 609
+✅ Successfully processed participant 615
+✅ Successfully processed participant 618
+✅ Successfully processed participant 619
+✅ Successfully processed participant 620
+✅ Successfully processed participant 622
+✅ Successfully processed participant 623
+✅ Successfully processed participant 625
+✅ Successfully processed participant 626
+✅ Successfully processed participant 629
+✅ Successfully processed participant 631
+✅ Successfully processed participant 634
+✅ Successfully processed participant 636
+✅ Successfully processed participant 637
+✅ Successfully processed participant 638
+✅ Successfully processed participant 640
+✅ Successfully processed participant 649
+✅ Successfully processed participant 650
+✅ Successfully processed participant 652
+✅ Successfully processed participant 655
+✅ Successfully processed participant 656
+✅ Successfully processed participant 658
+✅ Successfully processed participant 659
+✅ Successfully processed participant 661
+✅ Successfully processed participant 664
+✅ Successfully processed participant 666
+✅ Successfully processed participant 676
+✅ Successfully processed participant 679
+✅ Successfully processed participant 682
+✅ Successfully processed participant 683
+✅ Successfully processed participant 688
+✅ Successfully processed participant 689
+✅ Successfully processed participant 691
+✅ Successfully processed participant 693
+✅ Successfully processed participant 696
+✅ Successfully processed participant 699
+✅ Successfully processed participant 705
+✅ Successfully processed participant 708
+✅ Successfully processed participant 709
+✅ Successfully processed participant 712
+✅ Successfully processed participant 715
+✅ Successfully processed participant 716
+✅ Successfully processed participant 717
+✅ Successfully processed participant 718
+✅ New test split saved to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/no_VA/summary/new_test_split.csv
+Removed 8 demo participants from test split
+New test split contains 48 participants
+Calling run_autocot_inference...🫠
+Running Auto-CoT Inference:   0%|          | 0/48 [00:00<?, ?it/s]Running Auto-CoT Inference:   2%|▏         | 1/48 [00:28<22:36, 28.86s/it]Running Auto-CoT Inference:   4%|▍         | 2/48 [00:49<18:35, 24.25s/it]Running Auto-CoT Inference:   6%|▋         | 3/48 [01:15<18:46, 25.04s/it]Running Auto-CoT Inference:   8%|▊         | 4/48 [01:33<16:14, 22.15s/it]Running Auto-CoT Inference:  10%|█         | 5/48 [01:47<13:42, 19.12s/it]Running Auto-CoT Inference:  12%|█▎        | 6/48 [02:01<12:14, 17.48s/it]Running Auto-CoT Inference:  15%|█▍        | 7/48 [02:18<11:45, 17.22s/it]Running Auto-CoT Inference:  17%|█▋        | 8/48 [02:29<10:07, 15.19s/it]Running Auto-CoT Inference:  19%|█▉        | 9/48 [02:33<07:43, 11.89s/it]Running Auto-CoT Inference:  21%|██        | 10/48 [02:46<07:38, 12.07s/it]Running Auto-CoT Inference:  23%|██▎       | 11/48 [02:54<06:45, 10.95s/it]Running Auto-CoT Inference:  25%|██▌       | 12/48 [03:03<06:06, 10.18s/it]Running Auto-CoT Inference:  27%|██▋       | 13/48 [03:19<07:01, 12.04s/it]Running Auto-CoT Inference:  29%|██▉       | 14/48 [03:24<05:41, 10.06s/it]Running Auto-CoT Inference:  31%|███▏      | 15/48 [03:40<06:22, 11.59s/it]Running Auto-CoT Inference:  33%|███▎      | 16/48 [03:51<06:10, 11.58s/it]Running Auto-CoT Inference:  35%|███▌      | 17/48 [04:04<06:15, 12.10s/it]Running Auto-CoT Inference:  38%|███▊      | 18/48 [04:17<06:07, 12.25s/it]Running Auto-CoT Inference:  40%|███▉      | 19/48 [04:31<06:12, 12.85s/it]Running Auto-CoT Inference:  42%|████▏     | 20/48 [04:39<05:18, 11.39s/it]Running Auto-CoT Inference:  44%|████▍     | 21/48 [05:03<06:46, 15.07s/it]Running Auto-CoT Inference:  46%|████▌     | 22/48 [05:11<05:36, 12.96s/it]Running Auto-CoT Inference:  48%|████▊     | 23/48 [05:22<05:07, 12.31s/it]Running Auto-CoT Inference:  50%|█████     | 24/48 [05:55<07:30, 18.75s/it]Running Auto-CoT Inference:  52%|█████▏    | 25/48 [06:06<06:12, 16.18s/it]Running Auto-CoT Inference:  54%|█████▍    | 26/48 [06:23<06:01, 16.43s/it]Running Auto-CoT Inference:  56%|█████▋    | 27/48 [06:35<05:21, 15.31s/it]Running Auto-CoT Inference:  58%|█████▊    | 28/48 [06:52<05:13, 15.69s/it]Running Auto-CoT Inference:  60%|██████    | 29/48 [07:03<04:34, 14.43s/it]
+🔍 Processing Participant_ID: 602 (1/48)
+✅ Saved prediction for Participant_ID: 602
+
+🔍 Processing Participant_ID: 604 (2/48)
+✅ Saved prediction for Participant_ID: 604
+
+🔍 Processing Participant_ID: 605 (3/48)
+✅ Saved prediction for Participant_ID: 605
+
+🔍 Processing Participant_ID: 606 (4/48)
+✅ Saved prediction for Participant_ID: 606
+
+🔍 Processing Participant_ID: 609 (5/48)
+[ERROR] o4-mini failed on PID 609 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 198339, Requested 29611. Please try again in 8.385s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 615 (6/48)
+[ERROR] o4-mini failed on PID 615 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 200000, Requested 28926. Please try again in 8.677s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 618 (7/48)
+[ERROR] o4-mini failed on PID 618 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 189892, Requested 27276. Please try again in 5.15s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 619 (8/48)
+[ERROR] o4-mini failed on PID 619 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 181586, Requested 28430. Please try again in 3.004s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 620 (9/48)
+✅ Saved prediction for Participant_ID: 620
+
+🔍 Processing Participant_ID: 622 (10/48)
+[ERROR] o4-mini failed on PID 622 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 198635, Requested 27826. Please try again in 7.938s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 623 (11/48)
+[ERROR] o4-mini failed on PID 623 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 199166, Requested 29211. Please try again in 8.513s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 625 (12/48)
+[ERROR] o4-mini failed on PID 625 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 200000, Requested 28600. Please try again in 8.58s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 626 (13/48)
+[ERROR] o4-mini failed on PID 626 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 174409, Requested 26675. Please try again in 325ms. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 629 (14/48)
+✅ Saved prediction for Participant_ID: 629
+
+🔍 Processing Participant_ID: 631 (15/48)
+[ERROR] o4-mini failed on PID 631 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 183587, Requested 26684. Please try again in 3.081s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 634 (16/48)
+[ERROR] o4-mini failed on PID 634 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 181382, Requested 27733. Please try again in 2.734s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 636 (17/48)
+[ERROR] o4-mini failed on PID 636 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 191744, Requested 30963. Please try again in 6.812s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 637 (18/48)
+[ERROR] o4-mini failed on PID 637 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 188245, Requested 28692. Please try again in 5.081s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 638 (19/48)
+✅ Saved prediction for Participant_ID: 638
+
+🔍 Processing Participant_ID: 640 (20/48)
+[ERROR] o4-mini failed on PID 640 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 198318, Requested 28091. Please try again in 7.922s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 649 (21/48)
+✅ Saved prediction for Participant_ID: 649
+
+🔍 Processing Participant_ID: 650 (22/48)
+[ERROR] o4-mini failed on PID 650 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 181184, Requested 28398. Please try again in 2.874s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 652 (23/48)
+✅ Saved prediction for Participant_ID: 652
+
+🔍 Processing Participant_ID: 655 (24/48)
+✅ Saved prediction for Participant_ID: 655
+
+🔍 Processing Participant_ID: 656 (25/48)
+✅ Saved prediction for Participant_ID: 656
+
+🔍 Processing Participant_ID: 658 (26/48)
+✅ Saved prediction for Participant_ID: 658
+
+🔍 Processing Participant_ID: 659 (27/48)
+[ERROR] o4-mini failed on PID 659 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 196979, Requested 29810. Please try again in 8.036s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 661 (28/48)
+[ERROR] o4-mini failed on PID 661 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 180679, Requested 29373. Please try again in 3.015s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 664 (29/48)
+✅ Saved prediction for Participant_ID: 664
+
+🔍 Processing Participant_ID: 666 (30/48)
+Running Auto-CoT Inference:  62%|██████▎   | 30/48 [07:22<04:39, 15.53s/it]Running Auto-CoT Inference:  65%|██████▍   | 31/48 [07:35<04:11, 14.77s/it]Running Auto-CoT Inference:  67%|██████▋   | 32/48 [07:44<03:31, 13.22s/it]Running Auto-CoT Inference:  69%|██████▉   | 33/48 [08:01<03:33, 14.22s/it]Running Auto-CoT Inference:  71%|███████   | 34/48 [08:15<03:18, 14.20s/it]Running Auto-CoT Inference:  73%|███████▎  | 35/48 [08:26<02:52, 13.29s/it]Running Auto-CoT Inference:  75%|███████▌  | 36/48 [08:37<02:30, 12.56s/it]Running Auto-CoT Inference:  77%|███████▋  | 37/48 [09:00<02:54, 15.87s/it]Running Auto-CoT Inference:  79%|███████▉  | 38/48 [09:09<02:15, 13.58s/it]Running Auto-CoT Inference:  81%|████████▏ | 39/48 [09:19<01:52, 12.52s/it]Running Auto-CoT Inference:  83%|████████▎ | 40/48 [09:24<01:21, 10.21s/it]Running Auto-CoT Inference:  85%|████████▌ | 41/48 [09:35<01:14, 10.63s/it]Running Auto-CoT Inference:  88%|████████▊ | 42/48 [09:52<01:14, 12.41s/it]Running Auto-CoT Inference:  90%|████████▉ | 43/48 [10:14<01:17, 15.41s/it]Running Auto-CoT Inference:  92%|█████████▏| 44/48 [10:25<00:55, 13.95s/it]Running Auto-CoT Inference:  94%|█████████▍| 45/48 [10:46<00:48, 16.03s/it]Running Auto-CoT Inference:  96%|█████████▌| 46/48 [10:59<00:30, 15.36s/it]Running Auto-CoT Inference:  98%|█████████▊| 47/48 [11:19<00:16, 16.60s/it]Running Auto-CoT Inference: 100%|██████████| 48/48 [11:25<00:00, 13.44s/it]Running Auto-CoT Inference: 100%|██████████| 48/48 [11:25<00:00, 14.28s/it]
+[ERROR] o4-mini failed on PID 666 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 198862, Requested 29678. Please try again in 8.562s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 676 (31/48)
+✅ Saved prediction for Participant_ID: 676
+
+🔍 Processing Participant_ID: 679 (32/48)
+[ERROR] o4-mini failed on PID 679 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 200000, Requested 28685. Please try again in 8.605s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 682 (33/48)
+[ERROR] o4-mini failed on PID 682 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 190010, Requested 27066. Please try again in 5.122s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 683 (34/48)
+[ERROR] o4-mini failed on PID 683 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 200000, Requested 29195. Please try again in 8.758s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 688 (35/48)
+[ERROR] o4-mini failed on PID 688 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 197737, Requested 29163. Please try again in 8.07s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 689 (36/48)
+[ERROR] o4-mini failed on PID 689 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 182021, Requested 27742. Please try again in 2.928s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 691 (37/48)
+✅ Saved prediction for Participant_ID: 691
+
+🔍 Processing Participant_ID: 693 (38/48)
+[ERROR] o4-mini failed on PID 693 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 182982, Requested 27195. Please try again in 3.053s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 696 (39/48)
+✅ Saved prediction for Participant_ID: 696
+
+🔍 Processing Participant_ID: 699 (40/48)
+✅ Saved prediction for Participant_ID: 699
+
+🔍 Processing Participant_ID: 705 (41/48)
+[ERROR] o4-mini failed on PID 705 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 182557, Requested 27549. Please try again in 3.031s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 708 (42/48)
+✅ Saved prediction for Participant_ID: 708
+
+🔍 Processing Participant_ID: 709 (43/48)
+✅ Saved prediction for Participant_ID: 709
+
+🔍 Processing Participant_ID: 712 (44/48)
+[ERROR] o4-mini failed on PID 712 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 187157, Requested 29710. Please try again in 5.06s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 715 (45/48)
+✅ Saved prediction for Participant_ID: 715
+
+🔍 Processing Participant_ID: 716 (46/48)
+[ERROR] o4-mini failed on PID 716 → Error code: 429 - {'error': {'message': 'Rate limit reached for o4-mini in organization org-LpFkjtdwk9oLv4Nc25eNtGpb on tokens per min (TPM): Limit 200000, Used 198464, Requested 28815. Please try again in 8.183s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+🔍 Processing Participant_ID: 717 (47/48)
+✅ Saved prediction for Participant_ID: 717
+
+🔍 Processing Participant_ID: 718 (48/48)
+✅ Saved prediction for Participant_ID: 718
+
+✅ Finished! All predictions saved to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/no_VA/summary/autocotVA_predictions.csv
+Calling calculate_statistics...🫠
+PHQ-8 Total Score - MAE: 6.000, RMSE: 7.330
+Results saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/statistics_results.txt

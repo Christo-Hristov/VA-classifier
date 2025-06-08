@@ -43,7 +43,7 @@ def prune_by_length(participant_id, transcripts_dir, output_dir):
         pruned_df = df[df['word_count'] > mean_word_count]
         # Drop the temporary word_count column
         pruned_df = pruned_df.drop('word_count', axis=1)
-        pruned_df.to_csv(os.path.join(output_dir, f'{participant_id}_lengthpruned_transcript.csv'), index=False)
+        pruned_df.to_csv(os.path.join(output_dir, f'{participant_id}_Transcript.csv'), index=False)
 
 def prune_by_va(participant_id, transcripts_dir, output_dir):
     transcript_file = os.path.join(transcripts_dir, f'{participant_id}_Transcript.csv')
@@ -51,21 +51,7 @@ def prune_by_va(participant_id, transcripts_dir, output_dir):
         df = pd.read_csv(transcript_file)
         # Filter by valence and arousal: Score ranges are the 25th-75th percentile for depressed patients from Yalcin's analysis
         pruned_df = df[(df['valence'].between(-0.110732, 0.040102)) & (df['arousal'].between(-0.057169, 0.058140))]
-        pruned_df.to_csv(os.path.join(output_dir, f'{participant_id}_va_pruned_transcript.csv'), index=False)
-
-def prune_by_both(participant_id, transcripts_dir, output_dir):
-    transcript_file = os.path.join(transcripts_dir, f'{participant_id}_Transcript.csv')
-    if os.path.exists(transcript_file):
-        df = pd.read_csv(transcript_file)
-        # Count words in each row's Text column
-        df['word_count'] = df['Text'].str.split().str.len()
-        # Calculate mean word count for this transcript
-        mean_word_count = df['word_count'].mean()
-        # Filter by word count, valence, and arousal
-        pruned_df = df[(df['word_count'] > mean_word_count) & (df['valence'].between(-0.5, 0.5)) & (df['arousal'].between(-0.5, 0.5))]
-        # Drop the temporary word_count column
-        pruned_df = pruned_df.drop('word_count', axis=1)
-        pruned_df.to_csv(os.path.join(output_dir, f'{participant_id}_length_and_va_pruned_transcript.csv'), index=False)
+        pruned_df.to_csv(os.path.join(output_dir, f'{participant_id}_Transcript.csv'), index=False)
 
 def process_transcripts(input_csv, transcripts_dir, length_pruned_dir, va_pruned_dir, length_and_va_dir, prune_length, prune_va, prune_both):
     # Read participant IDs from input CSV

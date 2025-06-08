@@ -70,11 +70,17 @@ Estimate the participant's PHQ-8 total (0-24) and reply with **only** a number.
 def phq8_from_annotated(
     df: pd.DataFrame,
     model: str,
-    temperature: float = 1.0
+    temperature: float = 1.0,
+    without_va: bool = False
 ) -> float:
-    rows   = [f"{v:+.2f}\t{a:+.2f}\t{t}"
-              for v, a, t in df[["valence", "arousal", "Text"]].values]
-    prompt = "\n".join(rows)
+    if without_va:
+        rows = df["Text"].tolist()
+        prompt = "\n".join(rows)
+    else:
+        rows = [f"{v:+.2f}\t{a:+.2f}\t{t}"
+                for v, a, t in df[["valence", "arousal", "Text"]].values]
+        prompt = "\n".join(rows)
+    
     print(f"prompt: {prompt}")
 
     resp = client.chat.completions.create(
@@ -110,6 +116,12 @@ def main() -> None:
                     help="Only first N participants (debug)")
     ap.add_argument("--summary",      action="store_true",
                     help="Use existing VA scores from input CSV instead of computing new ones")
+    ap.add_argument("--without_va",   action="store_true",
+                    help="Only use transcript text without VA scores")
+    ap.add_argument("--length_pruned", action="store_true",
+                    help="Use length pruned transcripts with existing VA scores from input CSV instead of computing new ones")
+    ap.add_argument("--va_pruned",    action="store_true",
+                    help="Use VA pruned transcripts with existing VA scores from input CSV instead of computing new ones")
 
     args = ap.parse_args()
 
@@ -118,6 +130,13 @@ def main() -> None:
     ".shortcut-targets-by-id/1ZsoGK8SvUwFMzu_xhgN5lWRtBV9Rdfq_/cs277 project/"
     "edaic_transcripts"
     )
+
+    if args.length_pruned:
+        TRANSCRIPT_DIR = "/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/pruned_transcripts/length_pruned"
+    elif args.va_pruned:
+        TRANSCRIPT_DIR = "/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/pruned_transcripts/va_pruned"
+    elif args.summary:
+        TRANSCRIPT_DIR = "/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/summarized_transcripts"
 
     split = pd.read_csv(TEST_SPLIT_PATH)
     if args.limit:
@@ -135,7 +154,14 @@ def main() -> None:
 
         df = pd.read_csv(csv_p)
         
-        if not args.summary:
+        if args.summary:
+            if not args.without_va:
+                # Ensure that valence and arousal columns exist in the CSV
+                if "valence" not in df.columns or "arousal" not in df.columns:
+                    print(f"  [ERROR] Missing VA scores in {csv_p} - skipped")
+                    continue
+            # If without_va is true, proceed without checking for VA scores
+        elif not args.without_va:
             # Create the output directory if it doesn't exist
             output_dir = os.path.join(TRANSCRIPT_DIR, 'model1_outputted_va_scores')
             os.makedirs(output_dir, exist_ok=True)
@@ -147,16 +173,12 @@ def main() -> None:
                                output_path=output_path,
                                model_path=args.va_model,
                                device=args.device)
-        else:
-            # Case: Summary transcripts, already contain VA scores, no need to recalculate. Verify that valence and arousal columns exist
-            if "valence" not in df.columns or "arousal" not in df.columns:
-                print(f"  [ERROR] Missing VA scores in {csv_p} - skipped")
-                continue
 
         try:
             phq = phq8_from_annotated(df,
                                       model=args.model,
-                                      temperature=args.temperature)
+                                      temperature=args.temperature,
+                                      without_va=args.without_va)
             print(f"  [INFO] Predicted PHQ-8 score: {phq:.1f}")
         except Exception as e:
             print(f"  [ERROR] PHQ failed → {e}")

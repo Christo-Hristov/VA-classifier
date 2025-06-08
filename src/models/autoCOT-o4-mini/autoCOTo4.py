@@ -12,12 +12,13 @@ import re
 import json
 from tqdm import tqdm
 import numpy as np
+import argparse
 
 # Initialize OpenAI client
 api_key = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=api_key)
 
-def create_demo_set():
+def create_demo_set(TRANSCRIPT_DIR, args):
     """
     Creates a demo set to be ran through zero shot for prompt. Done by 
     selecting 8 participants from test split and merging their transcripts, 
@@ -26,22 +27,25 @@ def create_demo_set():
     Returns:
         pd.DataFrame: DataFrame containing demo examples with merged data
     """
+    print(f"Transcript directory used: {TRANSCRIPT_DIR}")
     # Load test split to get participant IDs
     test_split_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/data/test_split.csv"
     test_df = pd.read_csv(test_split_path)
+    print(f"Loaded test split with {len(test_df)} participants")
     
-    # Randomly select 8 unique participant IDs
-    selected_ids = test_df['Participant_ID'].sample(n=8, random_state=42).tolist()
+    # Use the --n flag to determine the number of participants
+    selected_ids = test_df['Participant_ID'].sample(n=args.n, random_state=42).tolist()
+    print(f"Selected demo IDs: {selected_ids}")
     demo_data = []
     
     for participant_id in selected_ids:
         try:
             # Load transcript
-            transcript_path = f"/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/{participant_id}_transcript.csv"
+            transcript_path = os.path.join(TRANSCRIPT_DIR, f'{participant_id}_Transcript.csv')
             transcript_df = pd.read_csv(transcript_path)
             
             # Load VA scores
-            va_path = f"/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/model1_outputted_va_scores/{participant_id}_Transcript.csv"
+            va_path = os.path.join(TRANSCRIPT_DIR, f'{participant_id}_Transcript.csv')
             va_df = pd.read_csv(va_path)
             
             # Get PHQ score for this participant
@@ -74,13 +78,13 @@ def create_demo_set():
     demo_df = pd.DataFrame(demo_data)
     
     # Save demo set
-    output_path = '/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/demo_set.csv'
+    output_path = '/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini/outputs/demo_set.csv'
     demo_df.to_csv(output_path, index=False)
     print(f"✅ Demo set saved to {output_path}")
     
     return demo_df
 
-def generate_rationale_demos_with_gpt(demo_df, output_json_path, num_demos=8, model="o4-mini"):
+def generate_rationale_demos_with_gpt(demo_df, output_json_path, num_demos=8, model="o4-mini", args=None):
     """
     Generates rationale demos using zero-shot CoT and saves them to a JSON file.
     
@@ -93,12 +97,20 @@ def generate_rationale_demos_with_gpt(demo_df, output_json_path, num_demos=8, mo
     Outputs:
         Saves rationale demos to a JSON file.
     """
-    SYSTEM_PROMPT = """
-        You are a clinical psychologist. 
-        You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. 
-        You will be given what the patient said line by line, along with the valence and arousal score (-1 to 1) for that line. 
-        Return only your reasoning — do not include the final score.
-        """.strip()
+    if args.without_va:
+        SYSTEM_PROMPT = """
+            You are a clinical psychologist. 
+            You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. 
+            You will be given what the patient said line by line.
+            Return only your reasoning — do not include the final score.
+            """.strip()
+    else:
+        SYSTEM_PROMPT = """
+            You are a clinical psychologist. 
+            You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. 
+            You will be given what the patient said line by line, along with the valence and arousal score (-1 to 1) for that line. 
+            Return only your reasoning — do not include the final score.
+            """.strip()
     
     # Sample from the DataFrame directly instead of reading from CSV
     df = demo_df.sample(frac=1, random_state=42).head(num_demos)
@@ -108,19 +120,29 @@ def generate_rationale_demos_with_gpt(demo_df, output_json_path, num_demos=8, mo
         # Format transcript with VA scores
         transcript_lines = []
         for text, va_scores in zip(row['Transcript'], row['VA_Scores']):
-            transcript_lines.append(f"Line: {text}\nValence: {va_scores[0]}, Arousal: {va_scores[1]}")
+            if args.without_va:
+                transcript_lines.append(f"Line: {text}")
+            else:
+                transcript_lines.append(f"Line: {text}\nValence: {va_scores[0]}, Arousal: {va_scores[1]}")
         
-        user_prompt = (
-            f"Transcript with Valence-Arousal Scores:\n" + "\n".join(transcript_lines) + "\n\n"
-            f"PHQ-8 Score: {row['PHQ_Score']}\n"
-            "Q: Explain how the transcript content and emotional patterns (valence/arousal) support this PHQ-8 score.\n"
-            "A: Let's think step by step."
-        )
+        if args.without_va:
+            user_prompt = (
+                f"Transcript:\n" + "\n".join(transcript_lines) + "\n\n"
+                f"PHQ-8 Score: {row['PHQ_Score']}\n"
+                "Q: Explain how the transcript content supports this PHQ-8 score.\n"
+                "A: Let's think step by step."
+            )
+        else:
+            user_prompt = (
+                f"Transcript with Valence-Arousal Scores:\n" + "\n".join(transcript_lines) + "\n\n"
+                f"PHQ-8 Score: {row['PHQ_Score']}\n"
+                "Q: Explain how the transcript content and emotional patterns (valence/arousal) support this PHQ-8 score.\n"
+                "A: Let's think step by step."
+            )
 
         try:
             response = client.chat.completions.create(
                 model=model,
-                temperature=0.7,
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
                     {"role": "user", "content": user_prompt}
@@ -145,7 +167,7 @@ def generate_rationale_demos_with_gpt(demo_df, output_json_path, num_demos=8, mo
     print(f"✅ Saved {len(demo_list)} demo rationales to: {output_json_path}")
 
 
-def format_autocot_demo_text(json_path, output_csv_path=None):
+def format_autocot_demo_text(json_path, output_csv_path=None, args=None):
     """
     Formats demo examples from GPT rationale output into Auto-CoT compatible Q&A format.
     
@@ -162,8 +184,14 @@ def format_autocot_demo_text(json_path, output_csv_path=None):
     
     formatted_demos = []
     
+    system_prompt = "You are a clinical psychologist. You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. "
+    if args.without_va:
+        system_prompt += "You will be given what the patient said line by line."
+    else:
+        system_prompt += "You will be given what the patient said line by line, along with the valence and arousal score (-1 to 1) for that line."
+    
     for demo in data['demo']:
-        question = "You are a clinical psychologist. You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. You will be given what the patient said line by line, along with the valence and arousal score (-1 to 1) for that line. " + demo['question']
+        question = system_prompt
         rationale = demo['rationale']
         phq_score = demo['phq_score']
         
@@ -179,7 +207,7 @@ def format_autocot_demo_text(json_path, output_csv_path=None):
 
     return formatted_demos
 
-def create_new_test_split(demo_csv_path, original_test_split_path, output_path):
+def create_new_test_split(demo_csv_path, original_test_split_path, output_path, TRANSCRIPT_DIR):
     """
     Creates a new test split by removing the participant IDs that were used for demos,
     and coalesces the remaining transcripts with VA scores and PHQ-8 total score.
@@ -188,9 +216,6 @@ def create_new_test_split(demo_csv_path, original_test_split_path, output_path):
         demo_csv_path (str): Path to the CSV file containing demo participants
         original_test_split_path (str): Path to the original test split CSV file
         output_path (str): Path to save the new test split CSV file
-    
-    Returns:
-        pd.DataFrame: The new test split DataFrame with processed transcripts
     """
     # Read the demo CSV file
     demo_df = pd.read_csv(demo_csv_path)
@@ -212,11 +237,11 @@ def create_new_test_split(demo_csv_path, original_test_split_path, output_path):
         
         try:
             # Load transcript
-            transcript_path = f"/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/{participant_id}_transcript.csv"
+            transcript_path = os.path.join(TRANSCRIPT_DIR, f'{participant_id}_Transcript.csv')
             transcript_df = pd.read_csv(transcript_path)
             
             # Load VA scores
-            va_path = f"/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/model1_outputted_va_scores/{participant_id}_Transcript.csv"
+            va_path = os.path.join(TRANSCRIPT_DIR, f'{participant_id}_Transcript.csv')
             va_df = pd.read_csv(va_path)
             
             # Get PHQ score for this participant
@@ -248,13 +273,13 @@ def create_new_test_split(demo_csv_path, original_test_split_path, output_path):
     return processed_df
 
 
-def run_autocot_inference(output_path, model="gpt-4o"):
+def run_autocot_inference(output_path, model="o4-mini", args=None):
     """
     Runs Auto-CoT inference on test data and saves predictions incrementally.
     
     Args:
         output_path (str): Path to save the predictions.
-        model (str): Model name for GPT-4o.
+        model (str): Model name for o4-mini.
     
     Outputs:
         Saves predictions to a CSV file with columns: Participant_ID, Response, and PHQ-8 Total score.
@@ -275,11 +300,6 @@ def run_autocot_inference(output_path, model="gpt-4o"):
     # Iterate through each test transcript
     for idx, row in tqdm(test_df.iterrows(), total=len(test_df), desc="Running Auto-CoT Inference"):
         participant_id = row["Participant_ID"]
-        
-        # Skip if already processed
-        if participant_id in processed_ids:
-            print(f"⏭️ Skipping already processed Participant_ID: {participant_id}")
-            continue
             
         transcript = row["Transcript"]
         va_scores = row["VA_Scores"]
@@ -293,22 +313,32 @@ def run_autocot_inference(output_path, model="gpt-4o"):
             formatted_transcript += f"Line: {text}\nValence: {va[0]:.2f}, Arousal: {va[1]:.2f}\n\n"
 
         # Construct the full prompt using demo rationales + the current transcript
-        prompt = (
-            "\n\n".join(formatted_demos['Formatted Demo'].tolist()) + "\n\n"
-            "Q: You are a clinical psychologist. You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. You will be given what the patient said line by line, along with the valence and arousal score (-1 to 1) for that line. "
-            "Evaluate the patient's total PHQ8 score\n"
-            f"{formatted_transcript}\n"
-            "A: Let's think step by step. After analyzing the transcript, you MUST output the score in this exact format:\n"
-            "PHQ_8Total: [score]\n"
-            "Again, make sure to output the score in the above format."
-        )
+        if args.without_va:
+            prompt = (
+                "\n\n".join(formatted_demos['Formatted Demo'].tolist()) + "\n\n"
+                "Q: You are a clinical psychologist. You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. You will be given what the patient said line by line. "
+                "Evaluate the patient's total PHQ8 score\n"
+                f"{formatted_transcript}\n"
+                "A: Let's think step by step. After analyzing the transcript, you MUST output the score in this exact format:\n"
+                "PHQ_8Total: [score]\n"
+                "Again, make sure to output the score in the above format."
+            )
+        else:
+            prompt = (
+                "\n\n".join(formatted_demos['Formatted Demo'].tolist()) + "\n\n"
+                "Q: You are a clinical psychologist. You read transcripts of a patient from a diagnostic interview and estimate the PHQ-8 score (0-24) by reasoning through what the participant said. You will be given what the patient said line by line, along with the valence and arousal score (-1 to 1) for that line. "
+                "Evaluate the patient's total PHQ8 score\n"
+                f"{formatted_transcript}\n"
+                "A: Let's think step by step. After analyzing the transcript, you MUST output the score in this exact format:\n"
+                "PHQ_8Total: [score]\n"
+                "Again, make sure to output the score in the above format."
+            )
 
         try:
-            # Query GPT-4o for reasoning and prediction
+            # Query o4-mini for reasoning and prediction
             response = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
-                temperature=0.7,
             )
             reply = response.choices[0].message.content.strip()
 
@@ -329,8 +359,8 @@ def run_autocot_inference(output_path, model="gpt-4o"):
             print(f"✅ Saved prediction for Participant_ID: {participant_id}")
 
         except Exception as e:
-            # Handle GPT failure gracefully
-            print(f"[ERROR] GPT failed on PID {participant_id} → {e}")
+            # Handle o4-mini failure gracefully
+            print(f"[ERROR] o4-mini failed on PID {participant_id} → {e}")
             new_prediction = pd.DataFrame([{
                 "Participant_ID": participant_id,
                 "Response": "",
@@ -390,28 +420,87 @@ def calculate_statistics(predictions_csv_path, test_split_path):
     
     return mae, rmse
 
+def main():
+    parser = argparse.ArgumentParser(description='Auto-CoT with VA inference')
+    parser.add_argument('--transcripts', default=None,
+                        help='Folder that contains the <PID>_Transcript.csv files')
+    parser.add_argument('--summary', action='store_true',
+                        help='Use existing VA scores from input CSV instead of computing new ones')
+    parser.add_argument('--length_pruned', action='store_true',
+                        help='Use length pruned transcripts with existing VA scores from input CSV instead of computing new ones')
+    parser.add_argument('--va_pruned', action='store_true',
+                        help='Use VA pruned transcripts with existing VA scores from input CSV instead of computing new ones')
+    parser.add_argument('--without_va', action='store_true',
+                        help='Only use transcript text without VA scores')
+    parser.add_argument('--n', type=int, default=8,
+                        help='Number of participants to select for demo creation')
 
-# Main function to execute the Auto-CoT process
-if __name__ == "__main__":
+    args = parser.parse_args()
+
+    TRANSCRIPT_DIR = args.transcripts or '/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/model1_outputted_va_scores'
+
+    if args.length_pruned:
+        TRANSCRIPT_DIR = '/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/pruned_transcripts/length_pruned'
+    elif args.va_pruned:
+        TRANSCRIPT_DIR = '/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/pruned_transcripts/va_pruned'
+    elif args.summary:
+        TRANSCRIPT_DIR = '/Users/kevinawang/Documents/GitHub/VA-classifier/data/edaic_transcripts/summarized_transcripts'
+
+    # Determine base output directory based on VA usage
+    va_usage_dir = "va" if not args.without_va else "no_VA"
+    base_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT-o4-mini"
+    base_output_dir = os.path.join(base_path, "outputs", va_usage_dir)
+
+    # Determine subdirectory based on specific arguments
+    if args.summary:
+        sub_dir = "summary"
+    elif args.length_pruned:
+        sub_dir = "prune_length"
+    elif args.va_pruned:
+        sub_dir = "prune_va"
+    else:
+        sub_dir = "default"
+
+    # Combine base and subdirectory to form the final output directory
+    final_output_dir = os.path.join(base_output_dir, sub_dir)
+    os.makedirs(final_output_dir, exist_ok=True)
+
+    # Update paths to use the final output directory
+    rationale_demos_path = os.path.join(final_output_dir, "rationale_demos.csv")
+    formatted_demos_path = os.path.join(final_output_dir, "formatted_demos.csv")
+    demo_set_path = os.path.join(final_output_dir, "demo_set.csv")
+    new_test_path = os.path.join(final_output_dir, "new_test_split.csv")
+    predictions_path = os.path.join(final_output_dir, "autocotVA_predictions.csv")
+    results_output_path = os.path.join(final_output_dir, "statistics_results.txt")
+
+    # Ensure all necessary directories are created before file operations
+    os.makedirs(os.path.dirname(demo_set_path), exist_ok=True)
+
+    # Use the updated paths in the script
     print("Creating demo set...🫠")
-    # demo_df = create_demo_set()
+    demo_df = create_demo_set(TRANSCRIPT_DIR, args)
     
-    rationale_demos_output_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/rationale_demos.csv"
+    # Save demo set to the correct directory
+    demo_df.to_csv(demo_set_path, index=False)
+    print(f"✅ Demo set saved to {demo_set_path}")
+    
+    # Generate and format demos
     print("Calling generate_rationale_demos_with_gpt...🫠")
-    # generate_rationale_demos_with_gpt(demo_df, rationale_demos_output_path)
+    generate_rationale_demos_with_gpt(demo_df, rationale_demos_path, args=args)
     
-    formatted_demos_csv_path = '/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/formatted_demos.csv'
     print("Calling format_autocot_demo_text...🫠")
-    # formatted_demos = format_autocot_demo_text(rationale_demos_output_path, formatted_demos_csv_path)
+    formatted_demos = format_autocot_demo_text(rationale_demos_path, formatted_demos_path, args=args)
     
-    selected_demo_csv_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/demo_set.csv"
-    original_test_split_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/data/test_split.csv"
-    new_test_split_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/new_test_split.csv"
-    # create_new_test_split(selected_demo_csv_path, original_test_split_path, new_test_split_path)
+    # Create test split
+    original_test_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/data/test_split.csv"
+    create_new_test_split(demo_set_path, original_test_path, new_test_path, TRANSCRIPT_DIR)
     
-    output_predictions_path = "/Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT_with_VA/outputs/autocotVA_predictions.csv"
+    # Run inference and calculate statistics
     print("Calling run_autocot_inference...🫠")
-    run_autocot_inference(output_predictions_path)
+    run_autocot_inference(predictions_path, args=args)
     
     print("Calling calculate_statistics...🫠")
-    mae, rmse = calculate_statistics(output_predictions_path, new_test_split_path)
+    mae, rmse = calculate_statistics(predictions_path, new_test_path)
+
+if __name__ == "__main__":
+    main()
