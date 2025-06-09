@@ -39,7 +39,7 @@ else:                                # ← fallback to env-var
 client = OpenAI(api_key=api_key)
 
 # ───────────────  PTSD PROMPT  ─────────────── #
-SYSTEM_PROMPT = """
+PTSD_PROMPT = """
 You are a highly experienced psychiatrist specializing in trauma and mental health disorders.
 
 Your task is to analyze patient transcripts and classify whether the
@@ -56,10 +56,16 @@ Output:
 Overall, output should be 2 lines.
 """.strip()
 
+DEPRESSION_PROMPT = """
+You are a clinical psychiatrist.
+Every line below has Valence and Arousal (-1 to 1).
+Estimate the participant's PHQ-8 total (0-24) for depression and reply with **only** a number.
+""".strip()
+
 ### Generate 3 few shots
 
 
-def make_few_shot_prompt(df: pd.DataFrame, severity: float, binary: int, no_va: bool = False) -> str:
+def make_few_shot_prompt(df: pd.DataFrame, condition: str, severity: float, binary: int, no_va: bool = False) -> str:
     if no_va:
         header = f"{'Valence':>8} | {'Arousal':>8} | Text"
         separator = "-" * 60
@@ -73,7 +79,10 @@ def make_few_shot_prompt(df: pd.DataFrame, severity: float, binary: int, no_va: 
         ]
 
     transcript_block = "\n".join([header, separator] + rows)
-    return f"{transcript_block}\nPCL-5 Score: {severity:.1f}\nPTSD Binary: {binary}\n"
+    if condition == "ptsd":
+        return f"{transcript_block}\nPCL-5 Score: {severity:.1f}\nPTSD Binary: {binary}\n"
+    elif condition == "depression":
+        return f"{transcript_block}\nPHQ-5 Score: {severity:.1f}\nPHQ Binary: {binary}\n"
 
 
 # Format prompt
@@ -102,12 +111,12 @@ def format_prompt(df: pd.DataFrame, no_va: bool = False, random_va: bool = False
 
 def pcl5_from_annotated(
     df: pd.DataFrame,
+    condition: str,
     model: str,
     system_prompt: str,
     temperature: float = 1.0,
     no_va: bool = False,
-    random_va: bool = False
-) -> float:
+    random_va: bool = False):
 
     prompt = format_prompt(df, no_va=no_va, random_va=random_va)
     print(prompt)
@@ -121,14 +130,21 @@ def pcl5_from_annotated(
         ],
     )
     txt = str(resp.choices[0].message.content).strip()
-    
-    severity_match = re.search(r"PCL-5 Score:\s*(\d+)", txt)
-    if severity_match:
-        severity = int(severity_match.group(1))
-     
-    binary_match = re.search(r"PTSD Binary:\s*(\d+)", txt)
-    if binary_match:
-        binary = int(binary_match.group(1))
+
+    if condition == "ptsd":
+        severity_match = re.search(r"PCL-5 Score:\s*(\d+)", txt)
+        if severity_match:
+            severity = int(severity_match.group(1))
+        binary_match = re.search(r"PTSD Binary:\s*(\d+)", txt)
+        if binary_match:
+            binary = int(binary_match.group(1))
+    elif condition == "depression":
+        severity_match = re.search(r"PHQ-5 Score:\s*(\d+)", txt)
+        if severity_match:
+            severity = int(severity_match.group(1))
+        binary_match = re.search(r"PHQ Binary:\s*(\d+)", txt)
+        if binary_match:
+            binary = int(binary_match.group(1))
 
 
     #severity = float(lines[0].strip())
@@ -160,6 +176,7 @@ def main() -> None:
                 help="Use only text (no valence/arousal) in prompt")
     ap.add_argument("--few_shot", action="store_true")
     ap.add_argument("--random_va", action="store_true")
+    ap.add_argument("--condition", type=str, default="depression")
 
 
     args = ap.parse_args()
@@ -172,6 +189,8 @@ def main() -> None:
     split = pd.read_csv(TEST_SPLIT_PATH)
     if args.limit:
         split = split.head(args.limit)
+
+    condition = args.condition
 
     gold_severity, pred_severity = [], []
     gold_binary, pred_binary = [], []
@@ -205,9 +224,15 @@ def main() -> None:
         if not args.no_va and not all(col in df.columns for col in ["valence", "arousal"]):
             continue
 
-        severity = float(row["PTSD_Severity"])
-        binary = int(row["PTSD_Binary"])
-        few_shot_contexts.append(make_few_shot_prompt(df, severity, binary, no_va=args.no_va))
+        if condition == "ptsd":
+            severity = float(row["PTSD_Severity"])
+            binary = int(row["PTSD_Binary"])
+        elif condition == "depression":
+            severity = float(row["PHQ_Score"])
+            binary = int(row["PHQ_Binary"])
+
+
+        few_shot_contexts.append(make_few_shot_prompt(df, condition, severity, binary, no_va=args.no_va))
         used_pids.add(pid)
 
         if len(few_shot_contexts) == few_shot_limit:
@@ -220,11 +245,16 @@ def main() -> None:
         print("Without VA")
     else:
         print("With VA")
+    
+    if condition == "depression":
+        system_prompt=DEPRESSION_PROMPT
+    elif condition == "ptsd":
+        system_prompt=PTSD_PROMPT
 
     if args.few_shot:
-        final_system_prompt = SYSTEM_PROMPT + "\n\n--- FEW-SHOT EXAMPLES ---\n\n" + FEW_SHOT_CONTEXT
+        final_system_prompt = system_prompt + "\n\n--- FEW-SHOT EXAMPLES ---\n\n" + FEW_SHOT_CONTEXT
     else:
-        final_system_prompt = SYSTEM_PROMPT
+        final_system_prompt = system_prompt
     
     print(final_system_prompt)
 
@@ -246,6 +276,7 @@ def main() -> None:
 
         try:
             severity, binary = pcl5_from_annotated(df,
+                                        condition=condition,
                                       model=args.model_id,
                                       system_prompt=final_system_prompt,
                                       temperature=args.temperature,
@@ -254,21 +285,25 @@ def main() -> None:
         except Exception as e:
             print(f"  [ERROR] PHQ failed → {e}")
             phq = float("nan")
+        
+        if condition == "ptsd":
+            gold_severity.append(float(row["PTSD_Severity"]))        
+            gold_binary.append(float(row["PTSD_Binary"]))    
+        elif condition == "depression":
+            gold_severity.append(float(row["PHQ_Score"]))       
+            gold_binary.append(float(row["PHQ_Binary"]))         
 
-        gold_severity.append(float(row["PTSD_Severity"]))
         pred_severity.append(severity)
-
-        gold_binary.append(float(row["PTSD_Binary"]))
         pred_binary.append(binary)
 
     # Save results
     df = pd.DataFrame({"Paritcipant_ID" : pid, 
-                    "GT Severity" : gold_severity,
-                    "Predicted Severity" : pred_severity,
-                    "GT Binary" : gold_binary,
-                    "Predicted Binary" : pred_binary
+                    f"GT {condition} Severity" : gold_severity,
+                    f"Predicted {condition} Severity" : pred_severity,
+                    f"GT {condition} Binary" : gold_binary,
+                    f"Predicted {condition} Binary" : pred_binary
                     })
-    df.to_csv("/content/drive/MyDrive/PTSD_results/base_gpt.csv")
+    df.to_csv(f"/content/drive/MyDrive/PTSD_results/base_gpt.csv")
 
 
     # ───── Metrics (skip NaNs) ─────
@@ -291,12 +326,13 @@ def main() -> None:
     recall    = recall_score(gold_binary_int, pred_binary_int)
 
 
+    print(f"\n Condition: {condition}")
     print(f"\nParticipants evaluated : {n}/{len(split)}")
     print(f"MAE                   : {mae:.3f}")
     print(f"RMSE                  : {rmse:.3f}")
     print(f"Accuracy                  : {accuracy:.3f}")
     print(f"Precision                  : {precision:.3f}")
-    print(f"Recall                  : {precision:.3f}")
+    print(f"Recall                  : {recall:.3f}")
 
 
 
