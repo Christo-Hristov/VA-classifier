@@ -59,7 +59,11 @@ Overall, output should be 2 lines.
 DEPRESSION_PROMPT = """
 You are a clinical psychiatrist.
 Every line below has Valence and Arousal (-1 to 1).
-Estimate the participant's PHQ-8 total (0-24) for depression and reply with **only** a number.
+
+- First line: Estimate the participant's PHQ-8 total (0-24) for depression and reply with **only** a number.
+- Second line: Output 0 if there is no indication of Depression and 1 if Depression is present. Reply with 'PHQ Binary: [0 or 1]'.
+
+Overall, output should be 2 lines.
 """.strip()
 
 ### Generate 3 few shots
