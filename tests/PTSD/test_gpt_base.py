@@ -119,7 +119,7 @@ def pcl5_from_annotated(
     random_va: bool = False):
 
     prompt = format_prompt(df, no_va=no_va, random_va=random_va)
-    
+
     resp = client.chat.completions.create(
         model=model,
         temperature=temperature,
@@ -129,6 +129,8 @@ def pcl5_from_annotated(
         ],
     )
     txt = str(resp.choices[0].message.content).strip()
+
+    print(txt)
 
     if condition == "ptsd":
         severity_match = re.search(r"PCL-5 Score:\s*(\d+)", txt)
