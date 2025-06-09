@@ -146,7 +146,7 @@ def pcl5_from_annotated(
         if binary_match:
             binary = int(binary_match.group(1))
     elif condition == "depression":
-        severity_match = re.search(r"PHQ-5 Score:\s*(\d+)", txt)
+        severity_match = re.search(r"PHQ-8 Score:\s*(\d+)", txt)
         if severity_match:
             severity = int(severity_match.group(1))
         binary_match = re.search(r"PHQ Binary:\s*(\d+)", txt)
