@@ -62,7 +62,7 @@ Every line in the transcript has Valence and Arousal (-1 to 1).
 
 Output: 
 
-- First line: Estimate the participant's PHQ-8 total (0-24) for depression and reply with 'PHQ-5 Score: [0-24]'.
+- First line: Estimate the participant's PHQ-8 total (0-24) for depression and reply with 'PHQ-8 Score: [0-24]'.
 - Second line: Output 0 if there is no indication of Depression and 1 if Depression is present. Reply with 'PHQ Binary: [0 or 1]'.
 
 Overall, output should be 2 lines.
