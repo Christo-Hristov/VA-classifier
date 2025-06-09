@@ -50,17 +50,19 @@ patient has PTSD or not. PTSD is a psychiatric condition that arises after expos
 Every sentence in the transcript has a Valence and Arousal (-1 to 1) score. Valence and arousal are two key dimensions of emotional experience often used in affective computing and psychology to quantify the emotional tone of text or speech. Valence measures how positive or negative an emotion is (e.g., happiness vs. sadness), while arousal measures the intensity or activation level of that emotion (e.g., calm vs. panicked). In individuals with PTSD, emotional responses are often dysregulated: they may show frequent negative valence (e.g., fear, guilt, sadness) and high arousal (e.g., anxiety, hyperalertness), even in neutral situations.
 Output:
 
-- First line: Estimate the participant's total score of PCL-5 (0-80) and reply with 'PCL-5 Score: [0-80]' 
+- First line: Estimate the participant's total score of PCL-5 (0-80) and reply with 'PCL-5 Score: [0-80]'.
 - Second line: Output 0 if there is no indication of PTSD and 1 if PTSD is present. Reply with 'PTSD Binary: [0 or 1]'.
 
 Overall, output should be 2 lines.
 """.strip()
 
 DEPRESSION_PROMPT = """
-You are a clinical psychiatrist.
-Every line below has Valence and Arousal (-1 to 1).
+You are a clinical psychiatrist estimating signs of depression from clinical transcripts. 
+Every line in the transcript has Valence and Arousal (-1 to 1). 
 
-- First line: Estimate the participant's PHQ-8 total (0-24) for depression and reply with **only** a number.
+Output: 
+
+- First line: Estimate the participant's PHQ-8 total (0-24) for depression and reply with 'PHQ-5 Score: [0-24]'.
 - Second line: Output 0 if there is no indication of Depression and 1 if Depression is present. Reply with 'PHQ Binary: [0 or 1]'.
 
 Overall, output should be 2 lines.
