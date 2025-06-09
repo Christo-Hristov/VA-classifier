@@ -15,7 +15,6 @@ from tqdm import tqdm
 from openai import OpenAI
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 import random
-from autocot import auto_cot_completion
 
 # ───────────────  LOCAL VA REGRESSOR  ─────────────── #
 # util.py lives in src/models/; adjust if located elsewhere
@@ -123,29 +122,19 @@ def pcl5_from_annotated(
     system_prompt: str,
     temperature: float = 1.0,
     no_va: bool = False,
-    random_va: bool = False,
-    auto_cot: bool = False):
+    random_va: bool = False):
 
     prompt = format_prompt(df, no_va=no_va, random_va=random_va)
 
-    if auto_cot:
-        resp = auto_cot_completion(
-            client_fn=client.chat.completions.create,
-            system=system_prompt,
-            user=prompt,
-            few_shot=FEW_SHOT_CONTEXT if args.few_shot else None,
-            model=model,
-            temperature=temperature,
-        )
-    else:
-        resp = client.chat.completions.create(
-            model=model,
-            temperature=temperature,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user",   "content": prompt},
-            ],
-        )
+
+    resp = client.chat.completions.create(
+        model=model,
+        temperature=temperature,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user",   "content": prompt},
+        ],
+    )
     txt = str(resp.choices[0].message.content).strip()
 
     print(txt)
@@ -196,11 +185,6 @@ def main() -> None:
     ap.add_argument("--few_shot", action="store_true")
     ap.add_argument("--random_va", action="store_true")
     ap.add_argument("--condition", type=str, default="depression")
-    ap.add_argument(
-        "--auto_cot",
-        action="store_true",
-        help="If set, prepend a 'Let's think step by step' to the FEW-SHOT block"
-    )
 
 
     args = ap.parse_args()
