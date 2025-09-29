@@ -4,7 +4,7 @@ This repository accompanies the Stanford CS277 / BIODS 271 research
 project:\
 **"Text and Valence--Arousal: A Two-Dimensional Foundational Approach
 for Mental Health Prediction"** ([final paper in
-`/docs`](./docs/CS_277_Final.pdf)).
+`/docs`](./docs/CS_277_Final (1).pdf)).
 
 We introduce a unified framework that learns **Valence--Arousal (VA)**
 from text and uses these signals to improve downstream prediction of
@@ -53,7 +53,7 @@ from text and uses these signals to improve downstream prediction of
 
 -   **PTSD Code:** PTSD implementations were conducted in Google Colab
     notebooks and are **not included** here. See [final
-    paper](./docs/CS_277_Final.pdf) for methodology and results.\
+    paper](./docs/CS_277_Final (1).pdf) for methodology and results.\
 -   **Results Files:** Some experimental outputs are omitted because
     they contain **sensitive transcript-derived data** (E-DAIC). Only
     high-level aggregate plots are included.\
@@ -72,7 +72,7 @@ from text and uses these signals to improve downstream prediction of
 -   Curious about **visualizations of VA dynamics?** → see
     `src/va_classifier/visualizations/`\
 -   For full methodology, results, and context → read the [final
-    paper](./docs/CS_277_Final.pdf).
+    paper](./docs/CS_277_Final (1).pdf).
 
 ------------------------------------------------------------------------
 
