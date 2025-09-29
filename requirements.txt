@@ -1,4 +1,4 @@
-# Core dependencies
+# Core ML dependencies
 torch>=2.0.0
 transformers>=4.30.0
 datasets>=2.15.0
@@ -11,23 +11,26 @@ tqdm>=4.65.0
 requests>=2.31.0
 beautifulsoup4>=4.12.0
 
-# Visualization
+# Visualization and analysis
 matplotlib>=3.7.0
 seaborn>=0.12.0
+plotly>=5.14.0
 
-# Testing
+# OpenAI API for GPT-4/o4-mini
+openai>=1.0.0
+
+# Rate limiting and retries
+tenacity>=8.2.0
+
+# Configuration and utilities
+pyyaml>=6.0.0
+python-dotenv>=1.0.0
+
+# Development and testing
 pytest>=7.3.0
-
-# Jupyter
 jupyter>=1.0.0
 notebook>=6.5.0
 
-# Configuration
-pyyaml>=6.0.0
-
-# OpenAI API for GPT-4
-openai>=1.0.0
-
-# Utilities
-tensorboard>=2.13.0
-wandb>=0.15.0 
+# Optional: Experiment tracking
+# tensorboard>=2.13.0
+# wandb>=0.15.0 
