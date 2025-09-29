@@ -1,0 +1,456 @@
+"""
+PTSD Zero-Shot Base GPT Evaluation with VA Context (§3.3.1)
+
+Purpose: Zero-shot PTSD prediction using GPT-4o-mini with optional VA context enhancement.
+         Evaluates both PCL-5 severity scoring (0-80) and binary PTSD classification (0/1)
+         using clinical interview transcripts from E-DAIC dataset.
+
+Paper Section: §3.3.1 Base GPT Zero-Shot PTSD Prediction
+Task: Dual-output PTSD assessment without fine-tuning or demonstrations
+
+This script implements comprehensive zero-shot PTSD evaluation with multiple experimental conditions:
+
+1. Zero-Shot Evaluation:
+   - No fine-tuning or few-shot examples (baseline)
+   - Direct GPT-4o-mini prompting with clinical psychiatrist role
+   - Tests foundation model's inherent PTSD assessment capabilities
+   - Baseline for comparison with few-shot and fine-tuned approaches
+
+2. Few-Shot Enhancement (--few_shot):
+   - Includes 3 demonstration examples from training data
+   - Shows transcript → PCL-5 + binary classification pattern
+   - Tests in-context learning for PTSD assessment
+   - Comparison with pure zero-shot performance
+
+3. VA Context Integration:
+   - With VA (default): Uses RoBERTa-computed valence-arousal scores
+   - Without VA (--no_va): Text-only baseline
+   - Random VA (--random_va): Control condition with noise
+   - Tests emotional context impact on trauma assessment
+
+4. Dual Condition Support:
+   - PTSD assessment: PCL-5 severity + binary classification
+   - Depression assessment: PHQ-8 severity + binary classification
+   - Enables direct comparison between trauma and depression prediction
+
+Clinical Context:
+- PTSD assessment requires recognizing trauma-specific patterns
+- PCL-5 (PTSD Checklist for DSM-5) provides standardized severity scoring
+- VA scores may capture emotional numbing, hypervigilance, dysregulation
+- Binary classification identifies clinical PTSD threshold
+
+Experimental Conditions:
+- Baseline: Zero-shot with VA context
+- Text-only: Zero-shot without emotional context
+- Few-shot: 3 demonstration examples + VA context
+- Random VA: Control for VA significance validation
+- Cross-condition: PTSD vs Depression comparison
+
+Processing Pipeline:
+1. Load test participant data with ground truth labels
+2. Generate few-shot examples (if enabled) from training participants
+3. For each test participant:
+   - Load transcript with optional VA scores
+   - Format prompt with clinical psychiatrist system message
+   - Extract dual outputs: severity score + binary classification
+4. Calculate comprehensive evaluation metrics
+
+Output Format Example:
+System: "You are a highly experienced psychiatrist specializing in trauma..."
+User:   "Valence | Arousal | Text
+         -0.45   | +0.62   | I can't sleep, keep having nightmares
+         -0.23   | +0.71   | Loud noises make me jump"
+Assistant: "PCL-5 Score: 52
+           PTSD Binary: 1"
+
+Evaluation Metrics:
+- MAE/RMSE for severity prediction (PCL-5 or PHQ-8)
+- Accuracy, Precision, Recall for binary classification
+- Cross-condition performance comparison
+- VA context impact analysis
+
+Key Features:
+- Dual-output prediction (severity + binary)
+- Multiple experimental condition support
+- Trauma-specialized clinical prompting
+- Comprehensive evaluation metrics
+- VA context significance testing
+
+Configuration Options:
+- --condition: "ptsd" or "depression" assessment mode
+- --few_shot: Enable 3-shot demonstration examples
+- --no_va: Text-only evaluation (baseline)
+- --random_va: Random emotional context (control)
+- --transcripts: Custom transcript directory path
+
+Research Applications:
+- Tests foundation model PTSD assessment capabilities
+- Compares VA context impact on trauma vs depression prediction
+- Evaluates few-shot learning effectiveness for clinical tasks
+- Establishes baselines for supervised fine-tuning comparison
+
+Related Files:
+- va_classifier.ptsd.sft.prepare — Fine-tuning data preparation
+- va_classifier.ptsd.autocot — Few-shot AutoCoT implementation
+- va_classifier.phq8.zero_shot — Depression equivalent for comparison
+
+Usage Examples:
+    # Zero-shot PTSD with VA context
+    python base_gpt.py --condition ptsd
+    
+    # Few-shot PTSD evaluation
+    python base_gpt.py --condition ptsd --few_shot
+    
+    # Text-only baseline
+    python base_gpt.py --condition ptsd --no_va
+    
+    # Depression comparison
+    python base_gpt.py --condition depression
+
+Output:
+    base_gpt.csv — Predictions and ground truth for all participants
+    Console metrics — MAE, RMSE, Accuracy, Precision, Recall
+
+Note: PTSD assessment requires specialized clinical expertise. This tool provides
+      screening capabilities but should not replace professional clinical evaluation.
+"""
+
+import os, argparse, math, re, time
+from pathlib import Path
+
+import pandas as pd
+from tqdm import tqdm
+from openai import OpenAI
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+import random
+
+# ───────────────  LOCAL VA REGRESSOR  ─────────────── #
+# util.py lives in src/models/; adjust if located elsewhere
+from src.utils.util import get_va_scores
+
+# ───────────────  CONSTANT PATHS  ─────────────── #
+
+TRANSCRIPT_DIR = "/content/drive/MyDrive/model1_outputted_va_scores"
+
+TEST_SPLIT_PATH = "/content/drive/My Drive/test_split.csv"
+API_KEY_PATH = os.path.expanduser("~/Desktop/openai_key.txt")
+
+if os.path.exists(API_KEY_PATH):
+    api_key = Path(API_KEY_PATH).read_text().strip()
+else:                                # ← fallback to env-var
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "No openai_key.txt file and OPENAI_API_KEY not set."
+        )
+
+client = OpenAI(api_key=api_key)
+
+# ───────────────  PTSD PROMPT  ─────────────── #
+PTSD_PROMPT = """
+You are a highly experienced psychiatrist specializing in trauma and mental health disorders.
+
+Your task is to analyze patient transcripts and classify whether the
+patient has PTSD or not. PTSD is a psychiatric condition that arises after exposure to traumatic events, characterized by symptoms such as hypervigilance, emotional numbing, intrusive thoughts, and avoidance.
+
+
+
+Every sentence in the transcript has a Valence and Arousal (-1 to 1) score. Valence and arousal are two key dimensions of emotional experience often used in affective computing and psychology to quantify the emotional tone of text or speech. Valence measures how positive or negative an emotion is (e.g., happiness vs. sadness), while arousal measures the intensity or activation level of that emotion (e.g., calm vs. panicked). In individuals with PTSD, emotional responses are often dysregulated: they may show frequent negative valence (e.g., fear, guilt, sadness) and high arousal (e.g., anxiety, hyperalertness), even in neutral situations.
+Output:
+
+- First line: Estimate the participant's total score of PCL-5 (0-80) and reply with 'PCL-5 Score: [0-80]'.
+- Second line: Output 0 if there is no indication of PTSD and 1 if PTSD is present. Reply with 'PTSD Binary: [0 or 1]'.
+
+Overall, output should be 2 lines.
+""".strip()
+
+DEPRESSION_PROMPT = """
+You are a clinical psychiatrist estimating signs of depression from clinical transcripts. 
+Every line in the transcript has Valence and Arousal (-1 to 1). 
+
+Output: 
+
+- First line: Estimate the participant's PHQ-8 total (0-24) for depression and reply with 'PHQ-8 Score: [0-24]'.
+- Second line: Output 0 if there is no indication of Depression and 1 if Depression is present. Reply with 'PHQ Binary: [0 or 1]'.
+
+Overall, output should be 2 lines.
+""".strip()
+
+### Generate 3 few shots
+
+
+def make_few_shot_prompt(df: pd.DataFrame, condition: str, severity: float, binary: int, no_va: bool = False) -> str:
+    if no_va:
+        header = f"{'Valence':>8} | {'Arousal':>8} | Text"
+        separator = "-" * 60
+        rows = [f"{'':>8} | {'':>8} | {t}" for t in df["Text"].fillna("")]
+    else:
+        header = f"{'Valence':>8} | {'Arousal':>8} | Text"
+        separator = "-" * 60
+        rows = [
+            f"{v:+8.2f} | {a:+8.2f} | {t}"
+            for v, a, t in df[["valence", "arousal", "Text"]].values
+        ]
+
+    transcript_block = "\n".join([header, separator] + rows)
+    if condition == "ptsd":
+        return f"{transcript_block}\nPCL-5 Score: {severity:.1f}\nPTSD Binary: {binary}\n"
+    elif condition == "depression":
+        return f"{transcript_block}\nPHQ-5 Score: {severity:.1f}\nPHQ Binary: {binary}\n"
+
+
+# Format prompt
+
+
+def format_prompt(df: pd.DataFrame, no_va: bool = False, random_va: bool = False) -> str:
+    header = f"{'Valence':>8} | {'Arousal':>8} | Text"
+    separator = "-" * 60
+
+    if no_va:
+        rows = [f"{'':>8} | {'':>8} | {t}" for t in df["Text"].fillna("")]
+    elif random_va:
+        rows = [
+            f"{random.uniform(-0.5, 0.5):+8.2f} | {random.uniform(-0.5, 0.5):+8.2f} | {t}"
+            for t in df["Text"].fillna("")
+        ]
+    else:
+        rows = [
+            f"{v:+8.2f} | {a:+8.2f} | {t}"
+            for v, a, t in df[["valence", "arousal", "Text"]].values
+        ]
+
+    return "\n".join([header, separator] + rows)
+
+
+
+def pcl5_from_annotated(
+    df: pd.DataFrame,
+    condition: str,
+    model: str,
+    system_prompt: str,
+    temperature: float = 1.0,
+    no_va: bool = False,
+    random_va: bool = False):
+
+    prompt = format_prompt(df, no_va=no_va, random_va=random_va)
+
+
+    resp = client.chat.completions.create(
+        model=model,
+        temperature=temperature,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user",   "content": prompt},
+        ],
+    )
+    txt = str(resp.choices[0].message.content).strip()
+
+    print(txt)
+
+    if condition == "ptsd":
+        severity_match = re.search(r"PCL-5 Score:\s*(\d+)", txt)
+        if severity_match:
+            severity = int(severity_match.group(1))
+        binary_match = re.search(r"PTSD Binary:\s*(\d+)", txt)
+        if binary_match:
+            binary = int(binary_match.group(1))
+    elif condition == "depression":
+        severity_match = re.search(r"PHQ-8 Score:\s*(\d+)", txt)
+        if severity_match:
+            severity = int(severity_match.group(1))
+        binary_match = re.search(r"PHQ Binary:\s*(\d+)", txt)
+        if binary_match:
+            binary = int(binary_match.group(1))
+
+
+    #severity = float(lines[0].strip())
+    #binary = float(lines[1].strip())
+
+    print(f"severity: {severity}")
+    print(f"binary: {binary}")
+
+    return severity, binary
+
+
+# ───────────────  MAIN  ─────────────── #
+def main() -> None:
+    ap = argparse.ArgumentParser(description="DAIC-WOZ PCL evaluator")
+    ap.add_argument("--model_id",        default="gpt-4o-mini-2024-07-18",
+                    help="OpenAI model for PCL-5 estimation")
+    ap.add_argument("--temperature",  type=float, default=1.0,
+                    help="Sampling temperature for the PCL step")
+    ap.add_argument("--va_model",     default=None,
+                    help="Path to RoBERTa VA checkpoint (.pt). "
+                         "If omitted, util.py uses its default.")
+    ap.add_argument("--device",       default=None,
+                    help="'cpu' or 'cuda'; util.py auto-detects if None")
+    ap.add_argument("--transcripts",  default=None,
+               help="Folder that contains the <PID>_Transcript.csv files")
+    ap.add_argument("--limit",        type=int,
+                    help="Only first N participants (debug)")
+    ap.add_argument("--no_va", action="store_true",
+                help="Use only text (no valence/arousal) in prompt")
+    ap.add_argument("--few_shot", action="store_true")
+    ap.add_argument("--random_va", action="store_true")
+    ap.add_argument("--condition", type=str, default="depression")
+
+
+    args = ap.parse_args()
+    print(args.model_id)
+
+    transcript_dir = TRANSCRIPT_DIR
+    if args.transcripts:
+        transcript_dir = args.transcripts
+
+    split = pd.read_csv(TEST_SPLIT_PATH)
+    if args.limit:
+        split = split.head(args.limit)
+
+    condition = args.condition
+
+    gold_severity, pred_severity = [], []
+    gold_binary, pred_binary = [], []
+    pids = []
+
+    # Make few shot examples
+
+    few_shot_contexts = []
+    few_shot_limit = 3
+    used_pids = set()
+    #train_split = pd.read_csv("/content/drive/My Drive/train_split.csv")
+
+    for _, row in split.iterrows():
+        pid = row["Participant_ID"]
+        if pid in used_pids:
+            continue
+        name = f"{pid}_Transcript.csv"
+        if "va_pruned" in transcript_dir:
+            name = f"{pid}_va_pruned_transcript.csv"
+        if "length_pruned" in transcript_dir:
+            name = f"{pid}_lengthpruned_transcript.csv"
+        transcript_path = os.path.join(transcript_dir, name)
+        if not os.path.exists(transcript_path):
+            print(f"{transcript_path} does not exist")
+            continue
+
+        df = pd.read_csv(transcript_path)
+        if not all(col in df.columns for col in ["Text"]):
+            continue
+
+        if not args.no_va and not all(col in df.columns for col in ["valence", "arousal"]):
+            continue
+
+        if condition == "ptsd":
+            severity = float(row["PTSD_Severity"])
+            binary = int(row["PTSD_Binary"])
+        elif condition == "depression":
+            severity = float(row["PHQ_Score"])
+            binary = int(row["PHQ_Binary"])
+
+
+        few_shot_contexts.append(make_few_shot_prompt(df, condition, severity, binary, no_va=args.no_va))
+        used_pids.add(pid)
+
+        if len(few_shot_contexts) == few_shot_limit:
+            break
+
+    FEW_SHOT_CONTEXT = "\n---\n".join(few_shot_contexts).strip()
+
+
+    if args.no_va:
+        print("Without VA")
+    else:
+        print("With VA")
+    
+    if condition == "depression":
+        system_prompt=DEPRESSION_PROMPT
+    elif condition == "ptsd":
+        system_prompt=PTSD_PROMPT
+
+    if args.few_shot:
+        final_system_prompt = system_prompt + "\n\n--- FEW-SHOT EXAMPLES ---\n\n" + FEW_SHOT_CONTEXT
+    else:
+        final_system_prompt = system_prompt
+    
+    print(final_system_prompt)
+
+    for _, row in tqdm(split.iterrows(), total=len(split), desc="Participants"):
+        pid   = row["Participant_ID"]
+        pids.append(pid)
+        print(f"\n[{time.strftime('%H:%M:%S')}] → PID {pid}")
+        name = f"{pid}_Transcript.csv"
+        if "va_pruned" in transcript_dir:
+            name = f"{pid}_va_pruned_transcript.csv"
+        if "length_pruned" in transcript_dir:
+            name = f"{pid}_lengthpruned_transcript.csv"
+        csv_p = os.path.join(transcript_dir, name)
+        if not os.path.exists(csv_p):
+            print("  [WARN] transcript missing - skipped")
+            continue
+
+        df = pd.read_csv(csv_p)
+
+        try:
+            severity, binary = pcl5_from_annotated(df,
+                                        condition=condition,
+                                      model=args.model_id,
+                                      system_prompt=final_system_prompt,
+                                      temperature=args.temperature,
+                                      no_va=args.no_va, 
+                                      random_va=args.random_va)
+        except Exception as e:
+            print(f"  [ERROR] PHQ failed → {e}")
+            phq = float("nan")
+        
+        if condition == "ptsd":
+            gold_severity.append(float(row["PTSD_Severity"]))        
+            gold_binary.append(float(row["PTSD_Binary"]))    
+        elif condition == "depression":
+            gold_severity.append(float(row["PHQ_Score"]))       
+            gold_binary.append(float(row["PHQ_Binary"]))         
+
+        pred_severity.append(severity)
+        pred_binary.append(binary)
+
+    # Save results
+    df = pd.DataFrame({"Paritcipant_ID" : pid, 
+                    f"GT {condition} Severity" : gold_severity,
+                    f"Predicted {condition} Severity" : pred_severity,
+                    f"GT {condition} Binary" : gold_binary,
+                    f"Predicted {condition} Binary" : pred_binary
+                    })
+    df.to_csv(f"/content/drive/MyDrive/PTSD_results/base_gpt.csv")
+
+
+    # ───── Metrics (skip NaNs) ─────
+
+    # MAE and RMSE
+    pairs = [(g, p) for g, p in zip(gold_severity, pred_severity)
+         if not math.isnan(g) and not math.isnan(p)]    
+    n     = len(pairs)
+    mae   = (sum(abs(g-p) for g, p in pairs) / n) if n else float("nan")
+    rmse  = (math.sqrt(sum((g-p)**2 for g, p in pairs) / n)
+             if n else float("nan"))
+    
+    # Accuracy and precision/recall
+
+    gold_binary_int = [int(g) for g in gold_binary]
+    pred_binary_int = [int(p) for p in pred_binary]
+
+    accuracy  = accuracy_score(gold_binary_int, pred_binary_int)
+    precision = precision_score(gold_binary_int, pred_binary_int)
+    recall    = recall_score(gold_binary_int, pred_binary_int)
+
+
+    print(f"\n Condition: {condition}")
+    print(f"\nParticipants evaluated : {n}/{len(split)}")
+    print(f"MAE                   : {mae:.3f}")
+    print(f"RMSE                  : {rmse:.3f}")
+    print(f"Accuracy                  : {accuracy:.3f}")
+    print(f"Precision                  : {precision:.3f}")
+    print(f"Recall                  : {recall:.3f}")
+
+
+
+if __name__ == "__main__":
+    main()

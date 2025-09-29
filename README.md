@@ -1,94 +1,87 @@
-# VA-Classifier: Valence-Arousal Classification Project
+# Text and Valence--Arousal: A Foundational Approach for Mental Health Prediction
 
-This project implements and compares different approaches for classifying text into valence-arousal space.
+This repository accompanies the Stanford CS277 / BIODS 271 research
+project:\
+**"Text and Valence--Arousal: A Two-Dimensional Foundational Approach
+for Mental Health Prediction"** ([final paper in
+`/docs`](./docs/CS_277_Final.pdf)).
 
-## Project Structure (UPDATE FULLY LATER)
+We introduce a unified framework that learns **Valence--Arousal (VA)**
+from text and uses these signals to improve downstream prediction of
+**depression (PHQ-8)** and **PTSD (PCL-5)**.
 
-```
-VA-classifier/
-├── data/                      # Data directory
-│   ├── raw/                   # Raw datasets
-│   │   ├── goemotions/        # GoEmotions dataset
-│   │   └── emobank/          # EmoBank dataset
-│   └── processed/             # Processed datasets
-├── models/                    # Model implementations
-│   ├── roberta_goemotions/    # RoBERTa model fine-tuned on GoEmotions
-│   ├── roberta_emobank/      # RoBERTa model fine-tuned on EmoBank
-│   └── gpt4_classifier/       # GPT-4 based classifier
-├── src/                       # Source code
-│   ├── data/                  # Data processing scripts
-│   │   ├── download.py        # Dataset download scripts
-│   │   └── preprocess.py      # Data preprocessing scripts
-│   ├── models/                # Model training and evaluation
-│   │   ├── roberta_goemotions.py
-│   │   ├── roberta_emobank.py
-│   │   └── GPT_classifier.py  # o4-mini default VA classifier
-│   └── utils/                 # Utility functions
-│       ├── metrics.py         # Evaluation metrics
-│       └── visualization.py   # Visualization tools
-├── notebooks/                 # Jupyter notebooks for analysis
-├── tests/                     # Unit tests
-    └── evaluation_gpt.py      # VA evaluation for model/GPT_classifier.py
-├── requirements.txt           # Project dependencies
-└── config/                    # Configuration files
-    └── model_configs.yaml     # Model configurations
-```
+------------------------------------------------------------------------
 
-## Setup Instructions
+## 🔑 Key Contributions
 
-1. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+-   **VA Regressor (Part A, §3.1)**
+    -   GPT-4o-mini baseline (zero-shot)\
+    -   RoBERTa Direct VA regression (best performance: MAE 0.0759)\
+    -   RoBERTa + GoEmotions emotion context
+-   **PHQ-8 Depression Prediction (Part B, §3.2)**
+    -   Zero-shot GPT\
+    -   AutoCoT (few-shot chain-of-thought)\
+    -   Supervised Fine-Tuning (text-only vs VA-enhanced, 12.2% MAE
+        reduction with VA)
+-   **PTSD Prediction (Part C, §3.3)**
+    -   Benchmarks with zero-shot, AutoCoT, and SFT using VA-augmented
+        transcripts\
+    -   **Note:** Implementation scripts are missing here, as PTSD
+        experiments were run in shared Google Colab notebooks (see paper
+        for full details).
+-   **Cross-Cutting Experiments (§4)**
+    -   Prompt-length sensitivity (summarization, pruning)\
+    -   VA trajectory visualizations across demographics
 
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+------------------------------------------------------------------------
 
-3. Download datasets:
-```bash
-python src/data/preprocess_goemotions.py
-```
+## 📂 Repository Structure
 
-## Project Components
+    src/va_classifier/
+      va_regressor/      # Part A: VA models (GPT, RoBERTa, GoEmotions)
+      phq8/              # Part B: PHQ-8 experiments (zero-shot, AutoCoT, SFT)
+      ptsd/              # Part C: PTSD experiments (partial; Colab-based code missing)
+      data/              # Preprocessing for EmoBank, GoEmotions, E-DAIC
+      visualizations/    # VA trajectory & experimental plots
+    results/             # Processed outputs (redacted, see note below)
+    figures/             # High-level performance plots (MAE/RMSE comparisons)
+    docs/                # Final report & presentation
 
-### 1. RoBERTa + GoEmotions
-- Fine-tunes RoBERTa on GoEmotions dataset
-- Projects emotion outputs to valence-arousal space
-- Implementation in `models/roberta_goemotions/`
-- Overall MAE: 0.0792
-- Valence Pearson: 0.07893
-- Arousal Pearson: 0.5479
+------------------------------------------------------------------------
 
-### 2. RoBERTa + EmoBank
-- Uses fine-tuned RoBERTa with custom classifier head
-- Trained on EmoBank dataset
-- Implementation in `models/roberta_emobank/`
-- Overall MAE:
-- Valence Pearson:
-- Arousal Pearson:
+## ⚠️ Important Notes
 
-### 3. GPT-4 Classifier
-- Implements GPT-4 based classification
-- Includes prompt engineering and validation pipeline
-- Implementation in `models/gpt4_classifier/`
+-   **PTSD Code:** PTSD implementations were conducted in Google Colab
+    notebooks and are **not included** here. See [final
+    paper](./docs/CS_277_Final.pdf) for methodology and results.\
+-   **Results Files:** Some experimental outputs are omitted because
+    they contain **sensitive transcript-derived data** (E-DAIC). Only
+    high-level aggregate plots are included.\
+-   **Datasets:** EmoBank, GoEmotions, and E-DAIC must be obtained
+    separately. Licensing and ethics restrictions prevent redistribution
+    here.
 
-## Dataset Information
+------------------------------------------------------------------------
 
-### EmoBank Dataset
-- Source: https://github.com/JULIELab/EmoBank
-- Contains train/dev/test splits
-- Valence-Arousal scores scaled from [0,5] to [-1,1]
+## 📑 How to Navigate
 
-### GoEmotions Dataset
-- Used for initial RoBERTa fine-tuning
-- Provides emotion labels for projection to VA space
+-   Interested in **core ML modeling?** → see
+    `src/va_classifier/va_regressor/`\
+-   Want to see **depression prediction experiments?** → see
+    `src/va_classifier/phq8/`\
+-   Curious about **visualizations of VA dynamics?** → see
+    `src/va_classifier/visualizations/`\
+-   For full methodology, results, and context → read the [final
+    paper](./docs/CS_277_Final.pdf).
 
-### EDAIC-WOZ
-- https://dcapswoz.ict.usc.edu/wwwedaic/
+------------------------------------------------------------------------
 
-## License
+## 👥 Contributions
 
-[Add appropriate license information]
+-   Christo Hristov --- Developed VA regression models (GoEmotions vs
+    EmoBank pre-training)\
+-   Kevina Wang --- Prompt engineering, transcript length/content
+    sensitivity studies\
+-   Miko Rimer --- Psychiatric framing, PHQ-8 prediction experiments\
+-   Yalcin Tur --- VA trajectory visualizations\
+-   Ion Martinis --- PTSD benchmark implementation

@@ -1,477 +1,0 @@
-Formatted demos saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/formatted_demos.csv
-Calling run_autocot_inference...🫠
-Running Auto-CoT Inference:   0%|          | 0/210 [00:00<?, ?it/s]Running Auto-CoT Inference:   0%|          | 1/210 [00:02<09:31,  2.74s/it]Running Auto-CoT Inference:   1%|          | 2/210 [00:12<22:51,  6.59s/it]Running Auto-CoT Inference:   1%|▏         | 3/210 [00:47<1:08:09, 19.76s/it]Running Auto-CoT Inference:   2%|▏         | 4/210 [01:12<1:15:02, 21.86s/it]Running Auto-CoT Inference:   2%|▏         | 5/210 [01:50<1:34:51, 27.76s/it]Running Auto-CoT Inference:   3%|▎         | 6/210 [02:18<1:34:51, 27.90s/it]Running Auto-CoT Inference:   3%|▎         | 7/210 [02:49<1:36:49, 28.62s/it]Running Auto-CoT Inference:   4%|▍         | 8/210 [03:22<1:41:33, 30.17s/it]Running Auto-CoT Inference:   4%|▍         | 9/210 [03:50<1:39:14, 29.62s/it]Running Auto-CoT Inference:   5%|▍         | 10/210 [04:21<1:39:36, 29.88s/it]Running Auto-CoT Inference:   5%|▌         | 11/210 [04:56<1:44:38, 31.55s/it]Running Auto-CoT Inference:   6%|▌         | 12/210 [05:24<1:40:30, 30.45s/it]Running Auto-CoT Inference:   6%|▌         | 13/210 [05:59<1:44:44, 31.90s/it]Running Auto-CoT Inference:   7%|▋         | 14/210 [06:33<1:45:43, 32.36s/it]Running Auto-CoT Inference:   7%|▋         | 15/210 [07:03<1:42:49, 31.64s/it]Running Auto-CoT Inference:   8%|▊         | 16/210 [07:41<1:48:25, 33.54s/it]Running Auto-CoT Inference:   8%|▊         | 17/210 [08:10<1:43:59, 32.33s/it]Running Auto-CoT Inference:   9%|▊         | 18/210 [08:37<1:38:01, 30.63s/it]Running Auto-CoT Inference:   9%|▉         | 19/210 [09:13<1:42:31, 32.21s/it]Running Auto-CoT Inference:  10%|▉         | 20/210 [09:45<1:41:32, 32.07s/it]Running Auto-CoT Inference:  10%|█         | 21/210 [10:17<1:41:07, 32.10s/it]Running Auto-CoT Inference:  10%|█         | 22/210 [10:46<1:37:41, 31.18s/it]Running Auto-CoT Inference:  11%|█         | 23/210 [11:17<1:37:09, 31.17s/it]Running Auto-CoT Inference:  11%|█▏        | 24/210 [11:52<1:40:43, 32.49s/it]Running Auto-CoT Inference:  12%|█▏        | 25/210 [12:23<1:38:41, 32.01s/it]Running Auto-CoT Inference:  12%|█▏        | 26/210 [12:55<1:38:02, 31.97s/it]Running Auto-CoT Inference:  13%|█▎        | 27/210 [13:26<1:36:23, 31.61s/it]Running Auto-CoT Inference:  13%|█▎        | 28/210 [13:56<1:34:47, 31.25s/it]Running Auto-CoT Inference:  14%|█▍        | 29/210 [14:27<1:33:53, 31.13s/it]Running Auto-CoT Inference:  14%|█▍        | 30/210 [14:53<1:28:04, 29.36s/it]Running Auto-CoT Inference:  15%|█▍        | 31/210 [15:23<1:28:43, 29.74s/it]Running Auto-CoT Inference:  15%|█▌        | 32/210 [16:01<1:35:18, 32.13s/it]Running Auto-CoT Inference:  16%|█▌        | 33/210 [16:31<1:32:57, 31.51s/it]Running Auto-CoT Inference:  16%|█▌        | 34/210 [17:04<1:33:48, 31.98s/it]Running Auto-CoT Inference:  17%|█▋        | 35/210 [17:31<1:29:00, 30.52s/it]Running Auto-CoT Inference:  17%|█▋        | 36/210 [18:06<1:32:36, 31.94s/it]Running Auto-CoT Inference:  18%|█▊        | 37/210 [18:35<1:29:33, 31.06s/it]Running Auto-CoT Inference:  18%|█▊        | 38/210 [19:04<1:26:54, 30.32s/it]Running Auto-CoT Inference:  19%|█▊        | 39/210 [19:43<1:33:33, 32.83s/it]Running Auto-CoT Inference:  19%|█▉        | 40/210 [20:06<1:25:18, 30.11s/it]Running Auto-CoT Inference:  20%|█▉        | 41/210 [20:40<1:28:05, 31.27s/it]Running Auto-CoT Inference:  20%|██        | 42/210 [21:15<1:30:24, 32.29s/it]Running Auto-CoT Inference:  20%|██        | 43/210 [21:43<1:25:57, 30.88s/it]Running Auto-CoT Inference:  21%|██        | 44/210 [22:18<1:29:13, 32.25s/it]Running Auto-CoT Inference:  21%|██▏       | 45/210 [22:50<1:28:09, 32.06s/it]Running Auto-CoT Inference:  22%|██▏       | 46/210 [23:21<1:27:17, 31.93s/it]Running Auto-CoT Inference:  22%|██▏       | 47/210 [23:55<1:28:16, 32.49s/it]Running Auto-CoT Inference:  23%|██▎       | 48/210 [24:20<1:21:23, 30.15s/it]Running Auto-CoT Inference:  23%|██▎       | 49/210 [24:57<1:26:55, 32.39s/it]Running Auto-CoT Inference:  24%|██▍       | 50/210 [25:22<1:20:29, 30.19s/it]Running Auto-CoT Inference:  24%|██▍       | 51/210 [25:57<1:23:42, 31.59s/it]Running Auto-CoT Inference:  25%|██▍       | 52/210 [26:30<1:24:25, 32.06s/it]Running Auto-CoT Inference:  25%|██▌       | 53/210 [27:03<1:24:21, 32.24s/it]Running Auto-CoT Inference:  26%|██▌       | 54/210 [27:28<1:18:19, 30.12s/it]Running Auto-CoT Inference:  26%|██▌       | 55/210 [28:06<1:23:23, 32.28s/it]Running Auto-CoT Inference:  27%|██▋       | 56/210 [28:39<1:23:38, 32.59s/it]Running Auto-CoT Inference:  27%|██▋       | 57/210 [29:08<1:20:29, 31.56s/it]Running Auto-CoT Inference:  28%|██▊       | 58/210 [29:34<1:15:31, 29.82s/it]Running Auto-CoT Inference:  28%|██▊       | 59/210 [30:08<1:18:40, 31.26s/it]Running Auto-CoT Inference:  29%|██▊       | 60/210 [30:37<1:16:15, 30.50s/it]Running Auto-CoT Inference:  29%|██▉       | 61/210 [31:10<1:17:32, 31.23s/it]Running Auto-CoT Inference:  30%|██▉       | 62/210 [31:47<1:20:49, 32.77s/it]Running Auto-CoT Inference:  30%|███       | 63/210 [32:19<1:20:20, 32.79s/it]Running Auto-CoT Inference:  30%|███       | 64/210 [32:46<1:15:04, 30.85s/it]Running Auto-CoT Inference:  31%|███       | 65/210 [33:25<1:20:34, 33.34s/it]Running Auto-CoT Inference:  31%|███▏      | 66/210 [33:59<1:20:49, 33.68s/it]Running Auto-CoT Inference:  32%|███▏      | 67/210 [34:24<1:14:03, 31.07s/it]Running Auto-CoT Inference:  32%|███▏      | 68/210 [35:00<1:16:33, 32.35s/it]Running Auto-CoT Inference:  33%|███▎      | 69/210 [35:32<1:16:04, 32.37s/it]Running Auto-CoT Inference:  33%|███▎      | 70/210 [36:06<1:16:54, 32.96s/it]Running Auto-CoT Inference:  34%|███▍      | 71/210 [36:31<1:10:52, 30.59s/it]Running Auto-CoT Inference:  34%|███▍      | 72/210 [37:03<1:10:59, 30.86s/it]Running Auto-CoT Inference:  35%|███▍      | 73/210 [37:33<1:09:44, 30.55s/it]Running Auto-CoT Inference:  35%|███▌      | 74/210 [38:04<1:09:58, 30.87s/it]Running Auto-CoT Inference:  36%|███▌      | 75/210 [38:39<1:12:18, 32.14s/it]Running Auto-CoT Inference:  36%|███▌      | 76/210 [39:09<1:09:58, 31.33s/it]Running Auto-CoT Inference:  37%|███▋      | 77/210 [39:47<1:14:13, 33.49s/it]Running Auto-CoT Inference:  37%|███▋      | 78/210 [40:11<1:07:02, 30.47s/it]Running Auto-CoT Inference:  38%|███▊      | 79/210 [40:47<1:10:05, 32.10s/it]Running Auto-CoT Inference:  38%|███▊      | 80/210 [41:22<1:11:48, 33.14s/it]Running Auto-CoT Inference:  39%|███▊      | 81/210 [41:59<1:13:17, 34.09s/it]Running Auto-CoT Inference:  39%|███▉      | 82/210 [42:24<1:07:04, 31.44s/it]Running Auto-CoT Inference:  40%|███▉      | 83/210 [42:56<1:06:53, 31.60s/it]Running Auto-CoT Inference:  40%|████      | 84/210 [43:27<1:06:08, 31.49s/it]Running Auto-CoT Inference:  40%|████      | 85/210 [43:56<1:03:52, 30.66s/it]Running Auto-CoT Inference:  41%|████      | 86/210 [44:29<1:04:50, 31.37s/it]Running Auto-CoT Inference:  41%|████▏     | 87/210 [44:59<1:03:47, 31.12s/it]Running Auto-CoT Inference:  42%|████▏     | 88/210 [45:31<1:03:20, 31.16s/it]Running Auto-CoT Inference:  42%|████▏     | 89/210 [46:01<1:02:21, 30.92s/it]Running Auto-CoT Inference:  43%|████▎     | 90/210 [46:36<1:04:25, 32.22s/it]Running Auto-CoT Inference:  43%|████▎     | 91/210 [47:10<1:04:55, 32.74s/it]Running Auto-CoT Inference:  44%|████▍     | 92/210 [47:41<1:03:19, 32.20s/it]Running Auto-CoT Inference:  44%|████▍     | 93/210 [48:11<1:01:15, 31.42s/it]Running Auto-CoT Inference:  45%|████▍     | 94/210 [48:46<1:03:13, 32.70s/it]Running Auto-CoT Inference:  45%|████▌     | 95/210 [49:16<1:01:03, 31.86s/it]Running Auto-CoT Inference:  46%|████▌     | 96/210 [49:42<56:54, 29.95s/it]  Running Auto-CoT Inference:  46%|████▌     | 97/210 [50:17<59:33, 31.62s/it]Running Auto-CoT Inference:  47%|████▋     | 98/210 [50:43<55:29, 29.73s/it]Running Auto-CoT Inference:  47%|████▋     | 99/210 [51:20<59:16, 32.04s/it]Running Auto-CoT Inference:  48%|████▊     | 100/210 [51:21<41:53, 22.85s/it]Running Auto-CoT Inference:  48%|████▊     | 101/210 [51:23<29:48, 16.41s/it]Running Auto-CoT Inference:  49%|████▊     | 102/210 [51:24<21:19, 11.84s/it]Running Auto-CoT Inference:  49%|████▉     | 103/210 [51:25<15:24,  8.64s/it]Running Auto-CoT Inference:  50%|████▉     | 104/210 [51:27<11:23,  6.45s/it]Running Auto-CoT Inference:  50%|█████     | 105/210 [51:28<08:36,  4.92s/it]Running Auto-CoT Inference:  50%|█████     | 106/210 [51:29<06:38,  3.83s/it]Running Auto-CoT Inference:  51%|█████     | 107/210 [51:31<05:17,  3.08s/it]Running Auto-CoT Inference:  51%|█████▏    | 108/210 [51:32<04:22,  2.57s/it]Running Auto-CoT Inference:  52%|█████▏    | 109/210 [51:33<03:39,  2.18s/it]Running Auto-CoT Inference:  52%|█████▏    | 110/210 [51:35<03:15,  1.95s/it]Running Auto-CoT Inference:  53%|█████▎    | 111/210 [51:36<02:52,  1.74s/it]Running Auto-CoT Inference:  53%|█████▎    | 112/210 [51:37<02:41,  1.64s/it]Running Auto-CoT Inference:  54%|█████▍    | 113/210 [51:39<02:27,  1.52s/it]Running Auto-CoT Inference:  54%|█████▍    | 114/210 [51:40<02:20,  1.46s/it]Running Auto-CoT Inference:  55%|█████▍    | 115/210 [51:41<02:17,  1.45s/it]Running Auto-CoT Inference:  55%|█████▌    | 116/210 [51:43<02:13,  1.42s/it]Running Auto-CoT Inference:  56%|█████▌    | 117/210 [51:44<02:10,  1.40s/it]Running Auto-CoT Inference:  56%|█████▌    | 118/210 [51:45<02:08,  1.39s/it]Running Auto-CoT Inference:  57%|█████▋    | 119/210 [51:47<02:06,  1.40s/it]Running Auto-CoT Inference:  57%|█████▋    | 120/210 [51:48<02:02,  1.36s/it]Running Auto-CoT Inference:  58%|█████▊    | 121/210 [51:49<02:01,  1.36s/it]Running Auto-CoT Inference:  58%|█████▊    | 122/210 [51:51<02:00,  1.37s/it]Running Auto-CoT Inference:  59%|█████▊    | 123/210 [51:52<01:56,  1.33s/it]Running Auto-CoT Inference:  59%|█████▉    | 124/210 [51:53<01:54,  1.33s/it]Running Auto-CoT Inference:  60%|█████▉    | 125/210 [51:55<01:52,  1.32s/it]Running Auto-CoT Inference:  60%|██████    | 126/210 [51:56<01:51,  1.32s/it]Running Auto-CoT Inference:  60%|██████    | 127/210 [51:57<01:50,  1.33s/it]Running Auto-CoT Inference:  61%|██████    | 128/210 [51:59<01:51,  1.36s/it]Running Auto-CoT Inference:  61%|██████▏   | 129/210 [52:00<01:51,  1.38s/it]Running Auto-CoT Inference:  62%|██████▏   | 130/210 [52:02<01:53,  1.42s/it]Running Auto-CoT Inference:  62%|██████▏   | 131/210 [1:02:04<3:59:02, 181.55s/it]Running Auto-CoT Inference:  63%|██████▎   | 132/210 [1:02:05<2:45:51, 127.59s/it]Running Auto-CoT Inference:  63%|██████▎   | 133/210 [1:02:13<1:57:46, 91.77s/it] Running Auto-CoT Inference:  64%|██████▍   | 134/210 [1:03:42<1:54:57, 90.76s/it]Running Auto-CoT Inference:  64%|██████▍   | 135/210 [1:04:37<1:40:05, 80.07s/it]Running Auto-CoT Inference:  65%|██████▍   | 136/210 [1:04:38<1:09:38, 56.47s/it]
-🔍 Processing Participant_ID: 473 (1/210)
-
-🔍 Processing Participant_ID: 334 (2/210)
-
-🔍 Processing Participant_ID: 411 (3/210)
-
-🔍 Processing Participant_ID: 316 (4/210)
-
-🔍 Processing Participant_ID: 331 (5/210)
-
-🔍 Processing Participant_ID: 310 (6/210)
-
-🔍 Processing Participant_ID: 707 (7/210)
-
-🔍 Processing Participant_ID: 403 (8/210)
-
-🔍 Processing Participant_ID: 341 (9/210)
-
-🔍 Processing Participant_ID: 440 (10/210)
-
-🔍 Processing Participant_ID: 492 (11/210)
-
-🔍 Processing Participant_ID: 459 (12/210)
-
-🔍 Processing Participant_ID: 628 (13/210)
-
-🔍 Processing Participant_ID: 344 (14/210)
-
-🔍 Processing Participant_ID: 667 (15/210)
-
-🔍 Processing Participant_ID: 366 (16/210)
-
-🔍 Processing Participant_ID: 363 (17/210)
-
-🔍 Processing Participant_ID: 335 (18/210)
-
-🔍 Processing Participant_ID: 349 (19/210)
-
-🔍 Processing Participant_ID: 384 (20/210)
-
-🔍 Processing Participant_ID: 304 (21/210)
-
-🔍 Processing Participant_ID: 359 (22/210)
-
-🔍 Processing Participant_ID: 450 (23/210)
-
-🔍 Processing Participant_ID: 382 (24/210)
-
-🔍 Processing Participant_ID: 484 (25/210)
-
-🔍 Processing Participant_ID: 410 (26/210)
-
-🔍 Processing Participant_ID: 445 (27/210)
-
-🔍 Processing Participant_ID: 327 (28/210)
-
-🔍 Processing Participant_ID: 435 (29/210)
-
-🔍 Processing Participant_ID: 489 (30/210)
-
-🔍 Processing Participant_ID: 389 (31/210)
-
-🔍 Processing Participant_ID: 483 (32/210)
-
-🔍 Processing Participant_ID: 393 (33/210)
-
-🔍 Processing Participant_ID: 482 (34/210)
-
-🔍 Processing Participant_ID: 458 (35/210)
-
-🔍 Processing Participant_ID: 684 (36/210)
-
-🔍 Processing Participant_ID: 387 (37/210)
-
-🔍 Processing Participant_ID: 442 (38/210)
-
-🔍 Processing Participant_ID: 434 (39/210)
-
-🔍 Processing Participant_ID: 357 (40/210)
-
-🔍 Processing Participant_ID: 443 (41/210)
-
-🔍 Processing Participant_ID: 465 (42/210)
-
-🔍 Processing Participant_ID: 617 (43/210)
-
-🔍 Processing Participant_ID: 430 (44/210)
-
-🔍 Processing Participant_ID: 399 (45/210)
-
-🔍 Processing Participant_ID: 414 (46/210)
-
-🔍 Processing Participant_ID: 466 (47/210)
-
-🔍 Processing Participant_ID: 601 (48/210)
-
-🔍 Processing Participant_ID: 608 (49/210)
-
-🔍 Processing Participant_ID: 313 (50/210)
-
-🔍 Processing Participant_ID: 386 (51/210)
-
-🔍 Processing Participant_ID: 319 (52/210)
-
-🔍 Processing Participant_ID: 306 (53/210)
-
-🔍 Processing Participant_ID: 452 (54/210)
-
-🔍 Processing Participant_ID: 481 (55/210)
-
-🔍 Processing Participant_ID: 453 (56/210)
-
-🔍 Processing Participant_ID: 673 (57/210)
-
-🔍 Processing Participant_ID: 329 (58/210)
-
-🔍 Processing Participant_ID: 698 (59/210)
-
-🔍 Processing Participant_ID: 388 (60/210)
-
-🔍 Processing Participant_ID: 350 (61/210)
-
-🔍 Processing Participant_ID: 468 (62/210)
-
-🔍 Processing Participant_ID: 303 (63/210)
-
-🔍 Processing Participant_ID: 361 (64/210)
-
-🔍 Processing Participant_ID: 372 (65/210)
-
-🔍 Processing Participant_ID: 449 (66/210)
-
-🔍 Processing Participant_ID: 454 (67/210)
-
-🔍 Processing Participant_ID: 332 (68/210)
-
-🔍 Processing Participant_ID: 376 (69/210)
-
-🔍 Processing Participant_ID: 328 (70/210)
-
-🔍 Processing Participant_ID: 437 (71/210)
-
-🔍 Processing Participant_ID: 415 (72/210)
-
-🔍 Processing Participant_ID: 485 (73/210)
-
-🔍 Processing Participant_ID: 420 (74/210)
-
-🔍 Processing Participant_ID: 441 (75/210)
-
-🔍 Processing Participant_ID: 352 (76/210)
-
-🔍 Processing Participant_ID: 365 (77/210)
-
-🔍 Processing Participant_ID: 326 (78/210)
-
-🔍 Processing Participant_ID: 373 (79/210)
-
-🔍 Processing Participant_ID: 351 (80/210)
-
-🔍 Processing Participant_ID: 471 (81/210)
-
-🔍 Processing Participant_ID: 486 (82/210)
-
-🔍 Processing Participant_ID: 436 (83/210)
-
-🔍 Processing Participant_ID: 370 (84/210)
-
-🔍 Processing Participant_ID: 311 (85/210)
-
-🔍 Processing Participant_ID: 413 (86/210)
-
-🔍 Processing Participant_ID: 417 (87/210)
-
-🔍 Processing Participant_ID: 432 (88/210)
-
-🔍 Processing Participant_ID: 392 (89/210)
-
-🔍 Processing Participant_ID: 320 (90/210)
-
-🔍 Processing Participant_ID: 379 (91/210)
-
-🔍 Processing Participant_ID: 367 (92/210)
-
-🔍 Processing Participant_ID: 358 (93/210)
-
-🔍 Processing Participant_ID: 660 (94/210)
-
-🔍 Processing Participant_ID: 317 (95/210)
-
-🔍 Processing Participant_ID: 653 (96/210)
-
-🔍 Processing Participant_ID: 312 (97/210)
-
-🔍 Processing Participant_ID: 670 (98/210)
-
-🔍 Processing Participant_ID: 374 (99/210)
-[ERROR] GPT failed on PID 374 → Connection error.
-
-🔍 Processing Participant_ID: 633 (100/210)
-[ERROR] GPT failed on PID 633 → Connection error.
-
-🔍 Processing Participant_ID: 354 (101/210)
-[ERROR] GPT failed on PID 354 → Connection error.
-
-🔍 Processing Participant_ID: 383 (102/210)
-[ERROR] GPT failed on PID 383 → Connection error.
-
-🔍 Processing Participant_ID: 439 (103/210)
-[ERROR] GPT failed on PID 439 → Connection error.
-
-🔍 Processing Participant_ID: 472 (104/210)
-[ERROR] GPT failed on PID 472 → Connection error.
-
-🔍 Processing Participant_ID: 339 (105/210)
-[ERROR] GPT failed on PID 339 → Connection error.
-
-🔍 Processing Participant_ID: 323 (106/210)
-[ERROR] GPT failed on PID 323 → Connection error.
-
-🔍 Processing Participant_ID: 447 (107/210)
-[ERROR] GPT failed on PID 447 → Connection error.
-
-🔍 Processing Participant_ID: 702 (108/210)
-[ERROR] GPT failed on PID 702 → Connection error.
-
-🔍 Processing Participant_ID: 713 (109/210)
-[ERROR] GPT failed on PID 713 → Connection error.
-
-🔍 Processing Participant_ID: 461 (110/210)
-[ERROR] GPT failed on PID 461 → Connection error.
-
-🔍 Processing Participant_ID: 408 (111/210)
-[ERROR] GPT failed on PID 408 → Connection error.
-
-🔍 Processing Participant_ID: 487 (112/210)
-[ERROR] GPT failed on PID 487 → Connection error.
-
-🔍 Processing Participant_ID: 429 (113/210)
-[ERROR] GPT failed on PID 429 → Connection error.
-
-🔍 Processing Participant_ID: 305 (114/210)
-[ERROR] GPT failed on PID 305 → Connection error.
-
-🔍 Processing Participant_ID: 428 (115/210)
-[ERROR] GPT failed on PID 428 → Connection error.
-
-🔍 Processing Participant_ID: 479 (116/210)
-[ERROR] GPT failed on PID 479 → Connection error.
-
-🔍 Processing Participant_ID: 343 (117/210)
-[ERROR] GPT failed on PID 343 → Connection error.
-
-🔍 Processing Participant_ID: 355 (118/210)
-[ERROR] GPT failed on PID 355 → Connection error.
-
-🔍 Processing Participant_ID: 369 (119/210)
-[ERROR] GPT failed on PID 369 → Connection error.
-
-🔍 Processing Participant_ID: 474 (120/210)
-[ERROR] GPT failed on PID 474 → Connection error.
-
-🔍 Processing Participant_ID: 470 (121/210)
-[ERROR] GPT failed on PID 470 → Connection error.
-
-🔍 Processing Participant_ID: 697 (122/210)
-[ERROR] GPT failed on PID 697 → Connection error.
-
-🔍 Processing Participant_ID: 632 (123/210)
-[ERROR] GPT failed on PID 632 → Connection error.
-
-🔍 Processing Participant_ID: 377 (124/210)
-[ERROR] GPT failed on PID 377 → Connection error.
-
-🔍 Processing Participant_ID: 390 (125/210)
-[ERROR] GPT failed on PID 390 → Connection error.
-
-🔍 Processing Participant_ID: 321 (126/210)
-[ERROR] GPT failed on PID 321 → Connection error.
-
-🔍 Processing Participant_ID: 692 (127/210)
-[ERROR] GPT failed on PID 692 → Connection error.
-
-🔍 Processing Participant_ID: 400 (128/210)
-[ERROR] GPT failed on PID 400 → Connection error.
-
-🔍 Processing Participant_ID: 448 (129/210)
-[ERROR] GPT failed on PID 448 → Connection error.
-
-🔍 Processing Participant_ID: 478 (130/210)
-[ERROR] GPT failed on PID 478 → Connection error.
-
-🔍 Processing Participant_ID: 641 (131/210)
-[ERROR] GPT failed on PID 641 → Request timed out.
-
-🔍 Processing Participant_ID: 301 (132/210)
-
-🔍 Processing Participant_ID: 687 (133/210)
-
-🔍 Processing Participant_ID: 322 (134/210)
-[ERROR] GPT failed on PID 322 → Connection error.
-
-🔍 Processing Participant_ID: 360 (135/210)
-[ERROR] GPT failed on PID 360 → Connection error.
-
-🔍 Processing Participant_ID: 457 (136/210)
-[ERROR] GPT failed on PID 457 → Connection error.
-Running Auto-CoT Inference:  65%|██████▌   | 137/210 [1:04:40<48:33, 39.91s/it]  Running Auto-CoT Inference:  66%|██████▌   | 138/210 [1:04:41<34:00, 28.34s/it]Running Auto-CoT Inference:  66%|██████▌   | 139/210 [1:04:42<23:58, 20.26s/it]Running Auto-CoT Inference:  67%|██████▋   | 140/210 [1:04:44<17:02, 14.61s/it]Running Auto-CoT Inference:  67%|██████▋   | 141/210 [1:04:47<12:52, 11.19s/it]Running Auto-CoT Inference:  68%|██████▊   | 142/210 [1:04:51<10:06,  8.92s/it]Running Auto-CoT Inference:  68%|██████▊   | 143/210 [1:05:37<22:27, 20.12s/it]Running Auto-CoT Inference:  69%|██████▊   | 144/210 [1:05:41<16:53, 15.35s/it]Running Auto-CoT Inference:  69%|██████▉   | 145/210 [1:06:25<25:47, 23.81s/it]Running Auto-CoT Inference:  70%|██████▉   | 146/210 [1:06:40<22:43, 21.30s/it]Running Auto-CoT Inference:  70%|███████   | 147/210 [1:07:11<25:16, 24.08s/it]Running Auto-CoT Inference:  70%|███████   | 148/210 [1:07:49<29:25, 28.48s/it]Running Auto-CoT Inference:  71%|███████   | 149/210 [1:08:20<29:42, 29.23s/it]Running Auto-CoT Inference:  71%|███████▏  | 150/210 [1:08:58<31:39, 31.65s/it]Running Auto-CoT Inference:  72%|███████▏  | 151/210 [1:09:27<30:32, 31.07s/it]Running Auto-CoT Inference:  72%|███████▏  | 152/210 [1:09:53<28:30, 29.49s/it]Running Auto-CoT Inference:  73%|███████▎  | 153/210 [1:10:30<30:13, 31.82s/it]Running Auto-CoT Inference:  73%|███████▎  | 154/210 [1:11:05<30:27, 32.63s/it]Running Auto-CoT Inference:  74%|███████▍  | 155/210 [1:11:37<29:51, 32.58s/it]Running Auto-CoT Inference:  74%|███████▍  | 156/210 [1:12:08<28:40, 31.86s/it]Running Auto-CoT Inference:  75%|███████▍  | 157/210 [1:12:34<26:34, 30.08s/it]Running Auto-CoT Inference:  75%|███████▌  | 158/210 [1:13:04<26:09, 30.18s/it]Running Auto-CoT Inference:  76%|███████▌  | 159/210 [1:13:35<25:58, 30.56s/it]Running Auto-CoT Inference:  76%|███████▌  | 160/210 [1:14:08<26:01, 31.22s/it]Running Auto-CoT Inference:  77%|███████▋  | 161/210 [1:14:45<26:57, 33.01s/it]Running Auto-CoT Inference:  77%|███████▋  | 162/210 [1:15:16<25:48, 32.25s/it]Running Auto-CoT Inference:  78%|███████▊  | 163/210 [1:15:46<24:45, 31.62s/it]Running Auto-CoT Inference:  78%|███████▊  | 164/210 [1:16:18<24:14, 31.63s/it]Running Auto-CoT Inference:  79%|███████▊  | 165/210 [1:16:52<24:20, 32.46s/it]Running Auto-CoT Inference:  79%|███████▉  | 166/210 [1:17:23<23:31, 32.09s/it]Running Auto-CoT Inference:  80%|███████▉  | 167/210 [1:17:49<21:43, 30.32s/it]Running Auto-CoT Inference:  80%|████████  | 168/210 [1:18:26<22:30, 32.16s/it]Running Auto-CoT Inference:  80%|████████  | 169/210 [1:18:57<21:46, 31.86s/it]Running Auto-CoT Inference:  81%|████████  | 170/210 [1:19:27<20:54, 31.36s/it]Running Auto-CoT Inference:  81%|████████▏ | 171/210 [1:19:55<19:40, 30.26s/it]Running Auto-CoT Inference:  82%|████████▏ | 172/210 [1:20:27<19:34, 30.90s/it]Running Auto-CoT Inference:  82%|████████▏ | 173/210 [1:21:03<19:58, 32.39s/it]Running Auto-CoT Inference:  83%|████████▎ | 174/210 [1:21:28<18:06, 30.17s/it]Running Auto-CoT Inference:  83%|████████▎ | 175/210 [1:22:07<19:09, 32.85s/it]Running Auto-CoT Inference:  84%|████████▍ | 176/210 [1:22:36<17:53, 31.58s/it]Running Auto-CoT Inference:  84%|████████▍ | 177/210 [1:23:09<17:36, 32.02s/it]Running Auto-CoT Inference:  85%|████████▍ | 178/210 [1:23:34<15:59, 29.98s/it]Running Auto-CoT Inference:  85%|████████▌ | 179/210 [1:24:09<16:11, 31.35s/it]Running Auto-CoT Inference:  86%|████████▌ | 180/210 [1:24:38<15:25, 30.83s/it]Running Auto-CoT Inference:  86%|████████▌ | 181/210 [1:25:07<14:31, 30.07s/it]Running Auto-CoT Inference:  87%|████████▋ | 182/210 [1:25:45<15:12, 32.57s/it]Running Auto-CoT Inference:  87%|████████▋ | 183/210 [1:26:10<13:40, 30.38s/it]Running Auto-CoT Inference:  88%|████████▊ | 184/210 [1:26:46<13:51, 31.99s/it]Running Auto-CoT Inference:  88%|████████▊ | 185/210 [1:27:16<13:04, 31.39s/it]Running Auto-CoT Inference:  89%|████████▊ | 186/210 [1:27:47<12:33, 31.38s/it]Running Auto-CoT Inference:  89%|████████▉ | 187/210 [1:28:16<11:40, 30.48s/it]Running Auto-CoT Inference:  90%|████████▉ | 188/210 [1:28:52<11:47, 32.14s/it]Running Auto-CoT Inference:  90%|█████████ | 189/210 [1:29:28<11:41, 33.43s/it]Running Auto-CoT Inference:  90%|█████████ | 190/210 [1:29:55<10:29, 31.46s/it]Running Auto-CoT Inference:  91%|█████████ | 191/210 [1:30:31<10:20, 32.68s/it]Running Auto-CoT Inference:  91%|█████████▏| 192/210 [1:31:04<09:51, 32.86s/it]Running Auto-CoT Inference:  92%|█████████▏| 193/210 [1:31:29<08:40, 30.59s/it]Running Auto-CoT Inference:  92%|█████████▏| 194/210 [1:32:03<08:24, 31.51s/it]Running Auto-CoT Inference:  93%|█████████▎| 195/210 [1:32:36<08:00, 32.05s/it]Running Auto-CoT Inference:  93%|█████████▎| 196/210 [1:33:06<07:19, 31.38s/it]Running Auto-CoT Inference:  94%|█████████▍| 197/210 [1:33:37<06:44, 31.15s/it]Running Auto-CoT Inference:  94%|█████████▍| 198/210 [1:34:13<06:34, 32.87s/it]Running Auto-CoT Inference:  95%|█████████▍| 199/210 [1:34:39<05:37, 30.64s/it]Running Auto-CoT Inference:  95%|█████████▌| 200/210 [1:35:19<05:35, 33.60s/it]Running Auto-CoT Inference:  96%|█████████▌| 201/210 [1:36:02<05:27, 36.41s/it]Running Auto-CoT Inference:  96%|█████████▌| 202/210 [1:36:34<04:38, 34.86s/it]Running Auto-CoT Inference:  97%|█████████▋| 203/210 [1:36:52<03:30, 30.05s/it]Running Auto-CoT Inference:  97%|█████████▋| 204/210 [1:37:21<02:57, 29.64s/it]Running Auto-CoT Inference:  98%|█████████▊| 205/210 [1:38:08<02:53, 34.75s/it]Running Auto-CoT Inference:  98%|█████████▊| 206/210 [1:38:29<02:02, 30.56s/it]Running Auto-CoT Inference:  99%|█████████▊| 207/210 [1:39:05<01:36, 32.29s/it]Running Auto-CoT Inference:  99%|█████████▉| 208/210 [1:39:44<01:08, 34.42s/it]Running Auto-CoT Inference: 100%|█████████▉| 209/210 [1:40:04<00:29, 29.91s/it]Running Auto-CoT Inference: 100%|██████████| 210/210 [1:40:43<00:00, 32.63s/it]Running Auto-CoT Inference: 100%|██████████| 210/210 [1:40:43<00:00, 28.78s/it]
-
-🔍 Processing Participant_ID: 325 (137/210)
-[ERROR] GPT failed on PID 325 → Connection error.
-
-🔍 Processing Participant_ID: 385 (138/210)
-[ERROR] GPT failed on PID 385 → Connection error.
-
-🔍 Processing Participant_ID: 480 (139/210)
-[ERROR] GPT failed on PID 480 → Connection error.
-
-🔍 Processing Participant_ID: 462 (140/210)
-[ERROR] GPT failed on PID 462 → Connection error.
-
-🔍 Processing Participant_ID: 318 (141/210)
-
-🔍 Processing Participant_ID: 300 (142/210)
-
-🔍 Processing Participant_ID: 368 (143/210)
-[ERROR] GPT failed on PID 368 → Connection error.
-
-🔍 Processing Participant_ID: 407 (144/210)
-
-🔍 Processing Participant_ID: 469 (145/210)
-
-🔍 Processing Participant_ID: 337 (146/210)
-
-🔍 Processing Participant_ID: 348 (147/210)
-
-🔍 Processing Participant_ID: 662 (148/210)
-
-🔍 Processing Participant_ID: 314 (149/210)
-
-🔍 Processing Participant_ID: 438 (150/210)
-
-🔍 Processing Participant_ID: 396 (151/210)
-
-🔍 Processing Participant_ID: 421 (152/210)
-
-🔍 Processing Participant_ID: 378 (153/210)
-
-🔍 Processing Participant_ID: 603 (154/210)
-
-🔍 Processing Participant_ID: 405 (155/210)
-
-🔍 Processing Participant_ID: 336 (156/210)
-
-🔍 Processing Participant_ID: 427 (157/210)
-
-🔍 Processing Participant_ID: 612 (158/210)
-
-🔍 Processing Participant_ID: 431 (159/210)
-
-🔍 Processing Participant_ID: 680 (160/210)
-
-🔍 Processing Participant_ID: 346 (161/210)
-
-🔍 Processing Participant_ID: 476 (162/210)
-
-🔍 Processing Participant_ID: 455 (163/210)
-
-🔍 Processing Participant_ID: 401 (164/210)
-
-🔍 Processing Participant_ID: 444 (165/210)
-
-🔍 Processing Participant_ID: 404 (166/210)
-
-🔍 Processing Participant_ID: 412 (167/210)
-
-🔍 Processing Participant_ID: 467 (168/210)
-
-🔍 Processing Participant_ID: 418 (169/210)
-
-🔍 Processing Participant_ID: 362 (170/210)
-
-🔍 Processing Participant_ID: 397 (171/210)
-
-🔍 Processing Participant_ID: 381 (172/210)
-
-🔍 Processing Participant_ID: 677 (173/210)
-
-🔍 Processing Participant_ID: 490 (174/210)
-
-🔍 Processing Participant_ID: 491 (175/210)
-
-🔍 Processing Participant_ID: 627 (176/210)
-
-🔍 Processing Participant_ID: 695 (177/210)
-
-🔍 Processing Participant_ID: 375 (178/210)
-
-🔍 Processing Participant_ID: 309 (179/210)
-
-🔍 Processing Participant_ID: 302 (180/210)
-
-🔍 Processing Participant_ID: 446 (181/210)
-
-🔍 Processing Participant_ID: 409 (182/210)
-
-🔍 Processing Participant_ID: 324 (183/210)
-
-🔍 Processing Participant_ID: 353 (184/210)
-
-🔍 Processing Participant_ID: 475 (185/210)
-
-🔍 Processing Participant_ID: 333 (186/210)
-
-🔍 Processing Participant_ID: 425 (187/210)
-
-🔍 Processing Participant_ID: 356 (188/210)
-
-🔍 Processing Participant_ID: 402 (189/210)
-
-🔍 Processing Participant_ID: 423 (190/210)
-
-🔍 Processing Participant_ID: 422 (191/210)
-
-🔍 Processing Participant_ID: 477 (192/210)
-
-🔍 Processing Participant_ID: 463 (193/210)
-
-🔍 Processing Participant_ID: 488 (194/210)
-
-🔍 Processing Participant_ID: 371 (195/210)
-
-🔍 Processing Participant_ID: 433 (196/210)
-
-🔍 Processing Participant_ID: 307 (197/210)
-
-🔍 Processing Participant_ID: 456 (198/210)
-
-🔍 Processing Participant_ID: 347 (199/210)
-
-🔍 Processing Participant_ID: 380 (200/210)
-
-🔍 Processing Participant_ID: 464 (201/210)
-
-🔍 Processing Participant_ID: 657 (202/210)
-
-🔍 Processing Participant_ID: 703 (203/210)
-
-🔍 Processing Participant_ID: 419 (204/210)
-
-🔍 Processing Participant_ID: 451 (205/210)
-
-🔍 Processing Participant_ID: 315 (206/210)
-
-🔍 Processing Participant_ID: 424 (207/210)
-
-🔍 Processing Participant_ID: 308 (208/210)
-
-🔍 Processing Participant_ID: 338 (209/210)
-
-🔍 Processing Participant_ID: 364 (210/210)
-
-✅ Finished! Saved predictions to: /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/autocot_predictions_TEST.csv
-Calling calculate_statistics...🫠
-PHQ_8NoInterest - MAE: 0.527, RMSE: 0.867
-PHQ_8Depressed - MAE: 0.669, RMSE: 0.976
-PHQ_8Sleep - MAE: 0.574, RMSE: 0.874
-PHQ_8Tired - MAE: 0.574, RMSE: 0.853
-PHQ_8Appetite - MAE: 0.751, RMSE: 1.128
-PHQ_8Failure - MAE: 0.822, RMSE: 1.107
-PHQ_8Concentrating - MAE: 0.627, RMSE: 0.973
-PHQ_8Moving - MAE: 0.444, RMSE: 0.781
-PHQ_8Total - MAE: 3.237, RMSE: 4.257
-Results saved to /Users/kevinawang/Documents/GitHub/VA-classifier/src/models/autoCOT/outputs/statistics_results.txt
